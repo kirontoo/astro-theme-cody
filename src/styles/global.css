@@ -4,17 +4,57 @@
   License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
  */
 
-:root {
-	--accent: #2337ff;
-	--accent-dark: #000d8a;
-	--black: 15, 18, 25;
-	--gray: 96, 115, 159;
-	--gray-light: 229, 233, 240;
-	--gray-dark: 34, 41, 57;
-	--gray-gradient: rgba(var(--gray-light), 50%), #fff;
-	--box-shadow: 0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%),
-		0 16px 32px rgba(var(--gray), 33%);
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	:root {
+		color-scheme: light;
+		/* https://tailwindcss.com/docs/customizing-colors#using-css-variables */
+		--theme-bg: 0deg 0% 98%;
+		--theme-link: 172deg 18% 41%;
+		--theme-text: 203deg 11% 15%;
+		--theme-accent: 351deg 66% 48%;
+		--theme-accent-2: 0deg 0% 7%;
+		--theme-quote: 351deg 66% 48%;
+	}
+
+	:root.dark {
+		color-scheme: dark;
+		--theme-bg: 210deg 6% 12%;
+		--theme-link: 330deg 49% 67%;
+		--theme-text: 220deg 3% 79%;
+		--theme-accent: 159deg 64% 45%;
+		--theme-accent-2: 0deg 0% 93%;
+		--theme-quote: 102deg 100% 86%;
+	}
+
+	html {
+		@apply scroll-smooth;
+	}
+
+	html body {
+		@apply mx-auto flex min-h-screen max-w-4xl flex-col px-8 font-mono;
+	}
+
+	/* html body { */
+	/* 	@apply mx-auto flex min-h-screen max-w-3xl flex-col bg-bgColor px-8 pt-16 font-mono text-sm font-normal text-textColor antialiased; */
+	/* } */
 }
+
+/* :root { */
+/* 	--accent: #2337ff; */
+/* 	--accent-dark: #000d8a; */
+/* 	--black: 15, 18, 25; */
+/* 	--gray: 96, 115, 159; */
+/* 	--gray-light: 229, 233, 240; */
+/* 	--gray-dark: 34, 41, 57; */
+/* 	--gray-gradient: rgba(var(--gray-light), 50%), #fff; */
+/* 	--box-shadow: 0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%), */
+/* 		0 16px 32px rgba(var(--gray), 33%); */
+/* } */
+
 @font-face {
 	font-family: 'Atkinson';
 	src: url('/fonts/atkinson-regular.woff') format('woff');
