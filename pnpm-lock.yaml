@@ -10,7 +10,7 @@ dependencies:
     version: 0.3.2(typescript@5.3.3)
   '@astrojs/mdx':
     specifier: ^2.0.1
-    version: 2.0.1(astro@4.0.4)
+    version: 2.0.1(astro@4.0.5)
   '@astrojs/rss':
     specifier: ^4.0.1
     version: 4.0.1
@@ -19,10 +19,16 @@ dependencies:
     version: 3.0.3
   '@astrojs/tailwind':
     specifier: ^5.0.3
-    version: 5.0.3(astro@4.0.4)(tailwindcss@3.3.6)
+    version: 5.0.3(astro@4.0.5)(tailwindcss@3.3.6)
   astro:
     specifier: ^4.0.4
-    version: 4.0.4(typescript@5.3.3)
+    version: 4.0.5(typescript@5.3.3)
+  mdast-util-to-string:
+    specifier: ^4.0.0
+    version: 4.0.0
+  reading-time:
+    specifier: ^1.5.0
+    version: 1.5.0
   tailwindcss:
     specifier: ^3.3.6
     version: 3.3.6
@@ -129,7 +135,7 @@ packages:
       - supports-color
     dev: false
 
-  /@astrojs/mdx@2.0.1(astro@4.0.4):
+  /@astrojs/mdx@2.0.1(astro@4.0.5):
     resolution: {integrity: sha512-lWbiNoVV/6DO8hAf6eZmcN28hY/herif9eglw2PXZ5lEPoRu175BvBtuNTt9rH9YA/Ldm5mkNXhvMWNEnMqJkw==}
     engines: {node: '>=18.14.1'}
     peerDependencies:
@@ -138,7 +144,7 @@ packages:
       '@astrojs/markdown-remark': 4.0.1
       '@mdx-js/mdx': 3.0.0
       acorn: 8.11.2
-      astro: 4.0.4(typescript@5.3.3)
+      astro: 4.0.5(typescript@5.3.3)
       es-module-lexer: 1.4.1
       estree-util-visit: 2.0.0
       github-slugger: 2.0.0
@@ -176,13 +182,13 @@ packages:
       zod: 3.22.4
     dev: false
 
-  /@astrojs/tailwind@5.0.3(astro@4.0.4)(tailwindcss@3.3.6):
+  /@astrojs/tailwind@5.0.3(astro@4.0.5)(tailwindcss@3.3.6):
     resolution: {integrity: sha512-p+uFa1PNuV8RxhGkPUFgVq8CUbmS3xr0u5k1An2xKECLotRh7vsrGcPUijHvYOt42URohcg8rIq0CxNoVMhReg==}
     peerDependencies:
       astro: ^3.0.0 || ^4.0.0
       tailwindcss: ^3.0.24
     dependencies:
-      astro: 4.0.4(typescript@5.3.3)
+      astro: 4.0.5(typescript@5.3.3)
       autoprefixer: 10.4.16(postcss@8.4.32)
       postcss: 8.4.32
       postcss-load-config: 4.0.2(postcss@8.4.32)
@@ -1086,8 +1092,8 @@ packages:
     hasBin: true
     dev: false
 
-  /astro@4.0.4(typescript@5.3.3):
-    resolution: {integrity: sha512-KhwoF5//kFusczKN46ZG185uk9BQt1OH5949wsrFKs0z7Oo/o31XyxKyqIW8ZSL0fWU4XYKSdYlAo1RaPF9TtA==}
+  /astro@4.0.5(typescript@5.3.3):
+    resolution: {integrity: sha512-OTiTEiXYdXTkVJXNNKIWdYG1z2wpTST+92Qcldm36x91Pe4fKpLxeuRloy5cW175oHi8lvXytgG3Gl3VBP18RQ==}
     engines: {node: '>=18.14.1', npm: '>=6.14.0'}
     hasBin: true
     dependencies:
@@ -1147,8 +1153,8 @@ packages:
       tsconfck: 3.0.0(typescript@5.3.3)
       unist-util-visit: 5.0.0
       vfile: 6.0.1
-      vite: 5.0.8
-      vitefu: 0.2.5(vite@5.0.8)
+      vite: 5.0.9
+      vitefu: 0.2.5(vite@5.0.9)
       which-pm: 2.1.1
       yargs-parser: 21.1.1
       zod: 3.22.4
@@ -1257,7 +1263,7 @@ packages:
     hasBin: true
     dependencies:
       caniuse-lite: 1.0.30001570
-      electron-to-chromium: 1.4.612
+      electron-to-chromium: 1.4.613
       node-releases: 2.0.14
       update-browserslist-db: 1.0.13(browserslist@4.22.2)
     dev: false
@@ -1573,8 +1579,8 @@ packages:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
     dev: false
 
-  /electron-to-chromium@1.4.612:
-    resolution: {integrity: sha512-dM8BMtXtlH237ecSMnYdYuCkib2QHq0kpWfUnavjdYsyr/6OsAwg5ZGUfnQ9KD1Ga4QgB2sqXlB2NT8zy2GnVg==}
+  /electron-to-chromium@1.4.613:
+    resolution: {integrity: sha512-r4x5+FowKG6q+/Wj0W9nidx7QO31BJwmR2uEo+Qh3YLGQ8SbBAFuDFpTxzly/I2gsbrFwBuIjrMp423L3O5U3w==}
     dev: false
 
   /emmet@2.4.6:
@@ -3402,6 +3408,10 @@ packages:
     dependencies:
       picomatch: 2.3.1
 
+  /reading-time@1.5.0:
+    resolution: {integrity: sha512-onYyVhBNr4CmAxFsKS7bz+uTLRakypIe4R+5A824vBSkQy/hB3fZepoVEf8OVAxzLvK+H/jm9TzpI3ETSm64Kg==}
+    dev: false
+
   /rehype-parse@9.0.0:
     resolution: {integrity: sha512-WG7nfvmWWkCR++KEkZevZb/uw41E8TsH4DsY9UxsTbIXCVGbAs4S+r8FrQ+OtH5EEQAs+5UxKC42VinkmpA1Yw==}
     dependencies:
@@ -4185,8 +4195,8 @@ packages:
       vfile-message: 4.0.2
     dev: false
 
-  /vite@5.0.8:
-    resolution: {integrity: sha512-jYMALd8aeqR3yS9xlHd0OzQJndS9fH5ylVgWdB+pxTwxLKdO1pgC5Dlb398BUxpfaBxa4M9oT7j1g503Gaj5IQ==}
+  /vite@5.0.9:
+    resolution: {integrity: sha512-wVqMd5kp28QWGgfYPDfrj771VyHTJ4UDlCteLH7bJDGDEamaz5hV8IX6h1brSGgnnyf9lI2RnzXq/JmD0c2wwg==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
     peerDependencies:
@@ -4220,7 +4230,7 @@ packages:
       fsevents: 2.3.3
     dev: false
 
-  /vitefu@0.2.5(vite@5.0.8):
+  /vitefu@0.2.5(vite@5.0.9):
     resolution: {integrity: sha512-SgHtMLoqaeeGnd2evZ849ZbACbnwQCIwRH57t18FxcXoZop0uQu0uzlIhJBlF/eWVzuce0sHeqPcDo+evVcg8Q==}
     peerDependencies:
       vite: ^3.0.0 || ^4.0.0 || ^5.0.0
@@ -4228,7 +4238,7 @@ packages:
       vite:
         optional: true
     dependencies:
-      vite: 5.0.8
+      vite: 5.0.9
     dev: false
 
   /volar-service-css@0.0.16(@volar/language-service@1.10.10):
