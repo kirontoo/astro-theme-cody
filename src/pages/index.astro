@@ -1,17 +1,12 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
+import BaseLayout from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header title={SITE_TITLE} />
+<BaseLayout meta={{title: SITE_TITLE, description: SITE_DESCRIPTION}}>
 		<main>
 			<h1>🧑‍🚀 Hello, Astronaut!</h1>
 			<p>
@@ -45,6 +40,4 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 				</a> by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
 			</p>
 		</main>
-		<Footer />
-	</body>
-</html>
+</BaseLayout
