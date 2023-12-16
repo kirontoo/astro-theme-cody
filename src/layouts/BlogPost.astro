@@ -1,49 +1,56 @@
 ---
-import type { CollectionEntry } from 'astro:content';
-import BaseHead from '../components/BaseHead.astro';
+import { CollectionEntry, getCollection } from 'astro:content';
+import BaseLayout from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 
 type Props = CollectionEntry<'blog'>['data'];
+interface Props {
+	post: CollectionEntry<"blog">;
+}
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { 
+	data,
+	title, 
+	description, 
+	pubDate, 
+	updatedDate, 
+	heroImage, 
+	slug, 
+	ogImage, 
+	publishDate, 
+	post
+} = Astro.props;
+
+
+const socialImage = ogImage ?? `/og-image/${slug}.png`;
+// const articleDate = updatedDate?.toISOString() ?? publishDate.toISOString();
 ---
 
-<html lang="en" class="dark">
-	<head>
-		<BaseHead title={title} description={description} />
-	</head>
-
-	<body>
-		<Header />
-		<main>
-			<article>
-				<div class="hero-image">
-					{heroImage && <img width={1020} height={510} src={heroImage} alt="" />}
+<BaseLayout title, description, image={socialImage}>
+	<article>
+		<div class="hero-image">
+			{heroImage && <img width={1020} height={510} src={heroImage} alt=""/>}
+		</div>
+		<div class="prose dark:prose-invert prose-cody mt-12">
+			<div class="title">
+				<div class="date">
+					<FormattedDate date={pubDate} />
+					{
+						updatedDate && (
+							<div class="last-updated-on">
+								Last updated on <FormattedDate date={updatedDate} />
+							</div>
+						)
+					}
 				</div>
-				<div class="prose dark:prose-invert prose-cody mt-12">
-					<div class="title">
-						<div class="date">
-							<FormattedDate date={pubDate} />
-							{
-								updatedDate && (
-									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
-									</div>
-								)
-							}
-						</div>
-						<h1>{title}</h1>
-						<hr />
-					</div>
-					<div class="prose-sm mt-12 prose-headings:font-semibold prose-headings:ml-4 prose-headings:before:absolute prose-headings:before:-ms-4 prose-headings:before:text-accent prose-headings:before:content-['#'] prose-th:before:content-none">
-						<slot />
-					</div>
-				</div>
-			</article>
-		</main>
-		<Footer />
-	</body>
-</html>
-
+				<h1>{title}</h1>
+				<hr />
+			</div>
+			<div class="prose-sm mt-12 prose-headings:font-semibold prose-headings:ml-4 prose-headings:before:absolute prose-headings:before:-ms-4 prose-headings:before:text-accent prose-headings:before:content-['#'] prose-th:before:content-none">
+				<slot />
+			</div>
+		</div>
+	</article>
+</BaseLayout>

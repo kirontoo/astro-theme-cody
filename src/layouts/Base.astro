@@ -2,9 +2,17 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts.ts";
 
-const {meta} = Astro.props
-const {title, description, image, siteTitle} = meta;
+interface Props {
+		title?: string;
+		description?: string;
+		image?: string;
+}
+
+// const { meta } = Astro.props
+const { title = SITE_TITLE, description = SITE_DESCRIPTION, image } = Astro.props;
+
 ---
 <!doctype html>
 <html lang="en" class="dark">
