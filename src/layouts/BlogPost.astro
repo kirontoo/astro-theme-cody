@@ -45,13 +45,15 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
 					)
 				}
 			</span>
-			<ul class="not-prose flex gap-2 flex-wrap">
-				{tags.map(tag => (
-					<li class="tag">
-						{tag}
-					</li>
-				))}
-			</ul>
+			{tags && (
+				<ul class="not-prose flex gap-2 flex-wrap">
+					{tags.map(tag => (
+						<li class="tag">
+							{tag}
+						</li>
+					))}
+				</ul>
+			)}
 			<hr class="my-4"/>
 			<div class="prose-sm prose-headings:font-semibold prose-headings:ml-4 prose-headings:before:absolute prose-headings:before:-ms-4 prose-headings:before:text-accent prose-headings:before:content-['#'] prose-th:before:content-none">
 				<slot />
