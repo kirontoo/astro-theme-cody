@@ -18,37 +18,42 @@ const {
 	updatedDate, 
 	heroImage, 
 	slug, 
-	ogImage, 
 	publishDate, 
-	post
+	ogImage,
+	tags,
 } = Astro.props;
 
-
 const socialImage = ogImage ?? `/og-image/${slug}.png`;
+const dateTimeOptions: Intl.DateTimeFormatOptions = {
+	month: "long",
+};
 // const articleDate = updatedDate?.toISOString() ?? publishDate.toISOString();
 ---
 
-<BaseLayout title, description, image={socialImage}>
+<BaseLayout title={title} description={description} image={socialImage}>
 	<article>
-		<div class="hero-image">
-			{heroImage && <img width={1020} height={510} src={heroImage} alt=""/>}
-		</div>
-		<div class="prose dark:prose-invert prose-cody mt-12">
-			<div class="title">
-				<div class="date">
-					<FormattedDate date={pubDate} />
-					{
-						updatedDate && (
-							<div class="last-updated-on">
-								Last updated on <FormattedDate date={updatedDate} />
-							</div>
-						)
-					}
-				</div>
-				<h1>{title}</h1>
-				<hr />
-			</div>
-			<div class="prose-sm mt-12 prose-headings:font-semibold prose-headings:ml-4 prose-headings:before:absolute prose-headings:before:-ms-4 prose-headings:before:text-accent prose-headings:before:content-['#'] prose-th:before:content-none">
+		{heroImage && <img width={1020} height={510} src={heroImage} alt="" class="mb-4"/>}
+		<div class="prose dark:prose-invert prose-cody">
+			<h1 class="text-3xl my-0">{title}</h1>
+			<span class="font-semibold">
+				<FormattedDate date={pubDate} dateTimeOptions={dateTimeOptions} />
+				{
+					updatedDate && (
+						<div class="last-updated-on">
+							Last updated on <FormattedDate date={updatedDate} dateTimeOptions={dateTimeOptions} />
+						</div>
+					)
+				}
+			</span>
+			<ul class="not-prose flex gap-2 flex-wrap">
+				{tags.map(tag => (
+					<li class="tag">
+						{tag}
+					</li>
+				))}
+			</ul>
+			<hr class="my-4"/>
+			<div class="prose-sm prose-headings:font-semibold prose-headings:ml-4 prose-headings:before:absolute prose-headings:before:-ms-4 prose-headings:before:text-accent prose-headings:before:content-['#'] prose-th:before:content-none">
 				<slot />
 			</div>
 		</div>

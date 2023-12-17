@@ -13,7 +13,6 @@
     color-scheme: light;
     /* https://tailwindcss.com/docs/customizing-colors#using-css-variables */
     --theme-bg: 220deg 23% 95%;
-    --theme-link: 220deg 91% 54%;
     --theme-text: 234deg 16% 35%;
     --theme-accent: 343 81% 75%;
     --theme-accent-2: 350 65% 77%;
@@ -24,7 +23,6 @@
   :root.dark {
     color-scheme: dark;
     --theme-bg: 210deg 6% 12%;
-    --theme-link: 217deg 92% 76%;
     --theme-text: 220deg 3% 79%;
     --theme-accent: 170deg 57% 73%;
     --theme-accent-2: 41deg 86% 83%;
@@ -86,19 +84,26 @@
   }
 
   .prose-cody sup > a:hover {
-    @apply text-link no-underline bg-none;
+    @apply text-accent no-underline bg-none;
   }
 
   .prose-cody sup > a:before {
     content: "[";
+    @apply text-accent;
   }
 
   .prose-cody sup > a:after {
     content: "]";
+    @apply text-accent;
   }
 
   .tag {
-    @apply bg-accent p-0.5 text-bgColor;
+    @apply bg-accent px-1 py-0 text-bgColor font-semibold text-sm;
+  }
+
+  .tag:before {
+    content: "#";
+    @apply -mr-2;
   }
 
   .tag-link {
