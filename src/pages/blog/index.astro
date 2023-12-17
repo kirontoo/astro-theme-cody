@@ -17,21 +17,41 @@ const tags = getUniqueTags(posts).slice(0,10);
 
 <BaseLayout>
 	<section class="flex gap-4 cody-bg">
-		<ul class="flex flex-col gap-4">
-			{
-				posts.map((post) => (
-					<li>
-						<p class="date">
-							<FormattedDate date={post.data.pubDate} />
-						</p>
-						<a href={`/blog/${post.slug}/`}>
-							<h4 class="cody-link" >{post.data.title}</h4>
-						</a>
-					<p>{post.data.description}</p>
-					</li>
-				))
-			}
-		</ul>
+		<div>
+			<h1 class="text-lg font-bold mb-4">Posts</h1>
+			<ul class="flex flex-col gap-4">
+				{
+					posts.map(post => (
+						<li>
+							<a href={`/blog/${post.slug}/`} class="post-item">
+								<h4 class="cody-link inline font-bold" >{post.data.title}</h4>
+							</a>
+							<p class="date pr-2 mt-1">
+								<FormattedDate date={post.data.pubDate} />
+							</p>
+							<p class="italic">{post.data.description}</p>
+						</li>
+					))
+				}
+				<!--
+				{
+					posts.map((post) => (
+						<li>
+							<div class="inline-flex gap-x-2 sm:gap-x-0 sm:divide-x sm:divide-accent">
+								<p class="date pr-2">
+									<FormattedDate date={post.data.pubDate} />
+								</p>
+								<a href={`/blog/${post.slug}/`} class="pl-2">
+									<h4 class="cody-link font-bold" >{post.data.title}</h4>
+								</a>
+							</div>
+							<p class="italic">{post.data.description}</p>
+						</li>
+					))
+				}
+				-->
+			</ul>
+		</div>
 	</section>
 	<aside class="sidebar" slot="sidebar">
 		<h2 class="flex font-semibold text-lg items-center mb-4">
@@ -62,5 +82,16 @@ const tags = getUniqueTags(posts).slice(0,10);
 		</ul>
 		<a href="/tags" class="cody-link">See more -></a>
 	</aside>
+	<style>
+		.post-item:before {
+			content: "#";
+			@apply text-accent-2;
+		}	
+
+		h1:before {
+			content: "#";
+			@apply mr-2 text-accent-2;
+		}
+	</style>
 </BaseLayout>
 
