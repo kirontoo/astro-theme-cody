@@ -101,6 +101,25 @@
     @apply bg-accent p-0.5 text-bgColor;
   }
 
+  .tag-link {
+    @apply bg-[size:100%_6px] bg-bottom bg-repeat-x w-fit;
+    background-image: linear-gradient(
+      transparent,
+      transparent 5px,
+      hsl(var(--theme-text)) 5px,
+      hsl(var(--theme-text))
+    );
+  }
+
+  .tag-link:hover {
+    background-image: linear-gradient(
+      transparent,
+      transparent 4px,
+      hsl(var(--theme-accent)) 4px,
+      hsl(var(--theme-accent))
+    );
+  }
+
   .sidebar {
     @apply w-1/4;
   }
