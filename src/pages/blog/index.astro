@@ -24,8 +24,8 @@ const tags = getUniqueTags(posts).slice(0,10);
 						<p class="date">
 							<FormattedDate date={post.data.pubDate} />
 						</p>
-						<a href={`/blog/${post.slug}/`} class="underline">
-							<h4>{post.data.title}</h4>
+						<a href={`/blog/${post.slug}/`}>
+							<h4 class="cody-link" >{post.data.title}</h4>
 						</a>
 					<p>{post.data.description}</p>
 					</li>
@@ -59,7 +59,7 @@ const tags = getUniqueTags(posts).slice(0,10);
 					</li>
 				))}
 			</ul>
-			<a href="/tags" class="tag-link">See more -></a>
+			<a href="/tags" class="cody-link">See more -></a>
 		</aside>
 	</section>
 </BaseLayout>
