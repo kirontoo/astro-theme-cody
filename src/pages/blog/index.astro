@@ -76,7 +76,9 @@ const tags = getUniqueTags(posts).slice(0,10);
 		<ul class="flex gap-2 flex-wrap mb-4">
 			{tags.map(tag => (
 				<li class="tag">
-					{tag}
+					<a href={`/tags/${tag}`}>
+						{tag}
+					</a>
 				</li>
 			))}
 		</ul>

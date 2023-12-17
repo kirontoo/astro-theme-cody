@@ -32,10 +32,10 @@ const title = SITE_TITLE + " Tags"
 		Tags
 	</h1>
 	<ul>
-		{tags.map(tag => (
+		{tags.map(([tag, count]) => (
 			<li class="my-2">
-				<a class="cody-link">#{tag[0]}</a>
-				({tag[1]})
+				<a class="cody-link" href={`/tags/${tag}`}>#{tag}</a>
+				({count})
 			</li>
 		))}
 	</ul>

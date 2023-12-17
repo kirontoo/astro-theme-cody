@@ -49,7 +49,7 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
 				<ul class="not-prose flex gap-2 flex-wrap">
 					{tags.map(tag => (
 						<li class="tag">
-							{tag}
+							<a href={`/tags/${tag}`}>{tag}</a>
 						</li>
 					))}
 				</ul>
