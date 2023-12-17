@@ -4,9 +4,9 @@
     "baseUrl": ".",
     "strictNullChecks": true,
     "paths": {
-      "@/utils": [
-        "src/utils/index.ts"
-      ]
+      "@/utils": ["src/utils/index.ts"],
+      "@/components/*": ["src/components/*.astro"],
+      "@/layouts/*": ["src/layouts/*.astro"]
     }
   },
   "include": [
