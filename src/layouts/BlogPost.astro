@@ -31,7 +31,7 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
 ---
 
 <Layout title={title} description={description} image={socialImage}>
-	<article class="cody-bg w-3/4">
+	<article class="cody-bg">
 		{heroImage && <img width={1020} height={510} src={heroImage} alt="" class="mb-4"/>}
 		<div class="prose dark:prose-invert prose-cody text-textColor">
 			<h1 class="text-3xl my-0">{title}</h1>
@@ -60,7 +60,6 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
 			</div>
 		</div>
 	</article>
-	<aside>
-		<slot name="sidebar"/>
+	<aside slot="sidebar">
 	</aside>
 </Layout>
