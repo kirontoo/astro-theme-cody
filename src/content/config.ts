@@ -19,7 +19,8 @@ const blog = defineCollection({
 		updatedDate: z.coerce.date().optional(),
 		heroImage: z.string().optional(),
 		ogImage: z.string().optional(),
-		tags: z.array(z.string()).default([]).transform(removeDupsAndLowercase)
+		tags: z.array(z.string()).default([]).transform(removeDupsAndLowercase),
+		draft: z.boolean().optional().default(false)
 	}),
 });
 
