@@ -51,7 +51,7 @@
   }
 
   .prose-cody code {
-    @apply rounded-sm border-dotted border-surface;
+    @apply rounded-sm border-dotted border-accent;
   }
 
   .prose-cody hr {
@@ -64,7 +64,7 @@
   }
 
   .prose-cody thead th {
-    @apply font-bold border-b border-dashed border-surface;
+    @apply font-bold border-b border-dashed border-accent;
   }
 
   .prose-cody tbody tr {
@@ -72,7 +72,7 @@
   }
 
   .prose-cody tfoot {
-    @apply font-bold border-t border-dashed border-surface;
+    @apply font-bold border-t border-dashed border-accent;
   }
 
   .prose-cody sup {
