@@ -1,6 +1,6 @@
 ---
 import HeaderLink from './HeaderLink.astro';
-import { SITE_TITLE } from '../consts';
+import { SITE_TITLE, NAV_LINKS } from '../consts';
 import ThemeToggle from '../components/ThemeToggle.astro';
 ---
 
@@ -11,9 +11,11 @@ import ThemeToggle from '../components/ThemeToggle.astro';
 			<ThemeToggle/>
 		</div>
 		<div class="mt-4">
-			<HeaderLink href="/" class="text-accent">Home</HeaderLink>
-			<HeaderLink href="/blog">Blog</HeaderLink>
-			<HeaderLink href="/about">About</HeaderLink>
+			{
+				NAV_LINKS.map(nav => (
+					<HeaderLink href={nav.path}>{nav.title}</HeaderLink>
+				))
+			}
 		</div>
 	</nav>
 </header>
