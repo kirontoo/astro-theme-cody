@@ -5,3 +5,8 @@ export {
   getUniqueTags,
   getUniqueTagsWithCount
 } from "./tags";
+
+export {
+  getAllPosts,
+  sortMDByDate
+} from "./post";
