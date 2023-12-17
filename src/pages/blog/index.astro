@@ -11,7 +11,8 @@ const posts = (await getCollection('blog', ({data}) => {
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 
-const tags = getUniqueTags(posts);
+// only show 10 of the most recent tags
+const tags = getUniqueTags(posts).slice(0,10);
 ---
 
 <BaseLayout>
@@ -51,13 +52,14 @@ const tags = getUniqueTags(posts);
 				</svg>
 				Tags
 			</h2>
-			<ul class="flex gap-2 flex-wrap">
+			<ul class="flex gap-2 flex-wrap mb-4">
 				{tags.map(tag => (
 					<li class="tag">
 						{tag}
 					</li>
 				))}
 			</ul>
+			<a href="/tags" class="tag-link">See more -></a>
 		</aside>
 	</section>
 </BaseLayout>
