@@ -6,16 +6,16 @@ export const SITE_DESCRIPTION = 'Welcome to my website!';
 
 
 export const NAV_LINKS = [
-	{
-    title: "Home",
+  {
+    title: "Home", 
     path: "/",
-	}, 
-	{
+  },
+  {
     title: "About",
     path: "/about",
-	}, 
-	{
+  },
+  {
     title: "Blog",
     path: "/blog",
-	}, 
+  },
 ];
