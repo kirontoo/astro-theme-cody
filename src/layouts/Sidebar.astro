@@ -20,8 +20,9 @@ const { title = SITE_TITLE, description = SITE_DESCRIPTION, image } = Astro.prop
 	</head>
 	<body>
 		<Header/>
-		<main class="p-4">
+		<main class="flex gap-4">
 			<slot/>
+			<slot name="sidebar"/>
 		</main>
 		</Footer/>
 	</body>

@@ -125,6 +125,10 @@
     );
   }
 
+  .cody-bg {
+    @apply p-4 bg-surface;
+  }
+
   .sidebar {
     @apply w-1/4;
   }
