@@ -138,4 +138,8 @@
 			content: "#";
 			@apply mr-2 text-accent-2;
   }
+
+  .title {
+    @apply text-lg font-bold mb-4;
+  }
 }

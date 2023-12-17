@@ -21,7 +21,9 @@ const { title = SITE_TITLE, description = SITE_DESCRIPTION, image } = Astro.prop
 	<body>
 		<Header/>
 		<main>
-			<slot/>
+			<section class="cody-bg">
+				<slot/>
+			</section>
 		</main>
 		<Footer/>
 	</body>
