@@ -96,4 +96,12 @@
   .prose-cody sup > a:after {
     content: "]";
   }
+
+  .tag {
+    @apply bg-accent p-0.5 text-bgColor;
+  }
+
+  .sidebar {
+    @apply w-1/4;
+  }
 }
