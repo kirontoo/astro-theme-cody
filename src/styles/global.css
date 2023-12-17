@@ -14,9 +14,9 @@
     /* https://tailwindcss.com/docs/customizing-colors#using-css-variables */
     --theme-bg: 220deg 23% 95%;
     --theme-text: 234deg 16% 35%;
-    --theme-accent: 343 81% 75%;
-    --theme-accent-2: 350 65% 77%;
-    --theme-surface: 225deg 14% 77%;
+    --theme-accent: 355deg 76% 59%;
+    --theme-accent-2: 225 14% 77%;
+    --theme-surface: 220deg 22% 92%;
     --theme-quote: 199deg 76% 69%;
   }
 
@@ -25,7 +25,7 @@
     --theme-bg: 210deg 6% 12%;
     --theme-text: 220deg 3% 79%;
     --theme-accent: 170deg 57% 73%;
-    --theme-accent-2: 41deg 86% 83%;
+    --theme-accent-2: 210deg 1.2% 33.3%;
     --theme-surface: 200deg 3% 19%;
     --theme-quote: 232deg 97% 85%;
   }
