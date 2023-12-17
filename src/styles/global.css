@@ -13,10 +13,11 @@
     color-scheme: light;
     /* https://tailwindcss.com/docs/customizing-colors#using-css-variables */
     --theme-bg: 220deg 23% 95%;
-    --theme-text: 234deg 16% 35%;
+    --theme-text: 203deg 11% 15%;
     --theme-accent: 355deg 76% 59%;
     --theme-accent-2: 225 14% 77%;
     --theme-surface: 220deg 22% 92%;
+    /* TODO: remove quote color? */
     --theme-quote: 199deg 76% 69%;
   }
 
@@ -131,5 +132,10 @@
 
   .sidebar {
     @apply w-1/4;
+  }
+
+  .title:before {
+			content: "#";
+			@apply mr-2 text-accent-2;
   }
 }

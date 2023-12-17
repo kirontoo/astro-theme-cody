@@ -4,6 +4,9 @@ import { getCollection } from 'astro:content';
 import FormattedDate from '../../components/FormattedDate.astro';
 import BaseLayout from '../../layouts/Sidebar.astro';
 import { getUniqueTags } from '@/utils';
+import PostPreview from '@/components/blog/PostPreviewA';
+// Alternative post item
+// import PostPreview from '@/components/blog/PostPreviewB';
 
 const posts = (await getCollection('blog', ({data}) => {
 		return import.meta.env.PROD ? data.draft !== true : true;
@@ -18,35 +21,17 @@ const tags = getUniqueTags(posts).slice(0,10);
 <BaseLayout>
 	<section class="flex gap-4 cody-bg">
 		<div>
-			<h1 class="text-lg font-bold mb-4">Posts</h1>
+			<h1 class="title text-lg font-bold mb-4">Posts</h1>
 			<ul class="flex flex-col gap-4">
 				{
 					posts.map(post => (
-						<li>
-							<a href={`/blog/${post.slug}/`} class="post-item">
-								<h4 class="cody-link inline font-bold" >{post.data.title}</h4>
-							</a>
-							<p class="date pr-2 mt-1">
-								<FormattedDate date={post.data.pubDate} />
-							</p>
-							<p class="italic">{post.data.description}</p>
-						</li>
+						<PostPreview post={post}/>
 					))
 				}
 				<!--
 				{
 					posts.map((post) => (
-						<li>
-							<div class="inline-flex gap-x-2 sm:gap-x-0 sm:divide-x sm:divide-accent">
-								<p class="date pr-2">
-									<FormattedDate date={post.data.pubDate} />
-								</p>
-								<a href={`/blog/${post.slug}/`} class="pl-2">
-									<h4 class="cody-link font-bold" >{post.data.title}</h4>
-								</a>
-							</div>
-							<p class="italic">{post.data.description}</p>
-						</li>
+						<PostPreview post={post}/>
 					))
 				}
 				-->
@@ -84,16 +69,5 @@ const tags = getUniqueTags(posts).slice(0,10);
 		</ul>
 		<a href="/tags" class="cody-link">See more -></a>
 	</aside>
-	<style>
-		.post-item:before {
-			content: "#";
-			@apply text-accent-2;
-		}	
-
-		h1:before {
-			content: "#";
-			@apply mr-2 text-accent-2;
-		}
-	</style>
 </BaseLayout>
 

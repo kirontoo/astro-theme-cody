@@ -1,0 +1,29 @@
+---
+import type { CollectionEntry } from "astro:content";
+import type { HTMLTag, Polymorphic } from "astro/types";
+import FormattedDate from "@/components/FormattedDate";
+
+type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag }> & {
+	post: CollectionEntry<"post">;
+	withDesc?: boolean;
+};
+
+const { post, as: Tag = "div", withDesc = false } = Astro.props;
+const postDate = post.data.updatedDate ?? post.data.publishDate;
+---
+
+<li>
+	<a href={`/blog/${post.slug}/`} class="post-item">
+		<h4 class="cody-link inline font-bold" >{post.data.title}</h4>
+	</a>
+	<p class="date pr-2 mt-1">
+		<FormattedDate date={post.data.pubDate} />
+	</p>
+	<p class="italic">{post.data.description}</p>
+</li>
+<style>
+	.post-item:before {
+		content: "#";
+		@apply text-accent-2;
+	}	
+</style>
