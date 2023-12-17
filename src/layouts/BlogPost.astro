@@ -4,23 +4,28 @@ import Layout from '../layouts/Sidebar.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
+import TOC from '@/components/TableOfContents';
 
-type Props = CollectionEntry<'blog'>['data'];
 interface Props {
 	post: CollectionEntry<"blog">;
 }
 
+const post = Astro.props
+
 const { 
-	data,
-	title, 
-	description, 
-	pubDate, 
-	updatedDate, 
-	heroImage, 
-	slug, 
-	ogImage,
-	tags,
-} = Astro.props;
+	data: {
+		title, 
+		description, 
+		pubDate, 
+		updatedDate, 
+		heroImage, 
+		slug, 
+		ogImage,
+		tags,
+	}
+} = post;
+
+const { headings } = post.render && await post.render();
 
 const socialImage = ogImage ?? `/og-image/${slug}.png`;
 const dateTimeOptions: Intl.DateTimeFormatOptions = {
@@ -61,5 +66,6 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
 		</div>
 	</article>
 	<aside slot="sidebar">
+	{!!headings.length && <TOC headings={headings} />}
 	</aside>
 </Layout>
