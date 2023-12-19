@@ -15,7 +15,7 @@ const postDate = post.data.updatedDate ?? post.data.pubDate;
 <li>
 	<div class="flex flex-col gap-x-0 sm:flex-row sm:divide-x sm:divide-accent">
 		<FormattedDate date={postDate} class="min-w-[120px] text-gray-600 dark:text-gray-400" />
-		<span class="before:ml-4">
+		<span class="sm:before:ml-4">
 			<a href={`/blog/${post.slug}/`} class="cody-link" data-astro-prefetch>
 				{post.data.title}
 			</a>
