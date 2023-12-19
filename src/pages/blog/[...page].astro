@@ -47,7 +47,7 @@ const paginationProps = {
 		<ul class="flex flex-col gap-4">
 			{
 			page.data.map(post => (
-				<PostPreview post={post}/>
+				<PostPreview post={post} withDesc/>
 			))
 			}
 		</ul>
