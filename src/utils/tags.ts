@@ -1,5 +1,6 @@
 import type { CollectionEntry } from "astro:content";
 
+// https://github.com/chrismwilliams/astro-theme-cactus/blob/a85e0e559d3f92b32e73990486c0574b2b733227/src/utils/post.ts
 export function getAllTags(posts: Array<CollectionEntry<"blog">>) {
 	return posts.flatMap((post) => [...post.data.tags]);
 }
