@@ -14,21 +14,20 @@
     /* https://tailwindcss.com/docs/customizing-colors#using-css-variables */
     --theme-bg: 220deg 23% 95%;
     --theme-text: 203deg 11% 15%;
-    --theme-accent: 355deg 76% 59%;
+    --theme-accent: 0deg 60% 67%;
     --theme-accent-2: 225 14% 77%;
     --theme-surface: 220deg 22% 92%;
-    /* TODO: remove quote color? */
-    --theme-quote: 199deg 76% 69%;
+    --theme-quote: 0deg 60% 67%;
   }
 
   :root.dark {
     color-scheme: dark;
     --theme-bg: 210deg 6% 12%;
-    --theme-text: 220deg 3% 79%;
+    --theme-text: 0deg 0% 93%;
     --theme-accent: 170deg 57% 73%;
     --theme-accent-2: 210deg 1.2% 33.3%;
     --theme-surface: 200deg 3% 19%;
-    --theme-quote: 232deg 97% 85%;
+    --theme-quote: 170deg 57% 73%;
   }
 
   html {
@@ -40,7 +39,7 @@
   }
 
   .prose-cody blockquote {
-    @apply text-accent border-l-0;
+    @apply text-quote border-l-0;
   }
 
   .prose-cody a {
@@ -58,7 +57,7 @@
   .prose-cody hr {
     border-top-style: dashed;
     border-top-width: 0.5px;
-    @apply border-accent;
+    @apply border-accent my-4;
   }
   .prose-cody thead {
     @apply border-b-0;
@@ -98,6 +97,10 @@
     @apply text-accent;
   }
 
+  .prose-cody mark {
+    @apply bg-accent;
+  }
+
   .tag {
     @apply bg-accent px-1 py-0 text-bgColor font-semibold text-sm;
   }
@@ -135,8 +138,8 @@
   }
 
   .title:before {
-			content: "#";
-			@apply mr-2 text-accent-2;
+    content: "#";
+    @apply mr-2 text-accent-2;
   }
 
   .title {
