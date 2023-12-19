@@ -4,6 +4,7 @@
 export const SITE_TITLE = 'Astro Theme Cody';
 export const SITE_DESCRIPTION = 'Welcome to my website!';
 
+export const AUTHOR = 'Amy Dang';
 
 export const NAV_LINKS = [
   {

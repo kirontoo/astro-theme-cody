@@ -1,5 +1,5 @@
 ---
-import { NAV_LINKS } from '../consts.ts';
+import { NAV_LINKS, AUTHOR } from '../consts.ts';
 const today = new Date();
 
 const year = new Date().getFullYear();
@@ -11,7 +11,7 @@ const year = new Date().getFullYear();
 >
 	<div class="me-0 sm:me-4">
 		Copyright &copy; {year}{" "}
-		Amy Dang
+		{AUTHOR}
 	</div>
 	<nav
 		aria-label="More on this site"
