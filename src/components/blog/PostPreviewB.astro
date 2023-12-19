@@ -20,6 +20,6 @@ const postDate = post.data.updatedDate ?? post.data.publishDate;
 			<h4 class="cody-link font-bold" >{post.data.title}</h4>
 		</a>
 	</div>
-	<p class="italic">{post.data.description}</p>
+	{withDesc && ( <p class="italic">{post.data.description}</p> )}
 </li>
 

@@ -19,7 +19,7 @@ const postDate = post.data.updatedDate ?? post.data.publishDate;
 	<p class="date pr-2 mt-1">
 		<FormattedDate date={post.data.pubDate} />
 	</p>
-	<p class="italic">{post.data.description}</p>
+	{withDesc && ( <p class="italic">{post.data.description}</p> )}
 </li>
 <style>
 	.post-item:before {
