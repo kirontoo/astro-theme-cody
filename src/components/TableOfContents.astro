@@ -48,7 +48,7 @@ function buildToc(headings: ReadonlyArray<MarkdownHeading>) {
 ---
 
 <nav class="sticky top-20 order-2 -me-32 hidden basis-64 lg:block">
-  <h2 class="font-semibold border-solid border-accent border-b-[0.5px] my-2 w-fit">Table of Contents</h2>
+  <h2 class="font-bold text-lg">Table of Contents</h2>
   <ul>
     {toc.map((heading) => <TableOfContentsHeading heading={heading} />)}
   </ul>
