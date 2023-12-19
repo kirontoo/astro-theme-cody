@@ -9,16 +9,17 @@ type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag }> & {
 };
 
 const { post, as: Tag = "div", withDesc = false } = Astro.props;
-const postDate = post.data.updatedDate ?? post.data.publishDate;
+const postDate = post.data.updatedDate ?? post.data.pubDate;
 ---
+
 <li>
-	<div class="inline-flex gap-x-2 sm:gap-x-0 sm:divide-x sm:divide-accent">
-		<p class="date pr-2">
-			<FormattedDate date={post.data.pubDate} />
-		</p>
-		<a href={`/blog/${post.slug}/`} class="pl-2">
-			<h4 class="cody-link font-bold" >{post.data.title}</h4>
-		</a>
+	<div class="flex flex-col gap-x-0 sm:flex-row sm:divide-x sm:divide-accent">
+		<FormattedDate date={postDate} class="min-w-[120px] text-gray-600 dark:text-gray-400" />
+		<span class="before:ml-4">
+			<a href={`/blog/${post.slug}/`} class="cody-link" data-astro-prefetch>
+				{post.data.title}
+			</a>
+		</span>
 	</div>
 	{withDesc && ( <p class="italic">{post.data.description}</p> )}
 </li>
