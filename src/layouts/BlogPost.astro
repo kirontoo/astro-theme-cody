@@ -4,10 +4,13 @@ import Layout from '../layouts/Sidebar.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
+import SocialMediaLinks from '@/components/SocialMediaLinks';
 import TOC from '@/components/TableOfContents';
+import { AUTHOR } from '../consts';
 
 interface Props {
 	post: CollectionEntry<"blog">;
+	minutesRead
 }
 
 const post = Astro.props
@@ -25,31 +28,35 @@ const {
 	}
 } = post;
 
-const { headings } = post.render && await post.render();
+const { headings, remarkPluginFrontmatter } = post.render && await post.render();
+const { minutesRead } = remarkPluginFrontmatter;
 
 const socialImage = ogImage ?? `/og-image/${slug}.png`;
 const dateTimeOptions: Intl.DateTimeFormatOptions = {
 	month: "long",
 };
 
-// const articleDate = updatedDate?.toISOString() ?? pubDate.toISOString();
+const articleDate = updatedDate?.toISOString() ?? pubDate.toISOString();
 ---
 
-<Layout title={title} description={description} image={socialImage}>
+<Layout title={title} description={description} image={socialImage} articleDate={articleDate}>
 	<article class="cody-bg">
 		{heroImage && <img width={1020} height={510} src={heroImage} alt="" class="mb-4"/>}
 		<div class="prose dark:prose-invert prose-cody text-textColor">
 			<h1 class="text-3xl my-0">{title}</h1>
-			<span class="font-semibold">
+			<span class="font-semibold text-textColor">
 				<FormattedDate date={pubDate} dateTimeOptions={dateTimeOptions} />
-				{
-					updatedDate && (
-						<div class="last-updated-on">
-							Last updated on <FormattedDate date={updatedDate} dateTimeOptions={dateTimeOptions} />
-						</div>
-					)
-				}
+				<span>
+					/ {minutesRead}
+				</span>
 			</span>
+			{
+				updatedDate && (
+					<div class="mb-2 italic">
+						Last updated on <FormattedDate date={updatedDate} dateTimeOptions={dateTimeOptions} />
+					</div>
+				)
+			}
 			{tags && (
 				<ul class="not-prose flex gap-2 flex-wrap">
 					{tags.map(tag => (
@@ -66,6 +73,15 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
 		</div>
 	</article>
 	<aside slot="sidebar">
-	{!!headings.length && <TOC headings={headings} />}
+		<div class="flex flex-col space-y-2">
+			<h2 class="font-semibold text-lg text-textColor">{AUTHOR}</h2>
+			<SocialMediaLinks/>
+			<span class="!my-4 text-accent" aria-hidden>---</span>
+			<p>
+				{description}
+			</p>
+		</div>
+		{!!headings.length && <TOC headings={headings} />}
 	</aside>
 </Layout>
+
