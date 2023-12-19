@@ -9,7 +9,7 @@ const { heading } = Astro.props;
   </a>
   {
     heading.subheadings.length > 0 && (
-      <ul>
+      <ul class="ml-2">
         {heading.subheadings.map((subheading) => (
           <Astro.self heading={subheading} />
         ))}
@@ -17,3 +17,10 @@ const { heading } = Astro.props;
     )
   }
 </li>
+
+<style>
+  li:before {
+    content: "#";
+    @apply -mr-2 text-accent-2;
+  }
+</style>

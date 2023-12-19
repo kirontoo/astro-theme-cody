@@ -1,26 +1,54 @@
 ---
+import type { MarkdownHeading } from "astro";
 import TableOfContentsHeading from '@/components/TableOfContentsHeading';
 const { headings } = Astro.props;
 const toc = buildToc(headings);
 
-function buildToc(headings) {
-  const toc = [];
-  const parentHeadings = new Map();
-  headings.forEach((h) => {
-    const heading = { ...h, subheadings: [] };
-    parentHeadings.set(heading.depth, heading);
-    // Change 2 to 1 if your markdown includes your <h1>
-    if (heading.depth === 2) {
-      toc.push(heading);
-    } else {
-      parentHeadings.get(heading.depth - 1).subheadings.push(heading);
-    }
-  });
-  return toc;
+// https://github.com/chrismwilliams/astro-theme-cactus/blob/a85e0e559d3f92b32e73990486c0574b2b733227/src/utils/generateToc.ts
+export interface TocItem extends MarkdownHeading {
+	subheadings: Array<TocItem>;
 }
+
+function diveChildren(item: TocItem, depth: number): Array<TocItem> {
+	if (depth === 1 || !item.subheadings.length) {
+		return item.subheadings;
+	} else {
+		// e.g., 2
+		return diveChildren(item.subheadings[item.subheadings.length - 1] as TocItem, depth - 1);
+	}
+}
+
+function buildToc(headings: ReadonlyArray<MarkdownHeading>) {
+	// this ignores/filters out h1 element(s)
+	const bodyHeadings = headings.filter(({ depth }) => depth > 1);
+	const toc: Array<TocItem> = [];
+
+	bodyHeadings.forEach((h) => {
+		const heading: TocItem = { ...h, subheadings: [] };
+
+		// add h2 elements into the top level
+		if (heading.depth === 2) {
+			toc.push(heading);
+		} else {
+			const lastItemInToc = toc[toc.length - 1]!;
+			if (heading.depth < lastItemInToc.depth) {
+				throw new Error(`Orphan heading found: ${heading.text}.`);
+			}
+
+			// higher depth
+			// push into children, or children's children
+			const gap = heading.depth - lastItemInToc.depth;
+			const target = diveChildren(lastItemInToc, gap);
+			target.push(heading);
+		}
+	});
+	return toc;
+}
+
 ---
 
-<nav class="toc">
+<nav class="sticky top-20 order-2 -me-32 hidden basis-64 lg:block">
+  <h2 class="font-semibold border-solid border-accent border-b-[0.5px] my-2 w-fit">Table of Contents</h2>
   <ul>
     {toc.map((heading) => <TableOfContentsHeading heading={heading} />)}
   </ul>
