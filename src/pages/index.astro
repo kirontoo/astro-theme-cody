@@ -1,9 +1,9 @@
 ---
 import BaseLayout from '../layouts/Base.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { siteConfig } from '../consts';
 ---
 
-<BaseLayout title={`${SITE_TITLE} | Home`}>
+<BaseLayout title={`${siteConfig.title} | Home`}>
 	<h1>🧑‍🚀 Hello, Astronaut!</h1>
 	<p>
 			Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This

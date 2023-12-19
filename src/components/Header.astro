@@ -1,13 +1,13 @@
 ---
 import HeaderLink from './HeaderLink.astro';
-import { SITE_TITLE, NAV_LINKS } from '../consts';
+import { siteConfig, NAV_LINKS } from '../consts';
 import ThemeToggle from '../components/ThemeToggle.astro';
 ---
 
 <header class="group relative mb-8 flex items-center">
 	<nav class="w-full">
 		<div class="flex items-center justify-between">
-			<a class="title" href="/">{SITE_TITLE}</a>
+			<a class="title" href="/">{siteConfig.title}</a>
 			<ThemeToggle/>
 		</div>
 		<div class="mt-4">

@@ -6,7 +6,7 @@ import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import SocialMediaLinks from '@/components/SocialMediaLinks';
 import TOC from '@/components/TableOfContents';
-import { AUTHOR } from '../consts';
+import { siteConfig } from '../consts';
 
 interface Props {
 	post: CollectionEntry<"blog">;
@@ -74,7 +74,7 @@ const articleDate = updatedDate?.toISOString() ?? pubDate.toISOString();
 	</article>
 	<aside slot="sidebar">
 		<div class="flex flex-col space-y-2">
-			<h2 class="font-semibold text-lg text-textColor">{AUTHOR}</h2>
+			<h2 class="font-semibold text-lg text-textColor">{siteConfig.author}</h2>
 			<SocialMediaLinks/>
 			<span class="!my-4 text-accent" aria-hidden>---</span>
 			<p>

@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import { SITE_TITLE } from '../../consts';
+import { siteConfig } from '../../consts';
 import FormattedDate from '../../components/FormattedDate.astro';
 import BaseLayout from '../../layouts/Base.astro';
 import { getUniqueTagsWithCount } from '@/utils';
@@ -9,7 +9,7 @@ const posts = (await getCollection('blog', ({data}) => {
 		return import.meta.env.PROD ? data.draft !== true : true;
 }));
 const tags = getUniqueTagsWithCount(posts);
-const title = SITE_TITLE + " Tags"
+const title = siteConfig.title + " Tags"
 ---
 
 <BaseLayout title={title}>
