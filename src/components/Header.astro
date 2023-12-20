@@ -28,9 +28,11 @@ import ThemeToggle from '../components/ThemeToggle.astro';
 	.title:before{
 		content:"[";
 		margin-right: 0;
+		@apply text-bgColor;
 	}
 
 	.title:after {
 		content:"]";
+		@apply text-bgColor;
 	}
 </style>
