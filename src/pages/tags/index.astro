@@ -9,10 +9,9 @@ const posts = (await getCollection('blog', ({data}) => {
 		return import.meta.env.PROD ? data.draft !== true : true;
 }));
 const tags = getUniqueTagsWithCount(posts);
-const title = siteConfig.title + " Tags"
 ---
 
-<BaseLayout title={title}>
+<BaseLayout title="All Tags">
 	<h1 class="flex font-bold text-xl items-center mb-4"> 
 		<svg
 			aria-hidden="true"
