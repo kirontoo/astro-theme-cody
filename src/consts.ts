@@ -17,6 +17,7 @@ export const siteConfig: Config = {
   lang: "en-GB",
   profile: {
     author: "Amy Dang",
+    description: "your bio description"
   }
 }
 
