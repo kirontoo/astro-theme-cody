@@ -45,7 +45,7 @@ const articleDate = updatedDate?.toISOString() ?? pubDate.toISOString();
 		<div class="prose dark:prose-invert prose-cody text-textColor">
 			<h1 class="text-3xl my-0">{title}</h1>
 			<span class="font-semibold text-textColor">
-				<FormattedDate date={pubDate} dateTimeOptions={dateTimeOptions} />
+				<FormattedDate date={pubDate} dateTimeOptions={dateTimeOptions} pubdate />
 				<span>
 					/ {minutesRead}
 				</span>
@@ -74,7 +74,7 @@ const articleDate = updatedDate?.toISOString() ?? pubDate.toISOString();
 	</article>
 	<aside slot="sidebar">
 		<div class="flex flex-col space-y-2">
-			<h2 class="font-semibold text-lg text-textColor">{siteConfig.profile.author}</h2>
+			<h2 class="font-semibold text-lg text-textColor" rel="author">{siteConfig.profile.author}</h2>
 			{siteConfig.profile.description && (<p>{siteConfig.profile.description}</p>)}
 			<SocialMediaLinks/>
 			<span class="!my-4 text-accent" aria-hidden>---</span>

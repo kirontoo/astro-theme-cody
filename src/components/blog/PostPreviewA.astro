@@ -17,7 +17,7 @@ const postDate = post.data.updatedDate ?? post.data.publishDate;
 		<h4 class="cody-link inline font-bold" >{post.data.title}</h4>
 	</a>
 	<p class="date pr-2 mt-1">
-		<FormattedDate date={post.data.pubDate} />
+		<FormattedDate date={post.data.pubDate} pubDate/>
 	</p>
 	{withDesc && ( <p class="italic">{post.data.description}</p> )}
 </li>
