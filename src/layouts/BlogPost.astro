@@ -37,6 +37,9 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
 };
 
 const articleDate = updatedDate?.toISOString() ?? pubDate.toISOString();
+
+console.log(Astro.url)
+console.log(Astro.params)
 ---
 
 <Layout title={title} description={description} image={socialImage} articleDate={articleDate}>
@@ -51,7 +54,7 @@ const articleDate = updatedDate?.toISOString() ?? pubDate.toISOString();
 				</span>
 			{
 				updatedDate && (
-					<div class="mb-2 italic px-2 bg-accent-2 rounded w-fit inline text-sm">
+					<div class="mb-2 italic px-2 bg-accent-2 rounded w-fit inline text-sm font-normal">
 						Last updated: <FormattedDate date={updatedDate} dateTimeOptions={dateTimeOptions} />
 					</div>
 				)
