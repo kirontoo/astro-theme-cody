@@ -1,0 +1,63 @@
+---
+import { siteConfig } from '../consts';
+import SidebarLayout from './Sidebar.astro';
+import SocialMediaLinks from '@/components/SocialMediaLinks';
+import TOC from '@/components/TableOfContents';
+const { frontmatter, headings } = Astro.props;
+---
+<SidebarLayout title={frontmatter.title} description={frontmatter.description} articleDate={frontmatter.pubDate} image={frontmatter.image}>
+	<section class="cody-bg space-y-2 sm:space-y-4">
+		<h2 class="title">{frontmatter.title}</h2>
+
+		<div>
+			<img src={frontmatter.heroImage.url} alt={frontmatter.heroImage.alt} />
+    </div>
+
+		<ul class="space-y-2">
+			<li class="project-data-item">
+				<small>PLATFORM</small>
+				<span>{frontmatter.platform}</span>
+			</li>
+			<li class="project-data-item">
+				<small>STACK</small>
+				<span>{frontmatter.stack}</span>
+			</li>
+			<li class="project-data-item">
+				<small>WEBSITE</small>
+				<a href={frontmatter.website} target="_blank" class="cody-link">{frontmatter.website}</a>
+			</li>
+			<li class="project-data-item">
+				<small>GITHUB</small>
+				<a href={frontmatter.github} target="_blank" class="cody-link">{frontmatter.github}</a>
+			</li>
+		</ul>
+
+		<hr/>
+
+		<div class="prose dark:prose-invert prose-sm prose-headings:font-semibold prose-headings:ml-4 prose-headings:before:absolute prose-headings:before:-ms-4 prose-headings:before:text-accent prose-headings:before:content-['#'] prose-th:before:content-none">
+			<slot />
+		</div>
+
+	</section>
+	<aside name="sidebar">
+			<h2 class="font-semibold text-lg text-textColor" rel="author">{siteConfig.profile.author}</h2>
+			{siteConfig.profile.description && (<p>{siteConfig.profile.description}</p>)}
+			<SocialMediaLinks/>
+			<span class="!my-4 text-accent" aria-hidden>---</span>
+			<p>
+				{frontmatter.description}
+			</p>
+		</div>
+		{!!headings.length && <TOC headings={headings} />}
+	</aside>	
+</SidebarLayout>
+
+<style>
+	small {
+		@apply text-bgColor px-1 bg-accent mr-2 font-semibold min-w-[95px];
+	}
+
+	.project-data-item {
+		@apply flex flex-col gap-x-0 sm:flex-row;
+	}
+</style>

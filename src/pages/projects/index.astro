@@ -1,0 +1,27 @@
+---
+import BaseLayout from '@/layouts/Base';
+import ProjectPreview from '@/components/project/ProjectPreview';
+const allProjects = await Astro.glob('./*.md');
+const sortedByDateProjects = allProjects.sort(( a, b ) => {
+		const aDate = new Date(a.frontmatter.pubDate).valueOf();
+		const bDate = new Date(b.frontmatter.pubDate).valueOf();
+		return bDate - aDate;
+});
+
+// move all pinned projects to the top
+const sortedByPinned = sortedByDateProjects.sort(( a, b ) => {
+	const aOrder = a.frontmatter.order ?? 100;
+	const bOrder = b.frontmatter.order ?? 100;
+	return aOrder - bOrder;
+})
+---
+<BaseLayout title="Projects">
+	<section>
+		<h2 class="title">Projects</h2>
+		<ul role="list" class="space-y-2 sm:space-y-4">
+			{sortedByPinned.map((p) => (
+				<ProjectPreview project={p} withDesc/>
+			))}
+		</ul>
+	</section>
+</BaseLayout>
