@@ -4,17 +4,17 @@ const { heading } = Astro.props;
 ---
 
 <li>
-  <a href={'#' + heading.slug}>
+  <a href={'#' + heading.slug} id={`toc-${heading.slug}`}>
     {heading.text}
   </a>
   {
-    heading.subheadings.length > 0 && (
-      <ul class="ml-2">
-        {heading.subheadings.map((subheading) => (
-          <Astro.self heading={subheading} />
-        ))}
-      </ul>
-    )
+  heading.subheadings.length > 0 && (
+    <ul class="ml-2">
+      {heading.subheadings.map((subheading) => (
+        <Astro.self heading={subheading} />
+      ))}
+    </ul>
+  )
   }
 </li>
 
@@ -23,4 +23,9 @@ const { heading } = Astro.props;
     content: "#";
     @apply -mr-2 text-accent-2;
   }
+
+  .active-toc {
+    @apply text-accent;
+  }
 </style>
+

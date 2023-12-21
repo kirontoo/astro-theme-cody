@@ -4,6 +4,8 @@ import TableOfContentsHeading from '@/components/TableOfContentsHeading';
 const { headings } = Astro.props;
 const toc = buildToc(headings);
 
+console.log(headings)
+
 // https://github.com/chrismwilliams/astro-theme-cactus/blob/a85e0e559d3f92b32e73990486c0574b2b733227/src/utils/generateToc.ts
 export interface TocItem extends MarkdownHeading {
 	subheadings: Array<TocItem>;
@@ -26,31 +28,59 @@ function buildToc(headings: ReadonlyArray<MarkdownHeading>) {
 	bodyHeadings.forEach((h) => {
 	const heading: TocItem = { ...h, subheadings: [] };
 
-	// add h2 elements into the top level
-	if (heading.depth === 2) {
-		toc.push(heading);
-	} else {
-		const lastItemInToc = toc[toc.length - 1]!;
-		if (heading.depth < lastItemInToc.depth) {
-			throw new Error(`Orphan heading found: ${heading.text}.`);
-		}
+		// add h2 elements into the top level
+		if (heading.depth === 2) {
+			toc.push(heading);
+		} else {
+			const lastItemInToc = toc[toc.length - 1]!;
+			if (heading.depth < lastItemInToc.depth) {
+				throw new Error(`Orphan heading found: ${heading.text}.`);
+			}
 
-		// higher depth
-		// push into children, or children's children
-		const gap = heading.depth - lastItemInToc.depth;
-		const target = diveChildren(lastItemInToc, gap);
-		target.push(heading);
-	}
+			// higher depth
+			// push into children, or children's children
+			const gap = heading.depth - lastItemInToc.depth;
+			const target = diveChildren(lastItemInToc, gap);
+			target.push(heading);
+		}
 	});
 	return toc;
 }
 
 ---
 
-<nav class="sticky top-20 order-2 hidden basis-64 lg:block">
-  <hr/>
-  <h2 class="font-bold text-lg">Table of Contents</h2>
-  <ul class="-me-32">
-    {toc.map((heading) => <TableOfContentsHeading heading={heading} />)}
-  </ul>
-</nav>
+<toc-list data-headings={JSON.stringify(headings)}>
+	<nav class="sticky top-20 order-2 hidden basis-64 lg:block">
+		<hr/>
+		<h2 class="font-bold text-lg">Table of Contents</h2>
+		<ul class="-me-32">
+			{toc.map((heading) => <TableOfContentsHeading heading={heading} />)}
+		</ul>
+	</nav>
+</toc-list>
+
+<script>
+  class Toc extends HTMLElement {
+    constructor() {
+      super();
+
+      // Read the message from the data attribute.
+      const headings = JSON.parse(this.dataset.headings);
+
+			headings.forEach(({ slug }) => {
+				const tocLink = document.getElementById(`toc-${slug}`);
+
+				tocLink.addEventListener('click', () => {
+					const prevHeading = window.location.hash.slice(1);
+					const prevLink = document.getElementById(`toc-${prevHeading}`);
+
+					prevLink.classList.remove('active-toc');
+					tocLink.classList.add('active-toc');
+				});
+			})
+
+    }
+  }
+
+  customElements.define('toc-list', Toc);
+</script>
