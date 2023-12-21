@@ -6,6 +6,7 @@ import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import SocialMediaLinks from '@/components/SocialMediaLinks';
 import TOC from '@/components/TableOfContents';
+import { Icon } from 'astro-icon';
 import { siteConfig } from '../consts';
 
 interface Props {
@@ -25,6 +26,7 @@ const {
 		slug, 
 		ogImage,
 		tags,
+		draft
 	}
 } = post;
 
@@ -37,31 +39,33 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
 };
 
 const articleDate = updatedDate?.toISOString() ?? pubDate.toISOString();
-
-console.log(Astro.url)
-console.log(Astro.params)
 ---
 
 <Layout title={title} description={description} image={socialImage} articleDate={articleDate}>
 	<article class="cody-bg">
 		{heroImage && <img width={1020} height={510} src={heroImage} alt="" class="mb-4"/>}
 		<div class="prose dark:prose-invert prose-cody text-textColor">
-			<h1 class="text-3xl my-0">{title}</h1>
-			<span class="font-semibold text-textColor">
+			<div class="flex gap-2 items-center">
+				<h1 class="text-3xl my-0">{title}</h1>
+				{ draft && (<span class="px-1 py-0 bg-red-200 text-red-600 text-sm font-semibold">draft</span>)}
+			</div>
+			<span class="font-semibold text-textColor flex gap-2 items-center">
 				<FormattedDate date={pubDate} dateTimeOptions={dateTimeOptions} pubdate />
 				<span>
 					/ {minutesRead}
 				</span>
-			{
-				updatedDate && (
-					<div class="mb-2 italic px-2 bg-accent-2 rounded w-fit inline text-sm font-normal">
-						Last updated: <FormattedDate date={updatedDate} dateTimeOptions={dateTimeOptions} />
-					</div>
-				)
-			}
+				{
+					updatedDate && (
+						<div class="italic px-2 bg-accent-2 w-fit text-sm font-normal">
+							Last updated: <FormattedDate date={updatedDate} dateTimeOptions={dateTimeOptions} />
+						</div>
+					)
+				}
 			</span>
 			{tags && (
+				
 				<ul class="not-prose flex gap-2 flex-wrap">
+					<Icon class="w-5 h-5" name="carbon:tag-group" aria-hidden="true" focusable="false"/>
 					{tags.map(tag => (
 						<li class="tag">
 							<a href={`/tags/${tag}`}>{tag}</a>
