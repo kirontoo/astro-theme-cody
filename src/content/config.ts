@@ -24,4 +24,24 @@ const blog = defineCollection({
 	}),
 });
 
-export const collections = { blog };
+const project = defineCollection({
+	type: 'content',
+	schema: z.object({
+		title: z.string(),
+		description: z.string(),
+		pubDate: z.coerce.date(),
+		heroImage: z.object({
+			url: z.string(),
+			alt: z.string().optional()
+		}),
+		ogImage: z.string().optional(),
+		stack: z.array(z.string()).default([]).transform(removeDupsAndLowercase),
+		website: z.string().optional(),
+		github: z.string(),
+		draft: z.boolean().optional().default(false),
+		// for pinning projects
+		order: z.number().optional()
+	})
+});
+
+export const collections = { blog, project };
