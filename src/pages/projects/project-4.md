@@ -7,7 +7,7 @@ heroImage:
     url: '/blog-placeholder-about.jpg'
     alt: 'GitHub wallpaper'
 platform: Web
-stack: Astro, JavaScript
+stack: ['Astro', 'Javascript']
 website: https://github.com/kirontoo/astro-theme-cody
 github: https://github.com/kirontoo/astro-theme-cody
 ---

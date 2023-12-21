@@ -3,6 +3,7 @@ import { siteConfig } from '../consts';
 import SidebarLayout from './Sidebar.astro';
 import SocialMediaLinks from '@/components/SocialMediaLinks';
 import TOC from '@/components/TableOfContents';
+import { Icon } from "astro-icon";
 const { frontmatter, headings } = Astro.props;
 ---
 <SidebarLayout title={frontmatter.title} description={frontmatter.description} articleDate={frontmatter.pubDate} image={frontmatter.image}>
@@ -20,7 +21,18 @@ const { frontmatter, headings } = Astro.props;
 			</li>
 			<li class="project-data-item">
 				<small>STACK</small>
-				<span>{frontmatter.stack}</span>
+				<ul class="inline-flex gap-2 sm:gap-4">
+					{frontmatter.stack.map(s => ( 
+						<li>
+							<Icon 
+								class="h-6 w-6 text-textColor" 
+								name={`logos:${s.toLowerCase()}`} 
+								focusable="false"
+								title={s}
+							/>
+						</li>
+					))}
+				</ul>
 			</li>
 			<li class="project-data-item">
 				<small>WEBSITE</small>
