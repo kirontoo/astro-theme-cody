@@ -24,23 +24,23 @@ function buildToc(headings: ReadonlyArray<MarkdownHeading>) {
 	const toc: Array<TocItem> = [];
 
 	bodyHeadings.forEach((h) => {
-		const heading: TocItem = { ...h, subheadings: [] };
+	const heading: TocItem = { ...h, subheadings: [] };
 
-		// add h2 elements into the top level
-		if (heading.depth === 2) {
-			toc.push(heading);
-		} else {
-			const lastItemInToc = toc[toc.length - 1]!;
-			if (heading.depth < lastItemInToc.depth) {
-				throw new Error(`Orphan heading found: ${heading.text}.`);
-			}
-
-			// higher depth
-			// push into children, or children's children
-			const gap = heading.depth - lastItemInToc.depth;
-			const target = diveChildren(lastItemInToc, gap);
-			target.push(heading);
+	// add h2 elements into the top level
+	if (heading.depth === 2) {
+		toc.push(heading);
+	} else {
+		const lastItemInToc = toc[toc.length - 1]!;
+		if (heading.depth < lastItemInToc.depth) {
+			throw new Error(`Orphan heading found: ${heading.text}.`);
 		}
+
+		// higher depth
+		// push into children, or children's children
+		const gap = heading.depth - lastItemInToc.depth;
+		const target = diveChildren(lastItemInToc, gap);
+		target.push(heading);
+	}
 	});
 	return toc;
 }
@@ -48,7 +48,7 @@ function buildToc(headings: ReadonlyArray<MarkdownHeading>) {
 ---
 
 <nav class="sticky top-20 order-2 hidden basis-64 lg:block">
-  <hr class="border-accent border-dashed my-6"/>
+  <hr/>
   <h2 class="font-bold text-lg">Table of Contents</h2>
   <ul class="-me-32">
     {toc.map((heading) => <TableOfContentsHeading heading={heading} />)}

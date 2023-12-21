@@ -145,4 +145,8 @@
   .title {
     @apply text-lg font-bold mb-4;
   }
+
+  hr {
+    @apply border-accent border-dashed my-6;
+  }
 }
