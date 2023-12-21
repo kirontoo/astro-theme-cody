@@ -4,8 +4,6 @@ import TableOfContentsHeading from '@/components/TableOfContentsHeading';
 const { headings } = Astro.props;
 const toc = buildToc(headings);
 
-console.log(headings)
-
 // https://github.com/chrismwilliams/astro-theme-cactus/blob/a85e0e559d3f92b32e73990486c0574b2b733227/src/utils/generateToc.ts
 export interface TocItem extends MarkdownHeading {
 	subheadings: Array<TocItem>;
@@ -74,7 +72,9 @@ function buildToc(headings: ReadonlyArray<MarkdownHeading>) {
 					const prevHeading = window.location.hash.slice(1);
 					const prevLink = document.getElementById(`toc-${prevHeading}`);
 
+					// remove active class from prev heading
 					prevLink.classList.remove('active-toc');
+					// add active class to current heading
 					tocLink.classList.add('active-toc');
 				});
 			})
