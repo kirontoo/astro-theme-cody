@@ -2,24 +2,86 @@
 import HeaderLink from './HeaderLink.astro';
 import { siteConfig, NAV_LINKS } from '../consts';
 import ThemeToggle from '../components/ThemeToggle.astro';
+
+const url = new URL(Astro.request.url);
 ---
 
-<header class="group relative mb-8 flex items-center">
-	<nav class="w-full">
-		<div class="flex items-center justify-between">
-			<a class="title" href="/">{siteConfig.title}</a>
-			<ThemeToggle/>
-		</div>
-		<div class="mt-4">
-			{
-				NAV_LINKS.map(nav => (
-					<HeaderLink href={nav.path}>{nav.title}</HeaderLink>
-				))
-			}
+<header class="group relative mb-8 flex justify-between items-center gap-4" id="main-header">
+	<div class="block">
+		<a
+			class="title whitespace-nowrap" 
+			href="/"
+			aria-current={url.pathname === "/" ? "page" : false}
+		>{siteConfig.title}</a>
+	</div>
+
+	<nav 
+		class="mt-4 bg-surface/95 sm:bg-bgColor absolute hidden top-8 w-full sm:block sm:static sm:mt-0 group-[.menu-open]:z-50 group-[.menu-open]:flex" 
+		id="navigation-menu" 
+		aria-label="main menu"
+		>
+		<div class="space-y-1 px-2 pb-3 pt-2 sm:flex sm:px-0 sm:py-0 sm:space-y-0">
+			{NAV_LINKS.map(nav => (
+				<HeaderLink 
+					class="block py-2 sm:py-0" 
+					href={nav.path} 
+					title={nav.title}
+					aria-current={url.pathname === nav.path ? "page" : false}
+					data-astro-prefetch
+				>{nav.title}</HeaderLink>
+			))}
 		</div>
 	</nav>
+
+	<div class="flex gap-2 items-center justify-center">
+		<ThemeToggle/>
+
+		<nav-button>
+			<div class="sm:hidden">
+				<span class="sr-only">open main menu</span>
+				<button 
+					class="group flex items-center justify-center" 
+					type="button" 
+					id="navigation-menu-btn"
+					aria-label="Open main menu"
+					aria-expanded="false"
+					aria-haspopup="menu"
+				>
+
+					<!-- icon when menu is closed -->
+					<svg class="transform transition-all duration-150 ease-out group-aria-expanded:scale-0 group-aria-expanded:opacity-0 h-6 w-6 block group-aria-expanded:hidden" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+					</svg>
+
+					<!-- icon when menu is open -->
+					<svg class="transform transition-all duration-150 ease-out h-6 w-6 scale-0 text-accent opacity-0 transition-all group-aria-expanded:scale-100 group-aria-expanded:opacity-100 hidden group-aria-expanded:block" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+					</svg>
+				</button>
+			</div>
+		</nav-button>
+
+	</div>
 </header>
 
+
+
+<!-- <header class="group relative mb-8"> -->
+<!-- 	<nav class="w-full flex flex-wrap"> -->
+<!-- 		<div class="flex items-center justify-between"> -->
+<!-- 			<a class="title" href="/">{siteConfig.title}</a> -->
+<!-- 			<ThemeToggle/> -->
+<!-- 		</div> -->
+<!-- 		<div class="mt-4"> -->
+<!-- 			{ -->
+<!-- 				NAV_LINKS.map(nav => ( -->
+<!-- 					<HeaderLink href={nav.path}>{nav.title}</HeaderLink> -->
+<!-- 				)) -->
+<!-- 			} -->
+<!-- 		</div> -->
+<!-- 	</nav> -->
+<!-- </header> -->
+<!---->
 <style>
 	.title {
 		@apply bg-accent p-1 text-bgColor text-xl;
@@ -36,3 +98,29 @@ import ThemeToggle from '../components/ThemeToggle.astro';
 		@apply text-bgColor;
 	}
 </style>
+
+<script>
+
+	class MobileNavBtn extends HTMLElement {
+		private headerEl: HTMLElement;
+		private mobileButtonEl: HTMLButtonElement;
+		private menuOpen: boolean;
+
+		constructor() {
+			super();
+			this.headerEl = document.getElementById("main-header")!;
+			this.mobileButtonEl = this.querySelector("button") as HTMLButtonElement;
+			this.menuOpen = false;
+
+			this.mobileButtonEl.addEventListener("click", this.toggleMobileMenu);
+		}
+
+		toggleMobileMenu = () => {
+			this.headerEl.classList.toggle("menu-open");
+			this.menuOpen = !this.menuOpen;
+			this.mobileButtonEl.setAttribute("aria-expanded", this.menuOpen.toString());
+		};
+	}
+
+	customElements.define("nav-button", MobileNavBtn);
+</script>
