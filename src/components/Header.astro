@@ -64,24 +64,6 @@ const url = new URL(Astro.request.url);
 	</div>
 </header>
 
-
-
-<!-- <header class="group relative mb-8"> -->
-<!-- 	<nav class="w-full flex flex-wrap"> -->
-<!-- 		<div class="flex items-center justify-between"> -->
-<!-- 			<a class="title" href="/">{siteConfig.title}</a> -->
-<!-- 			<ThemeToggle/> -->
-<!-- 		</div> -->
-<!-- 		<div class="mt-4"> -->
-<!-- 			{ -->
-<!-- 				NAV_LINKS.map(nav => ( -->
-<!-- 					<HeaderLink href={nav.path}>{nav.title}</HeaderLink> -->
-<!-- 				)) -->
-<!-- 			} -->
-<!-- 		</div> -->
-<!-- 	</nav> -->
-<!-- </header> -->
-<!---->
 <style>
 	.title {
 		@apply bg-accent p-1 text-bgColor text-xl;
@@ -100,6 +82,7 @@ const url = new URL(Astro.request.url);
 </style>
 
 <script>
+	// src: https://github.com/chrismwilliams/astro-theme-cactus/blob/a85e0e559d3f92b32e73990486c0574b2b733227/src/components/layout/Header.astro
 
 	class MobileNavBtn extends HTMLElement {
 		private headerEl: HTMLElement;
