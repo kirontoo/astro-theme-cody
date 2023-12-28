@@ -13,3 +13,12 @@ export function sortMDByDate(posts: Array<CollectionEntry<"blog">>) {
 		return bDate - aDate;
 	});
 }
+
+export function sortMDByPinned(posts: Array<CollectionEntry<"blog">>) {
+	return posts.sort((a, b) => {
+		const aOrder = a.data.order ?? 100;
+		const bOrder = b.data.order ?? 100;
+		return aOrder - bOrder;
+	});
+
+}

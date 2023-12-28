@@ -23,7 +23,9 @@ const blog = defineCollection({
 		}).optional(),
 		ogImage: z.string().optional(),
 		tags: z.array(z.string()).default([]).transform(removeDupsAndLowercase),
-		draft: z.boolean().optional().default(false)
+		draft: z.boolean().optional().default(false),
+		// for pinning posts
+		order: z.number().optional()
 	}),
 });
 

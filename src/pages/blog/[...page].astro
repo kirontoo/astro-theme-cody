@@ -4,13 +4,14 @@ import type { CollectionEntry } from "astro:content";
 import BaseLayout from "@/layouts/Sidebar";
 import PostPreview from "@/components/blog/PostPreviewA";
 import Pagination from "@/components/Pagination";
-import { getAllPosts, getUniqueTags, sortMDByDate } from "@/utils";
+import { getAllPosts, getUniqueTags, sortMDByDate, sortMDByPinned } from "@/utils";
 
 export const getStaticPaths = (async ({ paginate }) => {
 	const allPosts = await getAllPosts();
 	const allPostsByDate = sortMDByDate(allPosts);
+	const allPostsByPinned = sortMDByPinned(allPostsByDate);
 	const tags = getUniqueTags(allPosts);
-	return paginate(allPostsByDate, { props: { tags }, pageSize: 10 });
+	return paginate(allPostsByPinned, { props: { tags }, pageSize: 10 });
 }) satisfies GetStaticPaths;
 
 interface Props {
@@ -78,7 +79,10 @@ const paginationProps = {
 				<ul class="flex gap-2 flex-wrap mb-4">
 					{tags.map(tag => (
 						<li class="tag">
-							<a href={`/tags/${tag}`}>
+							<a 
+								href={`/tags/${tag}`}
+								aria-label={`tag: ${tag}`}
+							>
 								{tag}
 							</a>
 						</li>
