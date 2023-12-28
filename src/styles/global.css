@@ -149,4 +149,12 @@
   hr {
     @apply border-accent border-dashed my-6;
   }
+
+  ::selection {
+    @apply bg-accent text-bgColor;
+  }
+
+  ::-moz-selection {
+    @apply bg-accent text-bgColor;
+  }
 }
