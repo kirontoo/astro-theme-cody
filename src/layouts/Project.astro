@@ -10,9 +10,12 @@ const { frontmatter, headings } = Astro.props;
 	<section class="cody-bg space-y-2 sm:space-y-4">
 		<h2 class="title">{frontmatter.title}</h2>
 
-		<div>
-			<img src={frontmatter.heroImage.url} alt={frontmatter.heroImage.alt} />
-    </div>
+		{
+			frontmatter.heroImage && 
+			<div class="aspect-h-9 aspect-w-16 mb-6 w-full">
+				<img src={frontmatter.heroImage.url} alt={frontmatter.heroImage.alt} />
+			</div>
+		}
 
 		<ul class="space-y-2">
 			<li class="project-data-item">

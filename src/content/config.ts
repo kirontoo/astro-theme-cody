@@ -11,13 +11,16 @@ function removeDupsAndLowercase(list: string[]) {
 const blog = defineCollection({
 	type: 'content',
 	// Type-check frontmatter using a schema
-	schema: z.object({
+	schema: ({ image }) => z.object({
 		title: z.string(),
 		description: z.string(),
 		// Transform string to Date object
 		pubDate: z.coerce.date(),
 		updatedDate: z.coerce.date().optional(),
-		heroImage: z.string().optional(),
+		heroImage: z.object({
+			src: z.string().or(image()),
+			alt: z.string(),
+		}).optional(),
 		ogImage: z.string().optional(),
 		tags: z.array(z.string()).default([]).transform(removeDupsAndLowercase),
 		draft: z.boolean().optional().default(false)
@@ -26,14 +29,14 @@ const blog = defineCollection({
 
 const project = defineCollection({
 	type: 'content',
-	schema: z.object({
+	schema: ({ image }) => z.object({
 		title: z.string(),
 		description: z.string(),
 		pubDate: z.coerce.date(),
 		heroImage: z.object({
-			url: z.string(),
+			url: z.string().or(image()),
 			alt: z.string().optional()
-		}),
+		}).optional(),
 		ogImage: z.string().optional(),
 		stack: z.array(z.string()).default([]).transform(removeDupsAndLowercase),
 		website: z.string().optional(),

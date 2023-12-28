@@ -8,6 +8,7 @@ import SocialMediaLinks from '@/components/SocialMediaLinks';
 import TOC from '@/components/TableOfContents';
 import { Icon } from 'astro-icon';
 import { siteConfig } from '../consts';
+import { Image } from "astro:assets";
 
 interface Props {
 	post: CollectionEntry<"blog">;
@@ -43,7 +44,12 @@ const articleDate = updatedDate?.toISOString() ?? pubDate.toISOString();
 
 <Layout title={title} description={description} image={socialImage} articleDate={articleDate}>
 	<article class="cody-bg">
-		{heroImage && <img width={1020} height={510} src={heroImage} alt="" class="mb-4"/>}
+		{
+			heroImage && 
+			<div class="aspect-h-9 aspect-w-16 mb-6 w-full">
+					<img src={heroImage.src} alt={heroImage.alt} class="mb-4"/>
+			</div>
+		}
 		<div class="prose dark:prose-invert prose-cody text-textColor">
 			<div class="flex gap-2 items-center">
 				<h1 class="text-3xl my-0">{title}</h1>
@@ -79,7 +85,7 @@ const articleDate = updatedDate?.toISOString() ?? pubDate.toISOString();
 			</div>
 		</div>
 	</article>
-	<aside slot="sidebar">
+	<aside slot="sidebar" class="hidden sm:block">
 		<div class="flex flex-col space-y-2">
 			<h2 class="font-semibold text-lg text-textColor" rel="author">{siteConfig.profile.author}</h2>
 			{siteConfig.profile.description && (<p>{siteConfig.profile.description}</p>)}
