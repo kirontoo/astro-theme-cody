@@ -5,6 +5,7 @@ pubDate: 'Jul 01 2022'
 heroImage: 
   src: '/blog-placeholder-1.jpg'
   alt: ''
+order: 1
 ---
 
 Here is a sample of some basic Markdown syntax that can be used when writing Markdown content in Astro.
