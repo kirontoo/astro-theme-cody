@@ -22,7 +22,7 @@ const blog = defineCollection({
 			alt: z.string(),
 		}).optional(),
 		ogImage: z.string().optional(),
-		tags: z.array(z.string()).default([]).transform(removeDupsAndLowercase),
+		tags: z.array(z.string()).default([]).transform(removeDupsAndLowercase).optional(),
 		draft: z.boolean().optional().default(false),
 		// for pinning posts
 		order: z.number().optional()
