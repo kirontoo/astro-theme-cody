@@ -12,20 +12,31 @@ const blog = defineCollection({
 	type: 'content',
 	// Type-check frontmatter using a schema
 	schema: ({ image }) => z.object({
-		title: z.string(),
-		description: z.string(),
+		title: z.string().max(150),
+		description: z.string().min(20).max(250),
 		// Transform string to Date object
-		pubDate: z.coerce.date(),
-		updatedDate: z.coerce.date().optional(),
+		pubDate: z
+			.string()
+			.or(z.date())
+			.transform(val => new Date(val)),
+		updatedDate: z
+			.string()
+			.or(z.date())
+			.transform(val => val ? new Date(val) : undefined)
+			.optional(),
 		heroImage: z.object({
 			src: z.string().or(image()),
-			alt: z.string(),
+			alt: z.string().optional(),
 		}).optional(),
 		ogImage: z.string().optional(),
-		tags: z.array(z.string()).default([]).transform(removeDupsAndLowercase).optional(),
+		tags: z
+			.array(z.string())
+			.default([])
+			.transform(removeDupsAndLowercase)
+			.optional(),
 		draft: z.boolean().optional().default(false),
 		// for pinning posts
-		order: z.number().optional()
+		order: z.number().min(1).max(5).optional()
 	}),
 });
 
@@ -34,18 +45,22 @@ const project = defineCollection({
 	schema: ({ image }) => z.object({
 		title: z.string(),
 		description: z.string(),
-		pubDate: z.coerce.date(),
+		pubDate: z
+			.string()
+			.or(z.date())
+			.transform(val => new Date(val)),
 		heroImage: z.object({
 			url: z.string().or(image()),
 			alt: z.string().optional()
 		}).optional(),
 		ogImage: z.string().optional(),
 		stack: z.array(z.string()).default([]).transform(removeDupsAndLowercase),
+		platform: z.string().optional(),
 		website: z.string().optional(),
-		github: z.string(),
+		github: z.string().optional(),
 		draft: z.boolean().optional().default(false),
 		// for pinning projects
-		order: z.number().optional()
+		order: z.number().min(1).max(5).optional()
 	})
 });
 
