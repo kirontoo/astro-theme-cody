@@ -6,7 +6,6 @@ heroImage:
   src: '/blog-placeholder-5.jpg'
   alt: 'blog placeholder'
 tags: ["test"]
-draft: true
 updatedDate: 'Sep 10 2022'
 ---
 
