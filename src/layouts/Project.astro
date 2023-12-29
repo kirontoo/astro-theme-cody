@@ -18,33 +18,41 @@ const { frontmatter, headings } = Astro.props;
 		}
 
 		<ul class="space-y-2">
-			<li class="project-data-item">
-				<small>PLATFORM</small>
-				<span>{frontmatter.platform}</span>
-			</li>
-			<li class="project-data-item">
-				<small>STACK</small>
-				<ul class="inline-flex gap-2 sm:gap-4">
-					{frontmatter.stack.map(s => ( 
-						<li>
-							<Icon 
-								class="h-6 w-6 text-textColor" 
-								name={`logos:${s.toLowerCase()}`} 
-								focusable="false"
+			{ frontmatter.platform && 
+				<li class="project-data-item">
+					<small>PLATFORM</small>
+					<span>{frontmatter.platform}</span>
+				</li>
+			}
+			{ frontmatter.stack && 
+				<li class="project-data-item">
+					<small>STACK</small>
+					<ul class="inline-flex gap-2 sm:gap-4">
+						{frontmatter.stack.map(s => ( 
+							<li>
+								<Icon 
+									class="h-6 w-6 text-textColor" 
+									name={`logos:${s.toLowerCase()}`} 
+									focusable="false"
 								title={s}
-							/>
-						</li>
-					))}
-				</ul>
-			</li>
-			<li class="project-data-item">
-				<small>WEBSITE</small>
-				<a href={frontmatter.website} target="_blank" class="cody-link">{frontmatter.website}</a>
-			</li>
-			<li class="project-data-item">
-				<small>GITHUB</small>
-				<a href={frontmatter.github} target="_blank" class="cody-link">{frontmatter.github}</a>
-			</li>
+								/>
+							</li>
+						))}
+					</ul>
+				</li> 
+			}
+			{ frontmatter.website &&
+				<li class="project-data-item">
+					<small>WEBSITE</small>
+					<a href={frontmatter.website} target="_blank" class="cody-link">{frontmatter.website}</a>
+				</li>
+			}
+			{ frontmatter.github && 
+				<li class="project-data-item">
+					<small>GITHUB</small>
+					<a href={frontmatter.github} target="_blank" class="cody-link">{frontmatter.github}</a>
+				</li>
+			}
 		</ul>
 
 		<hr/>
