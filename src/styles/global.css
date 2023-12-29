@@ -32,6 +32,10 @@
     @apply mx-auto flex min-h-screen max-w-6xl flex-col px-8 pt-8 font-mono text-sm font-normal antialiased bg-bgColor text-textColor;
   }
 
+  /*
+  * CSS for markdown and MDX blog posts
+  */
+
   .prose-cody blockquote {
     @apply text-quote border-l-0;
   }
@@ -94,6 +98,10 @@
   .prose-cody mark {
     @apply bg-accent;
   }
+
+  /*
+  * ===== END =====
+  */
 
   .tag {
     @apply bg-accent px-1 py-0 text-bgColor font-semibold text-sm;
