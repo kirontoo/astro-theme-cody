@@ -1,37 +1,13 @@
 ---
 import { Icon } from "astro-icon";
+import { socialLinks } from "../consts.ts";
 
-/** 
-	Uses https://github.com/natemoo-re/astro-icon#readme
-	Find icons @ https://icones.js.org/
-*/
-const socialLinks: Array<{
-	name: string;
-	friendlyName: string;
-	link: string;
-}> = [
-	{
-		name: "mdi:github",
-		friendlyName: "Github",
-		link: "https://github.com/kirontoo/astro-theme-cody",
-	},
-	{
-		name: "mdi:linkedin",
-		friendlyName: "LinkedIn",
-		link: "#",
-	},
-	{
-		name: "mdi:email",
-		friendlyName: "email",
-		link: "mailto:ndangamy@gmail.com",
-	},
-];
 ---
 
 <div class="flex flex-wrap items-end gap-x-4">
 	<ul class="flex flex-1 items-center gap-x-2 sm:flex-initial">
 		{
-			socialLinks.map(({ link, name, friendlyName}) => (
+			socialLinks.map(({ link, icon, friendlyName}) => (
 				<li class="flex">
 					<a
 						class="inline-block p-1 sm:hover:text-accent"
@@ -39,7 +15,7 @@ const socialLinks: Array<{
 						target="_blank"
 						rel={`noopener noreferrer`}
 					>
-						<Icon class="h-5 w-5" name={name} aria-hidden="true" focusable="false" />
+						<Icon class="h-5 w-5" name={icon} aria-hidden="true" focusable="false" />
 						<span class="sr-only">{friendlyName}</span>
 					</a>
 				</li>

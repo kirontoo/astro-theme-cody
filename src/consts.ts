@@ -11,6 +11,12 @@ type Config = {
   }
 }
 
+type SocialLink = {
+  icon: string;
+  friendlyName: string;
+  link: string;
+}
+
 export const siteConfig: Config = {
   title: "Astro Theme Cody",
   description: "",
@@ -21,9 +27,32 @@ export const siteConfig: Config = {
   }
 }
 
-export const NAV_LINKS: Array<{title: string, path: string}> = [
+/** 
+  Uses https://github.com/natemoo-re/astro-icon#readme
+  Find icons @ https://icones.js.org/
+*/
+export const socialLinks: Array<SocialLink> = [
   {
-    title: "Home", 
+    icon: "mdi:github",
+    friendlyName: "Github",
+    link: "https://github.com/kirontoo/astro-theme-cody",
+  },
+  {
+    icon: "mdi:linkedin",
+    friendlyName: "LinkedIn",
+    link: "#",
+  },
+  {
+    icon: "mdi:email",
+    friendlyName: "email",
+    link: "mailto:ndangamy@gmail.com",
+  },
+
+];
+
+export const NAV_LINKS: Array<{ title: string, path: string }> = [
+  {
+    title: "Home",
     path: "/",
   },
   {
