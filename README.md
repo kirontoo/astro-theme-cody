@@ -43,8 +43,6 @@ pnpm dlx create-astro --template kirontoo/astro-theme-cody
 
 ![astro-theme-cody-dark-theme](https://github.com/kirontoo/astro-theme-cody/assets/28286622/f4520407-8696-4469-b73d-b06209feb4ca)
 
-
-
 ## 🧞 Commands
 
 All commands are run from the root of the project, from a terminal:
@@ -66,6 +64,8 @@ This theme utilises [ Content Collections ](https://docs.astro.build/en/guides/c
 to organise Markdown and/or MDX files, as well as type-checking frontmatter 
 with a schema -> `src/content/config.ts`.
 
+#### Blog
+You can find examples of blog posts in `src/content/blog`.
 
 #### Blog post frontmatter
 | Property (* = required) | Description |
@@ -81,14 +81,17 @@ with a schema -> `src/content/config.ts`.
 | order | Optional number value from 1 - 5 to pin certain posts to the top. Limited to only 5 pinned posts|
 
 
-#### Project frontmatter
+#### Projects
+All project content should be placed within `src/pages/projects`.
+
+##### Project frontmatter
 
 | Property (* = required) | Description |
 |:-----------------------| :----------|
 | title * | Title of your project. Limited to a maximum of 150 characters  |
 | description * | Short description of your project, which will also be used for SEO. Has a min length of 20 characters and max of 250 characters. |
 | pubDate * | Published date |
-| heroImage | Optional cover image for you project. Include both a `src` and a `alt` property. Check `src/content/blog/first-post.md` for an example.|
+| heroImage | Optional cover image for you project. Include both a `src` and a `alt` property. Check `src/pages/projects/project-1.md` for an example.|
 | ogImage | Optional image used for SEO. |
 | stack * | A list of technologies your project used which will be rendered as icons. This theme uses the SVG Logos librar, you can use [icones.js.org](https://icones.js.org/) to find the icons you need.|
 | platform | Link to website or demo |
@@ -96,7 +99,6 @@ with a schema -> `src/content/config.ts`.
 | github | Your github repo link |
 | draft | Optional boolean. Removes projects from being published.|
 | order | Optional number value from 1 - 5 to pin certain projects to the top. Limited to only 5 pinned posts|
-
 
 
 ## Credit
