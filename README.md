@@ -9,6 +9,8 @@ Astro Cody is a simple theme I built
 4. [Preview](#preview)
 5. [Commands](#commands)
 6. [Configure](#configure)
+7. [Deploy](#deploy)
+8. [Extra Functionality](#extra-functionality)
 
 ## Key Features:
 - Astro v4 Fast 🚀
@@ -43,7 +45,7 @@ pnpm dlx create-astro --template kirontoo/astro-theme-cody
 
 ![astro-theme-cody-dark-theme](https://github.com/kirontoo/astro-theme-cody/assets/28286622/f4520407-8696-4469-b73d-b06209feb4ca)
 
-## 🧞 Commands
+## Commands
 
 All commands are run from the root of the project, from a terminal:
 
@@ -99,6 +101,14 @@ All project content should be placed within `src/pages/projects`.
 | github | Your github repo link |
 | draft | Optional boolean. Removes projects from being published.|
 | order | Optional number value from 1 - 5 to pin certain projects to the top. Limited to only 5 pinned posts|
+
+## Deploy
+Astro provides great documentation for deploying your Astro websites on various platforms.
+You can find it [here](https://docs.astro.build/en/guides/deploy/).
+
+## Extra Funtionality
+Check out [Astro Recipes](https://docs.astro.build/en/recipes/) to add other functionality like a RSS feed.
+
 
 
 ## Credit
