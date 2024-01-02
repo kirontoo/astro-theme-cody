@@ -37,6 +37,14 @@ npm create astro@latest -- --template kirontoo/astro-theme-cody
 # pnpm
 pnpm dlx create-astro --template kirontoo/astro-theme-cody
 ```
+
+## Preview
+![astro-theme-cody-light-theme](https://github.com/kirontoo/astro-theme-cody/assets/28286622/17b31f0d-cd76-47e4-90ed-99366c903856)
+
+![astro-theme-cody-dark-theme](https://github.com/kirontoo/astro-theme-cody/assets/28286622/f4520407-8696-4469-b73d-b06209feb4ca)
+
+
+
 ## 🧞 Commands
 
 All commands are run from the root of the project, from a terminal:
