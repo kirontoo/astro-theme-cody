@@ -47,40 +47,28 @@ function buildToc(headings: ReadonlyArray<MarkdownHeading>) {
 
 ---
 
-<toc-list data-headings={JSON.stringify(headings)}>
-	<nav class="sticky top-20 order-2 hidden basis-64 lg:block">
-		<hr/>
-		<h2 class="font-bold text-lg">Table of Contents</h2>
-		<ul class="-me-32">
-			{toc.map((heading) => <TableOfContentsHeading heading={heading} />)}
-		</ul>
-	</nav>
-</toc-list>
+<nav class="sticky top-20 order-2 hidden basis-64 lg:block">
+	<hr/>
+	<h2 class="font-bold text-lg">Table of Contents</h2>
+	<ul class="-me-32" id="toc">
+		{toc.map((heading) => <TableOfContentsHeading heading={heading} />)}
+	</ul>
+</nav>
+
 
 <script>
-  class Toc extends HTMLElement {
-    constructor() {
-      super();
+	const toc = document.getElementById("toc");
+	toc.addEventListener('click', (e) => {
+		const currLink = e.target;
 
-      // Read the message from the data attribute.
-      const headings = JSON.parse(this.dataset.headings);
+		const prevHeading = window.location.hash.slice(1);
+		const prevLink = document.getElementById(`toc-${prevHeading}`);
 
-			headings.forEach(({ slug }) => {
-				const tocLink = document.getElementById(`toc-${slug}`);
-
-				tocLink.addEventListener('click', () => {
-					const prevHeading = window.location.hash.slice(1);
-					const prevLink = document.getElementById(`toc-${prevHeading}`);
-
-					// remove active class from prev heading
-					prevLink.classList.remove('active-toc');
-					// add active class to current heading
-					tocLink.classList.add('active-toc');
-				});
-			})
-
-    }
-  }
-
-  customElements.define('toc-list', Toc);
+		// remove active class from prev heading
+		if(prevLink) {
+			prevLink.classList.remove('active-toc');
+		}
+		// add active class to current heading
+		currLink.classList.add('active-toc');
+	})
 </script>
