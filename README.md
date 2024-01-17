@@ -95,7 +95,7 @@ All project content should be placed within `src/pages/projects`.
 | pubDate * | Published date |
 | heroImage | Optional cover image for you project. Include both a `src` and a `alt` property. Check `src/pages/projects/project-1.md` for an example.|
 | ogImage | Optional image used for SEO. |
-| stack * | A list of technologies your project used which will be rendered as icons. This theme uses the SVG Logos librar, you can use [icones.js.org](https://icones.js.org/) to find the icons you need.|
+| stack * | A list of technologies your project used which will be rendered as icons. This theme uses the SVG Logos librar, you can use [icones.js.org](https://icones.js.org/collection/vscode-icons) to find the icons you need.|
 | platform | Link to website or demo |
 | website | Link to website or demo |
 | github | Your github repo link |
