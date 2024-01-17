@@ -5,7 +5,7 @@ pubDate: 'Jul 08 2022'
 heroImage: 
   src: '/blog-placeholder-5.jpg'
   alt: 'blog placeholder'
-tags: ["test"]
+tags: ["placeholder", "test"]
 updatedDate: 'Sep 10 2022'
 ---
 
