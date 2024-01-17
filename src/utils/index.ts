@@ -8,6 +8,7 @@ export {
 
 export {
   getAllPosts,
+  getPostsByTag,
   sortMDByDate,
   sortMDByPinned
 } from "./post";

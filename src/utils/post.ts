@@ -22,3 +22,15 @@ export function sortMDByPinned(posts: Array<CollectionEntry<"blog">>) {
 	});
 
 }
+
+export function getPostsByTag(
+	tag: string, 
+	posts: Array<CollectionEntry<"blog">>
+) {
+	return posts.filter(post => {
+		if (post.data.tags) {
+			return post.data.tags.includes(tag);
+		}
+		return false;
+	});
+}
