@@ -1,14 +1,11 @@
 ---
-import { CollectionEntry, getCollection } from 'astro:content';
+import { CollectionEntry } from 'astro:content';
 import Layout from '../layouts/Sidebar.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import SocialMediaLinks from '@/components/SocialMediaLinks';
 import TOC from '@/components/TableOfContents';
 import { Icon } from 'astro-icon';
 import { siteConfig } from '../consts';
-import { Image } from "astro:assets";
 
 interface Props {
 	post: CollectionEntry<"blog">;
