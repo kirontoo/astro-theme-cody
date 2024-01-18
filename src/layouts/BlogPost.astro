@@ -9,7 +9,7 @@ import { siteConfig } from '../consts';
 
 interface Props {
 	post: CollectionEntry<"blog">;
-	minutesRead
+	minutesRead: number
 }
 
 const post = Astro.props
@@ -53,7 +53,7 @@ const articleDate = updatedDate?.toISOString() ?? pubDate.toISOString();
 				{ draft && (<span class="px-1 py-0 bg-red-200 text-red-600 text-sm font-semibold">draft</span>)}
 			</div>
 			<span class="font-semibold text-textColor flex gap-2 items-center">
-				<FormattedDate date={pubDate} dateTimeOptions={dateTimeOptions} pubdate />
+				<FormattedDate date={pubDate} dateTimeOptions={dateTimeOptions}/>
 				<span>
 					/ {minutesRead}
 				</span>

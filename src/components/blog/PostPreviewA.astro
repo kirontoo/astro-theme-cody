@@ -29,7 +29,7 @@ const pinned: boolean = !!post.data.order;
 		}
 	</span>
 	<p class="date pr-2 mt-1">
-		<FormattedDate date={postDate} pubDate/>
+		<FormattedDate date={postDate}/>
 	</p>
 	{withDesc && ( <p class="italic">{post.data.description}</p> )}
 </li>
