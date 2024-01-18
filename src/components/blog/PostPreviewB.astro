@@ -9,7 +9,7 @@ type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag }> & {
 	withDesc?: boolean;
 };
 
-const { post, as: Tag = "div", withDesc = false } = Astro.props;
+const { post, withDesc = false } = Astro.props;
 const postDate = post.data.updatedDate ?? post.data.pubDate;
 const pinned: boolean = !!post.data.order;
 ---
