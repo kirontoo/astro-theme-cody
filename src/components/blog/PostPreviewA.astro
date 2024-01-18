@@ -5,7 +5,7 @@ import FormattedDate from "@/components/FormattedDate";
 import { Icon } from "astro-icon";
 
 type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag }> & {
-	post: CollectionEntry<"post">;
+	post: CollectionEntry<"blog">;
 	withDesc?: boolean;
 };
 
