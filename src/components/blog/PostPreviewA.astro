@@ -9,8 +9,8 @@ type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag }> & {
 	withDesc?: boolean;
 };
 
-const { post, as: Tag = "div", withDesc = false } = Astro.props;
-const postDate = post.data.updatedDate ?? post.data.publishDate;
+const { post, withDesc = false } = Astro.props;
+const postDate = post.data.updatedDate ?? post.data.pubDate;
 const pinned: boolean = !!post.data.order;
 ---
 
@@ -29,7 +29,7 @@ const pinned: boolean = !!post.data.order;
 		}
 	</span>
 	<p class="date pr-2 mt-1">
-		<FormattedDate date={post.data.pubDate} pubDate/>
+		<FormattedDate date={postDate} pubDate/>
 	</p>
 	{withDesc && ( <p class="italic">{post.data.description}</p> )}
 </li>
