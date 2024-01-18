@@ -58,17 +58,20 @@ function buildToc(headings: ReadonlyArray<MarkdownHeading>) {
 
 <script>
 	const toc = document.getElementById("toc");
-	toc.addEventListener('click', (e) => {
-		const currLink = e.target;
+	if(toc) {
+		toc?.addEventListener('click', (e) => {
+			const prevHeading = window.location.hash.slice(1);
+			const prevLink = document.getElementById(`toc-${prevHeading}`);
 
-		const prevHeading = window.location.hash.slice(1);
-		const prevLink = document.getElementById(`toc-${prevHeading}`);
+			// remove active class from prev heading
+			if(prevLink instanceof HTMLElement) {
+				prevLink?.classList.remove('active-toc');
+			}
 
-		// remove active class from prev heading
-		if(prevLink) {
-			prevLink.classList.remove('active-toc');
-		}
-		// add active class to current heading
-		currLink.classList.add('active-toc');
-	})
+			// add active class to current heading
+			if (e.target instanceof HTMLElement) {
+				e.target.classList.add('active-toc');
+			}
+		});
+	}
 </script>
