@@ -10,7 +10,7 @@ Astro Cody is a simple theme I built
 5. [Commands](#commands)
 6. [Configure](#configure)
 7. [Deploy](#deploy)
-8. [Extra Functionality](#extra-functionality)
+8. [Extra Functionality](#extra-funtionality)
 
 ## Key Features:
 - Astro v4 Fast 🚀
