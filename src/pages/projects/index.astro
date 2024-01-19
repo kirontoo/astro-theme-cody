@@ -1,17 +1,22 @@
 ---
 import BaseLayout from '@/layouts/Base';
 import ProjectPreview from '@/components/project/ProjectPreview';
-const allProjects = await Astro.glob('./*.md');
+import { getCollection } from "astro:content";
+// const allProjects = await Astro.glob('./*.md');
+const allProjects = await getCollection("project",({data}) => {
+		return import.meta.env.PROD ? data.draft !== true : true;
+});
+
 const sortedByDateProjects = allProjects.sort(( a, b ) => {
-		const aDate = new Date(a.frontmatter.pubDate).valueOf();
-		const bDate = new Date(b.frontmatter.pubDate).valueOf();
+		const aDate = new Date(a.data.pubDate).valueOf();
+		const bDate = new Date(b.data.pubDate).valueOf();
 		return bDate - aDate;
 });
 
 // move all pinned projects to the top
 const sortedByPinned = sortedByDateProjects.sort(( a, b ) => {
-	const aOrder = a.frontmatter.order ?? 100;
-	const bOrder = b.frontmatter.order ?? 100;
+	const aOrder = a.data.order ?? 100;
+	const bOrder = b.data.order ?? 100;
 	return aOrder - bOrder;
 })
 ---

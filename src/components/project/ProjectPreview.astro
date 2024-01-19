@@ -10,16 +10,16 @@ type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag }> & {
 };
 
 const { project, withDesc = false } = Astro.props;
-const { frontmatter } = project;
+const { data } = project;
 
-const pubDate = new Date(frontmatter.pubDate);
-const pinned: boolean = !!frontmatter.order;
+const pubDate = new Date(data.pubDate);
+const pinned: boolean = !!data.order;
 ---
 
 <li>
 	<span>
 		<a href={`${project.url}/`} class="project-item">
-			<h4 class="cody-link inline font-bold" >{frontmatter.title}</h4>
+			<h4 class="cody-link inline font-bold" >{data.title}</h4>
 		</a>
 		{
 			pinned && (<Icon class="h-5 w-5 inline text-accent rotate-45 -ml-1" name="mdi:pin" aria-hidden="true" focusable="false"/>)
@@ -28,7 +28,7 @@ const pinned: boolean = !!frontmatter.order;
 	<p class="date pr-2 mt-1">
 		<FormattedDate date={pubDate}/>
 	</p>
-	{withDesc && ( <p class="italic">{frontmatter.description}</p> )}
+	{withDesc && ( <p class="italic">{data.description}</p> )}
 </li>
 <style>
 	.project-item:before {
