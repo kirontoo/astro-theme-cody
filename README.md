@@ -66,8 +66,7 @@ This theme utilises [ Content Collections ](https://docs.astro.build/en/guides/c
 to organise Markdown and/or MDX files, as well as type-checking frontmatter 
 with a schema -> `src/content/config.ts`.
 
-#### Blog
-You can find examples of blog posts in `src/content/blog`.
+You can find examples of blog posts in `src/content/blog` and examples of projects in `src/content/project`.
 
 #### Blog post frontmatter
 | Property (* = required) | Description |
@@ -82,11 +81,7 @@ You can find examples of blog posts in `src/content/blog`.
 | draft | Optional boolean. Removes posts from being published.|
 | order | Optional number value from 1 - 5 to pin certain posts to the top. Limited to only 5 pinned posts|
 
-
-#### Projects
-All project content should be placed within `src/pages/projects`.
-
-##### Project frontmatter
+#### Project frontmatter
 
 | Property (* = required) | Description |
 |:-----------------------| :----------|
@@ -108,7 +103,6 @@ You can find it [here](https://docs.astro.build/en/guides/deploy/).
 
 ## Extra Funtionality
 Check out [Astro Recipes](https://docs.astro.build/en/recipes/) to add other functionality like a RSS feed.
-
 
 
 ## Credit
