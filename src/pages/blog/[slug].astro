@@ -1,6 +1,6 @@
 ---
 
-import { type InferGetStaticPropsType, type GetStaticPaths } from 'astro';
+import type { InferGetStaticPropsType, GetStaticPaths } from 'astro';
 import BlogPost from '../../layouts/BlogPost.astro';
 import { getAllPosts } from '@/utils';
 
@@ -17,6 +17,6 @@ const { post } = Astro.props;
 const { Content } = await post.render();
 ---
 
-<BlogPost {...post}>
+<BlogPost post={post}>
 	<Content />
 </BlogPost>
