@@ -28,7 +28,7 @@ const { frontmatter, headings } = Astro.props;
 				<li class="project-data-item">
 					<small>STACK</small>
 					<ul class="inline-flex gap-2 sm:gap-4">
-						{frontmatter.stack.map(s => ( 
+						{frontmatter.stack.map((s: string) => ( 
 							<li>
 								<Icon 
 									class="h-6 w-6 text-textColor" 
@@ -62,9 +62,9 @@ const { frontmatter, headings } = Astro.props;
 		</div>
 
 	</section>
-	<aside name="sidebar">
+	<aside slot="sidebar">
 		<div class="flex flex-col space-y-2">
-			<h2 class="font-semibold text-lg text-textColor" rel="author">{siteConfig.profile.author}</h2>
+			<h2 class="font-semibold text-lg text-textColor">{siteConfig.profile.author}</h2>
 			{siteConfig.profile.description && (<p>{siteConfig.profile.description}</p>)}
 			<SocialMediaLinks/>
 			<span class="!my-4 text-accent" aria-hidden>---</span>
