@@ -11,6 +11,12 @@ export default defineConfig({
   integrations: [mdx(), sitemap(), tailwind()],
   markdown: {
     remarkPlugins: [remarkReadingTime],
+    syntaxHighlight: 'shiki',
+    shikiConfig: {
+      // // Choose from Shiki's built-in themes (or add your own)
+      // // https://github.com/shikijs/shiki/blob/main/docs/themes.md
+      theme: 'rose-pine-moon',
+    },
   },
 });
 
