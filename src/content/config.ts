@@ -11,7 +11,7 @@ function removeDupsAndLowercase(list: string[]) {
 const blog = defineCollection({
 	type: 'content',
 	// Type-check frontmatter using a schema
-	schema: ({ image }) => z.object({
+	schema: () => z.object({
 		title: z.string().max(150),
 		description: z.string().min(20).max(250),
 		// Transform string to Date object
@@ -25,7 +25,7 @@ const blog = defineCollection({
 			.transform(val => val ? new Date(val) : undefined)
 			.optional(),
 		heroImage: z.object({
-			src: z.string().or(image()),
+			src: z.string(),
 			alt: z.string().optional(),
 		}).optional(),
 		ogImage: z.string().optional(),
@@ -42,7 +42,7 @@ const blog = defineCollection({
 
 const project = defineCollection({
 	type: 'content',
-	schema: ({ image }) => z.object({
+	schema: () => z.object({
 		title: z.string(),
 		description: z.string(),
 		pubDate: z
@@ -50,7 +50,7 @@ const project = defineCollection({
 			.or(z.date())
 			.transform(val => new Date(val)),
 		heroImage: z.object({
-			url: z.string().or(image()),
+			url: z.string(),
 			alt: z.string().optional()
 		}).optional(),
 		ogImage: z.string().optional(),
