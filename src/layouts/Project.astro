@@ -4,31 +4,50 @@ import SidebarLayout from './Sidebar.astro';
 import SocialMediaLinks from '@/components/SocialMediaLinks';
 import TOC from '@/components/TableOfContents';
 import { Icon } from "astro-icon";
-const { frontmatter, headings } = Astro.props;
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+	project: CollectionEntry<"project">;
+}
+
+const { project } = Astro.props
+const { 
+	data: {
+		title,
+		pubDate,
+		description,
+		heroImage,
+		platform,
+		stack,
+		website,
+		github
+}} = project;
+const { headings } = project.render && await project.render();
+const articleDate = pubDate.toISOString();
 ---
-<SidebarLayout title={frontmatter.title} description={frontmatter.description} articleDate={frontmatter.pubDate} image={frontmatter.image}>
+<SidebarLayout title={title} description={description} articleDate={articleDate}>
 	<section class="cody-bg space-y-2 sm:space-y-4">
-		<h2 class="title">{frontmatter.title}</h2>
+		<h2 class="title">{title}</h2>
 
 		{
-			frontmatter.heroImage && 
+			heroImage && 
 			<div class="aspect-h-9 aspect-w-16 mb-6 w-full">
-				<img src={frontmatter.heroImage.url} alt={frontmatter.heroImage.alt} />
+				<img src={heroImage.url} alt={heroImage.alt} />
 			</div>
 		}
 
 		<ul class="space-y-2">
-			{ frontmatter.platform && 
-				<li class="project-data-item">
+			{ platform && 
+				<li class="project-frontmatter-item">
 					<small>PLATFORM</small>
-					<span>{frontmatter.platform}</span>
+					<span>{platform}</span>
 				</li>
 			}
-			{ frontmatter.stack && 
-				<li class="project-data-item">
+			{ stack && 
+				<li class="project-frontmatter-item">
 					<small>STACK</small>
 					<ul class="inline-flex gap-2 sm:gap-4">
-						{frontmatter.stack.map((s: string) => ( 
+						{stack.map((s: string) => ( 
 							<li>
 								<Icon 
 									class="h-6 w-6 text-textColor" 
@@ -41,16 +60,16 @@ const { frontmatter, headings } = Astro.props;
 					</ul>
 				</li> 
 			}
-			{ frontmatter.website &&
-				<li class="project-data-item">
+			{ website &&
+				<li class="project-frontmatter-item">
 					<small>WEBSITE</small>
-					<a href={frontmatter.website} target="_blank" class="cody-link">{frontmatter.website}</a>
+					<a href={website} target="_blank" class="cody-link">{website}</a>
 				</li>
 			}
-			{ frontmatter.github && 
-				<li class="project-data-item">
+			{ github && 
+				<li class="project-frontmatter-item">
 					<small>GITHUB</small>
-					<a href={frontmatter.github} target="_blank" class="cody-link">{frontmatter.github}</a>
+					<a href={github} target="_blank" class="cody-link">{github}</a>
 				</li>
 			}
 		</ul>
@@ -69,7 +88,7 @@ const { frontmatter, headings } = Astro.props;
 			<SocialMediaLinks/>
 			<span class="!my-4 text-accent" aria-hidden>---</span>
 			<p>
-				{frontmatter.description}
+				{description}
 			</p>
 		</div>
 		{!!headings.length && <TOC headings={headings} />}
@@ -81,7 +100,7 @@ const { frontmatter, headings } = Astro.props;
 		@apply text-bgColor px-1 bg-accent mr-2 font-semibold min-w-[95px];
 	}
 
-	.project-data-item {
+	.project-frontmatter-item {
 		@apply flex flex-col gap-x-0 sm:flex-row;
 	}
 </style>
