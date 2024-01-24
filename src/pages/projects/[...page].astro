@@ -1,0 +1,44 @@
+---
+import type { Page, GetStaticPaths } from "astro";
+import type { CollectionEntry } from "astro:content";
+import BaseLayout from '@/layouts/Base';
+import ProjectPreview from '@/components/project/ProjectPreview';
+import { getCollection } from "astro:content";
+
+interface Props {
+	page: Page<CollectionEntry<"project">>;
+}
+
+export const getStaticPaths = (async({ paginate}) => {
+	const allProjects = await getCollection("project",({data}) => {
+			return import.meta.env.PROD ? data.draft !== true : true;
+	});
+
+	const sortedByDateProjects = allProjects.sort(( a, b ) => {
+			const aDate = new Date(a.data.pubDate).valueOf();
+			const bDate = new Date(b.data.pubDate).valueOf();
+			return bDate - aDate;
+	});
+
+	// move all pinned projects to the top
+	const sortedByPinned = sortedByDateProjects.sort(( a, b ) => {
+		const aOrder = a.data.order ?? 100;
+		const bOrder = b.data.order ?? 100;
+		return aOrder - bOrder;
+	})
+
+	return paginate(sortedByPinned, {pageSize: 10});
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+---
+<BaseLayout title="Projects">
+	<section>
+		<h2 class="title">Projects</h2>
+		<ul role="list" class="space-y-2 sm:space-y-4">
+			{page.data.map((p) => (
+				<ProjectPreview project={p} withDesc/>
+			))}
+		</ul>
+	</section>
+</BaseLayout>
