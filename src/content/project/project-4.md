@@ -1,5 +1,4 @@
 ---
-layout: ../../layouts/Project.astro
 title: 'Project 4'
 description: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci'
 pubDate: 'Jun 08 2003'

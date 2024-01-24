@@ -1,5 +1,4 @@
 ---
-layout: ../../layouts/Project.astro
 title: 'Project 1'
 description: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci'
 pubDate: 'Apr 03 2023'
