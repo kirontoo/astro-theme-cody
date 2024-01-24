@@ -2,7 +2,7 @@
 import type { Page, GetStaticPaths } from "astro";
 import type { CollectionEntry } from "astro:content";
 import BaseLayout from '@/layouts/Base';
-import ProjectPreview from '@/components/project/ProjectPreview';
+import PostPreview from '@/components/blog/PostPreviewA';
 import { getCollection } from "astro:content";
 
 interface Props {
@@ -37,7 +37,7 @@ const { page } = Astro.props;
 		<h2 class="title">Projects</h2>
 		<ul role="list" class="space-y-2 sm:space-y-4">
 			{page.data.map((p) => (
-				<ProjectPreview project={p} withDesc/>
+				<PostPreview post={p} withDesc/>
 			))}
 		</ul>
 	</section>

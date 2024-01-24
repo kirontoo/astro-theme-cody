@@ -5,18 +5,19 @@ import FormattedDate from "@/components/FormattedDate";
 import { Icon } from "astro-icon";
 
 type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag }> & {
-	post: CollectionEntry<"blog">;
+	post: CollectionEntry<"blog" | "project">;
 	withDesc?: boolean;
 };
 
 const { post, withDesc = false } = Astro.props;
 const postDate = post.data.updatedDate ?? post.data.pubDate;
 const pinned: boolean = !!post.data.order;
+const urlBasePath = post.collection === "project" ? "projects" : post.collection;
 ---
 
 <li>
 	<span>
-		<a href={`/blog/${post.slug}/`} class="post-item">
+		<a href={`/${urlBasePath}/${post.slug}/`} class="post-item">
 			<h4 class="cody-link inline font-bold" >{post.data.title}</h4>
 		</a>
 		{ pinned &&
