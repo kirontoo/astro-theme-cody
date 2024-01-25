@@ -1,7 +1,6 @@
-# Astro Starter Kit: Blog
+# Astro Theme Cody
 
-Astro Cody is a simple theme I built 
-
+Cody is a simple minimalist theme built with Astro. It is a starter build for anyone who wants to quickly start a blog or website.
 ## Table of Contents
 1. [Key Features](#key-features)
 2. [Demo](#demo)
