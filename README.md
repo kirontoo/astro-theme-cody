@@ -26,7 +26,7 @@ Cody is a simple minimalist theme built with Astro. It is a starter build for an
 - [Astro Icon](https://github.com/natemoo-re/astro-icon) svg icon component
 
 ## Demo
-Check out the demo [here]().
+Check out the demo [here](https://astro-theme-cody.netlify.app).
 
 ## Quick Start
 [Create a new repo](https://github.com/new?template_name=astro-theme-cody&template_owner=kirontoo) from this template.
