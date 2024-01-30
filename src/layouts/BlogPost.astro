@@ -46,7 +46,7 @@ const articleDate = updatedDate?.toISOString() ?? pubDate.toISOString();
 					<img src={heroImage.src} alt={heroImage.alt} class="mb-4"/>
 			</div>
 		}
-		<div class="prose dark:prose-invert prose-cody text-textColor">
+		<div class="prose dark:prose-invert prose-cody text-textColor max-w-3xl">
 			<div class="flex gap-2 items-center">
 				<h1 class="text-3xl my-0">{title}</h1>
 				{ draft && (<span class="px-1 py-0 bg-red-200 text-red-600 text-sm font-semibold">draft</span>)}
@@ -76,7 +76,7 @@ const articleDate = updatedDate?.toISOString() ?? pubDate.toISOString();
 				</ul>
 			)}
 			<hr class="my-4"/>
-			<div class="prose-sm prose-headings:font-semibold prose-headings:ml-4 prose-headings:before:absolute prose-headings:before:-ms-4 prose-headings:before:text-accent prose-headings:before:content-['#'] prose-th:before:content-none">
+			<div class="prose-sm prose-headings:font-semibold prose-headings:ml-4 prose-headings:before:absolute prose-headings:before:-ms-4 prose-headings:before:text-accent prose-headings:before:content-['#'] prose-th:before:content-none prose-a:text-accent">
 				<slot />
 			</div>
 		</div>
