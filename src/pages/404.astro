@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../layouts/Base.astro';
+---
+
+<BaseLayout title="404">
+	<section class="flex justify-center items-center h-80 border-dashed border border-accent ">
+		<div  class="flex-col gap-2 text-8xl p-4 h-min">
+			<span id="status-code"> 404</span>
+			<div class="border-b-2 border-accent w-full border-solid blink mt-1"></div>
+		</div>
+		<span>Looks like you're lost! You sure you know where you're going?</span>
+	</section>
+</BaseLayout>
+
+<style>
+	#status-code:before {
+		content: "./";
+		@apply -mr-16 text-accent-2;
+	}
+ 
+	.blink {
+		animation: blink-animation 1.5s steps(2, start) infinite;
+		-webkit-animation: blink-animation 1.5s steps(2, start) infinite;
+	}
+
+	@keyframes blink-animation {
+		to {
+			visibility: hidden;
+			/* opacity: 0; */
+		}
+	}
+
+	@-webkit-keyframes blink-animation {
+		to {
+			visibility: hidden;
+			/* opacity: 0; */
+		}
+	}
+</style>
