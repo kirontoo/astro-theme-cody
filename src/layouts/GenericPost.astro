@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/Sidebar.astro';
+import { siteConfig } from '../consts';
+import SocialMediaLinks from '@/components/SocialMediaLinks';
+import TOC from '@/components/TableOfContents';
+const { frontmatter: {title, description}, headings } = Astro.props
+---
+
+<Layout title={title} description={description}>
+	<article class="cody-bg h-min">
+		<div class="prose dark:prose-invert prose-cody text-textColor max-w-3xl prose-sm prose-headings:font-semibold prose-headings:ml-4 prose-headings:before:absolute prose-headings:before:-ms-4 prose-headings:before:text-accent prose-headings:before:content-['#'] prose-th:before:content-none prose-a:text-accent">
+			<slot/>
+		</div>
+	</article>
+	<aside slot="sidebar" class="hidden sm:block">
+		<div class="flex flex-col space-y-2">
+			<h2 class="font-semibold text-lg text-textColor">{siteConfig.profile.author}</h2>
+			{siteConfig.profile.description && (<p>{siteConfig.profile.description}</p>)}
+			<SocialMediaLinks/>
+			<span class="!my-4 text-accent" aria-hidden>---</span>
+			<p>
+				{description}
+			</p>
+		</div>
+		{!!headings.length && <TOC headings={headings} />}
+	</aside>
+</Layout>
