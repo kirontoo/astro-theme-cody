@@ -22,18 +22,19 @@
   </p>
 </div>
 
+![demo-preview](https://github.com/kirontoo/astro-theme-cody/assets/28286622/d585dcb2-6d5f-4a68-871c-b6028cfcc27f)
+
 
 ## Table of Contents
 1. [Motivation](#motivation)
 2. [Key Features](#key-features)
 3. [Demo](#demo)
 4. [Quick Start](#quick-start)
-5. [Preview](#preview)
-6. [Commands](#commands)
-7. [Configure](#configure)
-8. [Deploy](#deploy)
-9. [Extra Functionality](#extra-funtionality)
-10. [Credit](#credit)
+5. [Commands](#commands)
+6. [Configure](#configure)
+7. [Deploy](#deploy)
+8. [Extra Functionality](#extra-funtionality)
+9. [Credit](#credit)
 
 ## Motivation
 Although there are already so many blog themes out there, I wanted one that would give off
@@ -67,9 +68,6 @@ npm create astro@latest -- --template kirontoo/astro-theme-cody
 # pnpm
 pnpm dlx create-astro --template kirontoo/astro-theme-cody
 ```
-
-## Preview
-![demo-preview](https://github.com/kirontoo/astro-theme-cody/assets/28286622/d585dcb2-6d5f-4a68-871c-b6028cfcc27f)
 
 
 ## Commands
