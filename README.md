@@ -53,7 +53,6 @@ that terminal/dev vibe and a few features that other themes did not have.
 - [Automatic RSS feed](https://docs.astro.build/en/guides/rss)
 - Auto-generated [sitemap](https://docs.astro.build/en/guides/integrations-guide/sitemap/)
 - [Astro Icon](https://github.com/natemoo-re/astro-icon) svg icon component
-- - Table of Contents
 
 ## Demo
 Check out the demo [here](https://astro-theme-cody.netlify.app).
