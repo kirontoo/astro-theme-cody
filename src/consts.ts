@@ -13,7 +13,7 @@ type Config = {
 
 type SocialLink = {
   icon: string;
-  friendlyName: string;
+  friendlyName: string; // for accessibility
   link: string;
 }
 
@@ -28,8 +28,9 @@ export const siteConfig: Config = {
 }
 
 /** 
-  Uses https://github.com/natemoo-re/astro-icon#readme
-  Find icons @ https://icones.js.org/
+  These are you social media links. 
+  It uses https://github.com/natemoo-re/astro-icon#readme
+  You can find icons @ https://icones.js.org/
 */
 export const socialLinks: Array<SocialLink> = [
   {
@@ -47,7 +48,11 @@ export const socialLinks: Array<SocialLink> = [
     friendlyName: "email",
     link: "mailto:ndangamy@gmail.com",
   },
-
+  {
+    icon: "mdi:rss",
+    friendlyName: "rss",
+    link: "/rss.xml"
+  }
 ];
 
 export const NAV_LINKS: Array<{ title: string, path: string }> = [
