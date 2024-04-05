@@ -96,7 +96,7 @@ You can find examples of blog posts in `src/content/blog` and examples of projec
 | Property (* = required) | Description |
 |:-----------------------| :---------- |
 | title * | Title of your post. Limited to a maximum of 150 characters  |
-| description * | Short description of your post, which will also be used for SEO. Has a min length of 20 characters and max of 250 characters. |
+| description * | Short description of your post, which will also be used for SEO. Has a max length of 250 characters. |
 | pubDate * | Published date |
 | updateDate | Optional date representing when the post has been updated. Note that this date will be used instead of the published date to order posts when available.|
 | heroImage | Optional cover image for you post. Include both a `src` and a `alt` property. Check `src/content/blog/first-post.md` for an example.|
@@ -110,7 +110,7 @@ You can find examples of blog posts in `src/content/blog` and examples of projec
 | Property (* = required) | Description |
 |:-----------------------| :----------|
 | title * | Title of your project. Limited to a maximum of 150 characters  |
-| description * | Short description of your project, which will also be used for SEO. Has a min length of 20 characters and max of 250 characters. |
+| description * | Short description of your project, which will also be used for SEO.|
 | pubDate * | Published date |
 | heroImage | Optional cover image for you project. Include both a `src` and a `alt` property. Check `src/pages/projects/project-1.md` for an example.|
 | ogImage | Optional image used for SEO. |
