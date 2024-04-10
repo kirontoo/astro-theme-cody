@@ -48,8 +48,16 @@
     font-weight: 700;
   }
 
-  .prose-cody code {
-    @apply rounded-sm border-dotted border-accent;
+  .prose-cody :where(code):not(:where([class~=not-prose],[class~=not-prose] *)) {
+    @apply bg-accent !text-surface px-1 py-0;
+  }
+
+  .prose :where(code):not(:where([class~="not-prose"],[class~="not-prose"] *))::before{
+    content: none !important;
+  }
+
+  .prose :where(code):not(:where([class~="not-prose"],[class~="not-prose"] *))::after{
+    content: none !important;
   }
 
   .prose-cody hr {
