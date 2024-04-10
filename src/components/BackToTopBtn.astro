@@ -19,17 +19,17 @@ button {
 		backToTopBtn.addEventListener("click", () => {
 			document.body.scrollTop = 0; // For Safari
 			document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-		})
+		});
+		window.addEventListener("scroll", () => {
+			if(window.scrollY < document.documentElement.clientHeight) {
+				backToTopBtn.classList.remove("fade-in");
+				backToTopBtn.classList.add("fade-out");
+				backToTopBtn.style.display = "flex";
+			} else {
+				backToTopBtn.classList.remove("fade-out");
+				backToTopBtn.classList.add("fade-in");
+			}
+		});
 	}
 
-	window.addEventListener("scroll", (event) => {
-		if(window.pageYOffset < document.documentElement.clientHeight) {
-			backToTopBtn.classList.remove("fade-in");
-			backToTopBtn.classList.add("fade-out");
-			backToTopBtn.style.display = "flex";
-		} else {
-			backToTopBtn.classList.remove("fade-out");
-			backToTopBtn.classList.add("fade-in");
-		}
-	})
 </script>
