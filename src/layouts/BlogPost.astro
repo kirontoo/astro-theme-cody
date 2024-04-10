@@ -4,6 +4,7 @@ import Layout from '../layouts/Sidebar.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import SocialMediaLinks from '@/components/SocialMediaLinks';
 import TOC from '@/components/TableOfContents';
+import BackToTopBtn from '@/components/BackToTopBtn';
 import { Icon } from 'astro-icon';
 import { siteConfig } from '../consts';
 
@@ -80,6 +81,7 @@ const articleDate = updatedDate?.toISOString() ?? pubDate.toISOString();
 				<slot />
 			</div>
 		</div>
+		<BackToTopBtn/>
 	</article>
 	<aside slot="sidebar" class="hidden sm:block">
 		<div class="flex flex-col space-y-2">

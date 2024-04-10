@@ -163,4 +163,12 @@
   ::-moz-selection {
     @apply bg-accent text-bgColor;
   }
+
+  .fade-in {
+    @apply transition-opacity duration-700 ease-in opacity-100 duration-700;
+  }
+  
+  .fade-out {
+    @apply transition-opacity duration-700 ease-in opacity-0 duration-700;
+  }
 }
