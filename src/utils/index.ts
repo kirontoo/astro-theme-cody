@@ -1,9 +1,9 @@
 export { getFormattedDate } from "./date";
 export { remarkReadingTime } from "./remark-reading-time";
-export { 
+export {
   getAllTags,
   getUniqueTags,
-  getUniqueTagsWithCount
+  getUniqueTagsWithCount,
 } from "./tags";
 
 export {
@@ -12,3 +12,9 @@ export {
   sortMDByDate,
   sortMDByPinned
 } from "./post";
+
+export {
+  getAllSeries,
+  getUniqueSeries,
+  getUniqueSeriesWithCount,
+} from "./series"
