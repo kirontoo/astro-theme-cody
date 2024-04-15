@@ -12,6 +12,7 @@
     --theme-accent-2: #bcc0cd;
     --theme-surface: #e6e6e6;
     --theme-quote: #dd7878;
+    --theme-highlight: #dd7878;
   }
 
   :root.dark {
@@ -22,6 +23,7 @@
     --theme-accent-2: #545454;
     --theme-surface: #2f2f2f;
     --theme-quote: #93e1d4;
+    --theme-highlight: #93e1d4;
   }
 
   html {
@@ -157,11 +159,11 @@
   }
 
   ::selection {
-    @apply bg-accent text-bgColor;
+    @apply bg-highlight text-bgColor;
   }
 
   ::-moz-selection {
-    @apply bg-accent text-bgColor;
+    @apply bg-highlight text-bgColor;
   }
 
   .fade-in {
