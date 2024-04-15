@@ -8,13 +8,13 @@ export default {
 		},
 		extend: {
 			colors: {
-				bgColor: "hsl(var(--theme-bg) / <alpha-value>)",
-				textColor: "hsl(var(--theme-text) / <alpha-value>)",
-				link: "hsl(var(--theme-link) / <alpha-value>)",
-				accent: "hsl(var(--theme-accent) / <alpha-value>)",
-				"accent-2": "hsl(var(--theme-accent-2) / <alpha-value>)",
-				surface: "hsl(var(--theme-surface) / <alpha-value>)",
-				quote: "hsl(var(--theme-quote) / <alpha-value>)",
+				bgColor: "var(--theme-bg)",
+				textColor: "var(--theme-text)",
+				link: "var(--theme-link)",
+				accent: "var(--theme-accent)",
+				"accent-2": "var(--theme-accent-2)",
+				surface: "var(--theme-surface)",
+				quote: "var(--theme-quote)",
 			},
 		}
 	},
