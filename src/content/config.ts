@@ -34,6 +34,11 @@ const blog = defineCollection({
 			.default([])
 			.transform(removeDupsAndLowercase)
 			.optional(),
+		series: z
+			.array(z.string())
+			.default([])
+			.transform(removeDupsAndLowercase)
+			.optional(),
 		draft: z.boolean().optional().default(false),
 		// for pinning posts
 		order: z.number().min(1).max(5).optional()
