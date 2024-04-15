@@ -15,6 +15,7 @@ export default {
 				"accent-2": "var(--theme-accent-2)",
 				surface: "var(--theme-surface)",
 				quote: "var(--theme-quote)",
+				highlight: "var(--theme-highlight)"
 			},
 		}
 	},
