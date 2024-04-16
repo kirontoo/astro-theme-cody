@@ -18,3 +18,9 @@ export {
   getUniqueSeries,
   getUniqueSeriesWithCount,
 } from "./series"
+
+export {
+  getAllPostsByProperty,
+  getUniqueByProperty,
+  getUniqueWithCountByProperty,
+} from "./frontmatter"

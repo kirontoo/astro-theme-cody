@@ -1,12 +1,12 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/Base.astro';
-import { getUniqueSeriesWithCount } from '@/utils';
+import { getUniqueWithCountByProperty } from '@/utils';
 
 const posts = (await getCollection('blog', ({data}) => {
 		return import.meta.env.PROD ? data.draft !== true : true;
 }));
-const series = getUniqueSeriesWithCount(posts);
+const series = getUniqueWithCountByProperty("series", posts);
 ---
 
 <BaseLayout title="Series">
