@@ -20,7 +20,6 @@ export function sortMDByPinned(posts: Array<CollectionEntry<"blog">>) {
 		const bOrder = b.data.order ?? 100;
 		return aOrder - bOrder;
 	});
-
 }
 
 export function getPostsByTag(
@@ -30,6 +29,18 @@ export function getPostsByTag(
 	return posts.filter(post => {
 		if (post.data.tags) {
 			return post.data.tags.includes(tag);
+		}
+		return false;
+	});
+}
+
+export function getPostsBySeries (
+	series: string,
+	posts: Array<CollectionEntry<"blog">>
+) {
+	return posts.filter(post => {
+		if (post.data.series) {
+			return post.data.series.includes(series);
 		}
 		return false;
 	});

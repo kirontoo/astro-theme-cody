@@ -1,0 +1,68 @@
+---
+import type { Page, GetStaticPaths } from "astro";
+import type { CollectionEntry } from "astro:content";
+import BaseLayout from "@/layouts/Base";
+import { getAllPosts, getUniqueByProperty, sortMDByDate, getPostsBySeries } from "@/utils";
+import PostPreview from '@/components/blog/PostPreviewA';
+// Alternative post item
+// import PostPreview from '@/components/blog/PostPreviewB';
+
+import Pagination from '@/components/Pagination';
+
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+	const allPosts = await getAllPosts();
+	const allPostsByDate = sortMDByDate(allPosts);
+	const  uniqueSeries = getUniqueByProperty("series", allPostsByDate);
+
+	return uniqueSeries.flatMap((series) => {
+		const filteredPosts = getPostsBySeries(series, allPostsByDate);
+		return paginate(filteredPosts, {
+			params: { series },
+			pageSize: 10,
+		});
+	});
+};
+
+interface Props {
+	page: Page<CollectionEntry<"blog">>;
+}
+
+const { page } = Astro.props;
+const { series } = Astro.params;
+
+const meta = {
+	title: `Series: ${series}`,
+	description: `View all posts with the series - ${series}`,
+};
+
+const paginationProps = {
+	...(page.url.prev && {
+		prevUrl: {
+			url: page.url.prev,
+			text: `← Previous Series`,
+		},
+	}),
+	...(page.url.next && {
+		nextUrl: {
+			url: page.url.next,
+			text: `Next Series →`,
+		},
+	}),
+};
+---
+
+<BaseLayout title={meta.title} description={meta.description}>
+	<h1 class="title flex items-center">
+		<a href="/series/" class="text-accent sm:hover:underline">Series</a>
+		<span class="me-3 ms-2">→</span>
+		<span>#{series}</span>
+	</h1>
+	<ul class="flex flex-col gap-4">
+		{
+		page.data.map(post => (
+			<PostPreview post={post} withDesc/>
+		))
+		}
+	</ul>
+	<Pagination {...paginationProps} />
+</BaseLayout>
