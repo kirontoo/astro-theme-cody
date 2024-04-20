@@ -127,8 +127,8 @@
     background-image: linear-gradient(
       transparent,
       transparent 5px,
-      hsl(var(--theme-text)) 5px,
-      hsl(var(--theme-text))
+      var(--theme-text) 5px,
+      var(--theme-text)
     );
   }
 
@@ -136,8 +136,8 @@
     background-image: linear-gradient(
       transparent,
       transparent 4px,
-      hsl(var(--theme-accent)) 4px,
-      hsl(var(--theme-accent))
+      var(--theme-accent) 4px,
+      var(--theme-accent)
     );
   }
 
