@@ -109,6 +109,10 @@
     @apply bg-accent;
   }
 
+  .prose-cody li::marker {
+    @apply text-accent;
+  }
+
   /*
   * ===== END =====
   */
