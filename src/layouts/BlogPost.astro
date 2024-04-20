@@ -40,14 +40,14 @@ const articleDate = updatedDate?.toISOString() ?? pubDate.toISOString();
 ---
 
 <Layout title={title} description={description} image={socialImage} articleDate={articleDate}>
-	<article class="cody-bg">
-		{
-			heroImage && 
-			<div class="aspect-h-9 aspect-w-16 mb-6 w-full flex justify-center">
-					<img src={heroImage.src} alt={heroImage.alt} class="mb-4"/>
-			</div>
-		}
-		<div class="prose dark:prose-invert prose-cody text-textColor max-w-3xl">
+	<article class="cody-bg prose dark:prose-invert prose-cody text-textColor max-w-3xl">
+		<header class="space-y-2">
+			{
+				heroImage && 
+				<div class="aspect-h-9 aspect-w-16 mb-6 w-full flex justify-center">
+						<img src={heroImage.src} alt={heroImage.alt} class="m-0"/>
+				</div>
+			}
 			<div class="flex gap-2 items-center">
 				<h1 class="text-3xl my-0">{title}</h1>
 				{ draft && (<span class="px-1 py-0 bg-red-200 text-red-600 text-sm font-semibold">draft</span>)}
@@ -66,7 +66,6 @@ const articleDate = updatedDate?.toISOString() ?? pubDate.toISOString();
 				}
 			</span>
 			{tags && (
-				
 				<ul class="not-prose flex gap-2 flex-wrap">
 					<Icon class="w-5 h-5" name="carbon:tag-group" aria-hidden="true" focusable="false"/>
 					{tags.map((tag: string) => (
@@ -76,11 +75,11 @@ const articleDate = updatedDate?.toISOString() ?? pubDate.toISOString();
 					))}
 				</ul>
 			)}
-			<hr class="my-4"/>
-			<div class="prose-sm prose-headings:font-semibold prose-headings:ml-4 prose-headings:before:absolute prose-headings:before:-ms-4 prose-headings:before:text-accent prose-headings:before:content-['#'] prose-th:before:content-none prose-a:text-accent">
-				<slot />
-			</div>
-		</div>
+		</header>
+		<hr class="my-4"/>
+		<main class="prose-sm prose-headings:font-semibold prose-headings:ml-4 prose-headings:before:absolute prose-headings:before:-ms-4 prose-headings:before:text-accent prose-headings:before:content-['#'] prose-th:before:content-none prose-a:text-accent">
+			<slot />
+		</main>
 		<BackToTopBtn/>
 	</article>
 	<aside slot="sidebar" class="hidden sm:block">
