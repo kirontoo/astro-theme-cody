@@ -113,6 +113,12 @@
     @apply text-accent;
   }
 
+  .prose-cody table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
   /*
   * ===== END =====
   */
