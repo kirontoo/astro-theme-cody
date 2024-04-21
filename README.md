@@ -69,6 +69,8 @@ npm create astro@latest -- --template kirontoo/astro-theme-cody
 pnpm dlx create-astro --template kirontoo/astro-theme-cody
 ```
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 
 ## Commands
 
@@ -83,8 +85,13 @@ All commands are run from the root of the project, from a terminal:
 | `pnpm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `pnpm run astro -- --help` | Get help using the Astro CLI                     |
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Configure
+
+### Site Config, Social Media Links and Navbar Links
+Your site config, social media links and Navbar links are all placed within [`src/consts.ts`](https://github.com/kirontoo/astro-theme-cody/blob/main/src/consts.ts).
+There you can configure your site default title, description, language, profile, social media links and visible nav bar links.
 
 ### Adding Posts and Projects
 This theme utilises [ Content Collections ](https://docs.astro.build/en/guides/content-collections/) 
@@ -121,6 +128,8 @@ You can find examples of blog posts in `src/content/blog` and examples of projec
 | github | Your github repo link |
 | draft | Optional boolean. Removes projects from being published.|
 | order | Optional number value from 1 - 5 to pin certain projects to the top. Limited to only 5 pinned posts|
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Deploy
 Astro provides great documentation for deploying your Astro websites on various platforms.
