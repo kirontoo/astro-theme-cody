@@ -1,7 +1,7 @@
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
-import { remarkReadingTime } from './src/utils/remark-reading-time.ts';
+import { remarkReadingTime } from './src/utils/remark-reading-time.mjs';
 
 import tailwind from "@astrojs/tailwind";
 
@@ -13,10 +13,12 @@ export default defineConfig({
     remarkPlugins: [remarkReadingTime],
     syntaxHighlight: 'shiki',
     shikiConfig: {
-      // // Choose from Shiki's built-in themes (or add your own)
-      // // https://github.com/shikijs/shiki/blob/main/docs/themes.md
-      theme: 'rose-pine-moon',
-    },
+      // https://docs.astro.build/en/guides/markdown-content/#syntax-highlighting
+      themes: {
+        light: 'catppuccin-mocha',
+        dark: 'catppuccin-latte',
+      },
+    }
   },
 });
 
