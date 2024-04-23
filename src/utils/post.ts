@@ -5,14 +5,24 @@ export async function getAllPosts() {
 		return import.meta.env.PROD ? data.draft !== true : true;
 	});
 }
+ 
+// ascending = oldest to newest date
+// descending = newest to oldest date
+export function sortMDByDate(
+	posts: Array<CollectionEntry<"blog">>, 
+	order: "ascending" | "descending" = "descending"
+) {
+	// -1 = ascending
+	// 1 = descending
+	const direction = order === "descending" ? 1 : -1;
 
-export function sortMDByDate(posts: Array<CollectionEntry<"blog">>) {
 	return posts.sort((a, b) => {
 		const aDate = new Date(a.data.updatedDate ?? a.data.pubDate).valueOf();
 		const bDate = new Date(b.data.updatedDate ?? b.data.pubDate).valueOf();
-		return bDate - aDate;
+		return (bDate - aDate) * direction;
 	});
 }
+
 
 export function sortMDByPinned(posts: Array<CollectionEntry<"blog">>) {
 	return posts.sort((a, b) => {
