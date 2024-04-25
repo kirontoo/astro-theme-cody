@@ -24,6 +24,7 @@ const {
 		heroImage, 
 		ogImage,
 		tags,
+		series,
 		draft
 	}
 } = post;
@@ -40,7 +41,7 @@ const articleDate = updatedDate?.toISOString() ?? pubDate.toISOString();
 ---
 
 <Layout title={title} description={description} image={socialImage} articleDate={articleDate}>
-	<article class="cody-bg prose dark:prose-invert prose-cody text-textColor max-w-3xl">
+	<article class="cody-bg prose dark:prose-invert prose-cody text-textColor max-w-4xl">
 		<header class="space-y-2">
 			{
 				heroImage && 
@@ -48,6 +49,12 @@ const articleDate = updatedDate?.toISOString() ?? pubDate.toISOString();
 						<img src={heroImage.src} alt={heroImage.alt} class="m-0"/>
 				</div>
 			}
+			{series && (
+				<div class="md:sr-only not-sr-only">
+					<span>Part of series:</span>
+						<a class="cody-link" href={`/series/${series}`}>{series}</a>
+				</div>
+			)}
 			<div class="flex gap-2 items-center">
 				<h1 class="text-3xl my-0">{title}</h1>
 				{ draft && (<span class="px-1 py-0 bg-red-200 text-red-600 text-sm font-semibold">draft</span>)}
@@ -91,6 +98,15 @@ const articleDate = updatedDate?.toISOString() ?? pubDate.toISOString();
 			<p>
 				{description}
 			</p>
+			{series && (
+				<div class="pt-2 hidden md:block">
+					<span>Part of series: </span>
+					<br>
+					<ul>
+							<li><a class="cody-link" href={`/series/${series}`}>{series}</a></li>
+					</ul>
+				</div>
+			)}
 		</div>
 		{!!headings.length && <TOC headings={headings} />}
 	</aside>
