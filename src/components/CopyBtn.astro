@@ -1,0 +1,39 @@
+<script>
+	// https://timneubauer.dev/blog/copy-code-button-in-astro/
+
+	// icon source: https://icones.js.org/collection/all?s=copy
+  const copyButtonLabel = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M6 19V1h9l6 6v12zm8-11h5l-5-5zM2 23V7h2v14h11v2z"/></svg>';
+  const codeBlocks = Array.from(document.querySelectorAll("pre.astro-code"));
+
+  for (const codeBlock of codeBlocks) {
+		codeBlock.classList.add("relative")
+
+    const copyButton = document.createElement("button");
+    copyButton.className = "cody-copy-code";
+    copyButton.innerHTML = copyButtonLabel;
+		copyButton.title = "Copy code block"
+
+    codeBlock.setAttribute("tabindex", "0");
+
+		// insert copy btn element
+    codeBlock.appendChild(copyButton);
+
+    copyButton.addEventListener("click", async () => {
+      await copyCode(codeBlock, copyButton);
+    });
+  }
+
+  async function copyCode(block: Element, button: HTMLElement) {
+    const code = block.querySelector("code");
+    const text = code?.innerText ?? '';
+
+    await navigator.clipboard.writeText(text);
+
+    // visual feedback that task is completed
+    button.innerText = "Code Copied";
+
+    setTimeout(() => {
+      button.innerHTML = copyButtonLabel;
+    }, 700);
+  }
+</script>
