@@ -110,6 +110,7 @@ You can find examples of blog posts in `src/content/blog` and examples of projec
 | heroImage | Optional cover image for you post. Include both a `src` and a `alt` property. Check `src/content/blog/first-post.md` for an example.|
 | ogImage | Optional image used for SEO. |
 | tags | Use optional tags to organize your posts into categories or topics. All tags will be shown in `yourdomain.com/tags`. |
+| series | Use optional series to organize your posts into a series of posts. All series will be shown in `yourdomain.com/series`. |
 | draft | Optional boolean. Removes posts from being published.|
 | order | Optional number value from 1 - 5 to pin certain posts to the top. Limited to only 5 pinned posts|
 
