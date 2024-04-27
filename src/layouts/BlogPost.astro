@@ -5,6 +5,7 @@ import FormattedDate from '../components/FormattedDate.astro';
 import SocialMediaLinks from '@/components/SocialMediaLinks';
 import TOC from '@/components/TableOfContents';
 import BackToTopBtn from '@/components/BackToTopBtn';
+import CopyBtn from '@/components/CopyBtn';
 import { Icon } from 'astro-icon';
 import { siteConfig } from '../consts';
 
@@ -112,3 +113,4 @@ const articleDate = updatedDate?.toISOString() ?? pubDate.toISOString();
 	</aside>
 </Layout>
 
+<CopyBtn/>

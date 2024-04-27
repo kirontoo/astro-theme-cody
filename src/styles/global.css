@@ -155,6 +155,10 @@
     @apply p-4 bg-surface;
   }
 
+  .cody-copy-code {
+    @apply absolute top-2 right-2 bg-accent text-bgColor p-0.5 border border-accent hover:bg-bgColor hover:text-accent transition-all duration-200 text-sm;
+  }
+
   .title:before {
     content: "#";
     @apply mr-2 text-accent-2;
