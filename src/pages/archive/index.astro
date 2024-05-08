@@ -1,0 +1,78 @@
+---
+
+import { 
+	getAllPosts,
+	sortMDByDate,
+} from "@/utils";
+import BaseLayout from "@/layouts/Base";
+import FormattedDate from "@/components/FormattedDate";
+import { siteConfig } from '../../consts';
+import type { CollectionEntry } from "astro:content";
+
+const allPosts = await getAllPosts();
+const allPostsByDate = sortMDByDate(allPosts, "ascending");
+
+const getGroupsByYear = (
+	posts: Array<CollectionEntry<"blog">>
+) : Record<string, Array<CollectionEntry<"blog">>> => {
+	const initialValue: Record<string, Array<CollectionEntry<"blog">>> = {}; 
+	return posts.reduce(
+		(groups, p) => {
+		const date = new Date(p.data.pubDate);
+		const year: string = date.getFullYear().toString();
+		if(!groups[year]) {
+			groups[year] = [];
+		}
+		groups[year].push(p);
+		return groups;
+		}, initialValue);
+}
+
+const groupArray = (posts: Array<CollectionEntry<"blog">>) => {
+	const groups = getGroupsByYear(posts);
+	const keys: Array<string> = Object.keys(groups);
+	return keys.map((year) => {
+		return {
+			year,
+			posts: groups[year]
+		}
+	});
+}
+
+const archivedPosts = groupArray(allPostsByDate).reverse();
+const dateFormat = {
+	locale: "en-US",
+	options: {
+		month: "short",
+		day: "2-digit",
+	} as Intl.DateTimeFormatOptions
+};
+---
+
+<BaseLayout title={`Archive | ${siteConfig.title}`} description="">
+	<main class="space-y-4">
+		{
+			archivedPosts.map(group => (
+				<ul class="space-y-2">
+					<h2 class="title" id={group.year}>
+						<a href={`#${group.year}`} class="-ml-2 cody-link">
+							<time datetime={group.year}>{group.year}</time>
+						</a>
+					</h2>
+					{group.posts.map(p => (
+						<li>
+							<FormattedDate 
+								date={p.data.updatedDate ?? p.data.pubDate} 
+								dateTimeOptions={dateFormat.options} 
+								locale={dateFormat.locale}
+							/>
+							<a class="cody-link" href={`/blog/${p.slug}`}>
+								{p.data.title}
+							</a>
+						</li>
+					))}
+				</ul>
+			))
+		}
+	</main>
+</BaseLayout>
