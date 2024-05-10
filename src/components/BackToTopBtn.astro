@@ -1,14 +1,14 @@
 ---
 import { Icon } from 'astro-icon';
 ---
-<button id="back-to-top-btn" aria-label="back to top">
+<button id="back-to-top-btn" aria-label="back to top" class="z-50">
 	<Icon class="w-7 h-7 sm:w-5 s:h-6" name="carbon:arrow-up" aria-hidden="true" focusable="false"/>
 </button>
 
 <style>
 button {
-	@apply w-12 h-12 sm:w-10 sm:h-10 transition-all rounded-full bg-accent 
-	text-bgColor fixed bottom-4 sm:bottom-8 left-[82%] md:left-[90%] 2xl:left-[75%] 
+	@apply w-12 h-12 sm:w-10 sm:h-10 transition-all rounded-full bg-accent
+	text-bgColor fixed bottom-4 sm:bottom-8 left-[82%] md:left-[90%] 2xl:left-[75%]
 	shadow hover:shadow-xl hover:scale-125 hidden justify-center items-center;
 }
 </style>
