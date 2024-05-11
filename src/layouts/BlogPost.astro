@@ -15,14 +15,14 @@ interface Props {
 
 const {post} = Astro.props
 
-const { 
-	slug, 
+const {
+	slug,
 	data: {
-		title, 
-		description, 
-		pubDate, 
-		updatedDate, 
-		heroImage, 
+		title,
+		description,
+		pubDate,
+		updatedDate,
+		heroImage,
 		ogImage,
 		tags,
 		series,
@@ -35,7 +35,9 @@ const { minutesRead } = remarkPluginFrontmatter;
 
 const socialImage = ogImage ?? `/og-image/${slug}.png`;
 const dateTimeOptions: Intl.DateTimeFormatOptions = {
+	year: "numeric",
 	month: "long",
+	day: "numeric"
 };
 
 const articleDate = updatedDate?.toISOString() ?? pubDate.toISOString();
@@ -45,7 +47,7 @@ const articleDate = updatedDate?.toISOString() ?? pubDate.toISOString();
 	<article class="cody-bg prose dark:prose-invert prose-cody text-textColor max-w-4xl">
 		<header class="space-y-2">
 			{
-				heroImage && 
+				heroImage &&
 				<div class="aspect-h-9 aspect-w-16 mb-6 w-full flex justify-center">
 						<img src={heroImage.src} alt={heroImage.alt} class="m-0"/>
 				</div>
