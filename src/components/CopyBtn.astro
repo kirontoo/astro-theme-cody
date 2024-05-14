@@ -1,39 +1,45 @@
 <script>
-	// https://timneubauer.dev/blog/copy-code-button-in-astro/
+    // https://timneubauer.dev/blog/copy-code-button-in-astro/
 
-	// icon source: https://icones.js.org/collection/all?s=copy
-  const copyButtonLabel = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M6 19V1h9l6 6v12zm8-11h5l-5-5zM2 23V7h2v14h11v2z"/></svg>';
-  const codeBlocks = Array.from(document.querySelectorAll("pre.astro-code"));
+    // icon source: https://icones.js.org/collection/all?s=copy
+    const copyButtonLabel = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M6 19V1h9l6 6v12zm8-11h5l-5-5zM2 23V7h2v14h11v2z"/></svg>';
+    const codeBlocks = Array.from(document.querySelectorAll("pre.astro-code"));
 
-  for (const codeBlock of codeBlocks) {
-		codeBlock.classList.add("relative")
+    for (const codeBlock of codeBlocks) {
+        // Get the current codeBlock's parent element
+        let mainDiv = codeBlock.parentElement;
+        // Create a new element to wrap the codeBlock and the copy button
+        let wrapperDiv = document.createElement("div");
+        // Insert the wrap element at the position of the original codeBlock
+        mainDiv.replaceChild(wrapperDiv, codeBlock);
+        wrapperDiv.classList.add("relative");
+        // Insert the codeBlock into the wrap element
+        wrapperDiv.appendChild(codeBlock);
+        // Create copy button
+        const copyButton = document.createElement("button");
+        copyButton.className = "cody-copy-code";
+        copyButton.innerHTML = copyButtonLabel;
+        copyButton.title = "Copy code block";
+        codeBlock.setAttribute("tabindex", "0");
+        // Insert copy button element
+        wrapperDiv.appendChild(copyButton);
 
-    const copyButton = document.createElement("button");
-    copyButton.className = "cody-copy-code";
-    copyButton.innerHTML = copyButtonLabel;
-		copyButton.title = "Copy code block"
+        copyButton.addEventListener("click", async () => {
+            await copyCode(codeBlock, copyButton);
+        });
+    }
 
-    codeBlock.setAttribute("tabindex", "0");
+    async function copyCode(block: Element, button: HTMLElement) {
+        const code = block.querySelector("code");
+        const text = code?.innerText ?? '';
 
-		// insert copy btn element
-    codeBlock.appendChild(copyButton);
+        await navigator.clipboard.writeText(text);
 
-    copyButton.addEventListener("click", async () => {
-      await copyCode(codeBlock, copyButton);
-    });
-  }
+        // visual feedback that task is completed
+        button.innerText = "Code Copied";
 
-  async function copyCode(block: Element, button: HTMLElement) {
-    const code = block.querySelector("code");
-    const text = code?.innerText ?? '';
-
-    await navigator.clipboard.writeText(text);
-
-    // visual feedback that task is completed
-    button.innerText = "Code Copied";
-
-    setTimeout(() => {
-      button.innerHTML = copyButtonLabel;
-    }, 700);
-  }
+        setTimeout(() => {
+            button.innerHTML = copyButtonLabel;
+        }, 700);
+    }
 </script>
