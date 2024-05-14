@@ -6,17 +6,23 @@
   const codeBlocks = Array.from(document.querySelectorAll("pre.astro-code"));
 
   for (const codeBlock of codeBlocks) {
-		codeBlock.classList.add("relative")
-
-    const copyButton = document.createElement("button");
-    copyButton.className = "cody-copy-code";
-    copyButton.innerHTML = copyButtonLabel;
-		copyButton.title = "Copy code block"
-
-    codeBlock.setAttribute("tabindex", "0");
-
-		// insert copy btn element
-    codeBlock.appendChild(copyButton);
+      // Get the current codeBlock's parent element
+      let mainDiv = codeBlock.parentElement;
+      // Create a new element to wrap the codeBlock and the copy button
+      let wrapperDiv = document.createElement("div");
+      // Insert the wrap element at the position of the original codeBlock
+      mainDiv.replaceChild(wrapperDiv, codeBlock);
+      wrapperDiv.classList.add("relative");
+      // Insert the codeBlock into the wrap element
+      wrapperDiv.appendChild(codeBlock);
+      // Create copy button
+      const copyButton = document.createElement("button");
+      copyButton.className = "cody-copy-code";
+      copyButton.innerHTML = copyButtonLabel;
+      copyButton.title = "Copy code block";
+      codeBlock.setAttribute("tabindex", "0");
+      // Insert copy button element
+      wrapperDiv.appendChild(copyButton);
 
     copyButton.addEventListener("click", async () => {
       await copyCode(codeBlock, copyButton);
