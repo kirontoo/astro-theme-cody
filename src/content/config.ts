@@ -37,7 +37,9 @@ const blog = defineCollection({
 		series: z.string().optional(),
 		draft: z.boolean().optional().default(false),
 		// for pinning posts
-		order: z.number().min(1).max(5).optional()
+		order: z.number().min(1).max(5).optional(),
+		// hide a post from pagination
+		hide: z.boolean().optional().default(false)
 	}),
 });
 
