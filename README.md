@@ -113,6 +113,7 @@ You can find examples of blog posts in `src/content/blog` and examples of projec
 | series | Use optional series to organize your posts into a series of posts. All series will be shown in `yourdomain.com/series`. |
 | draft | Optional boolean. Removes posts from being published.|
 | order | Optional number value from 1 - 5 to pin certain posts to the top. Limited to only 5 pinned posts|
+| hide  | Optional boolean. Hide a post on `/blog` page. Will still show up in `/archive`|
 
 #### Project frontmatter
 
