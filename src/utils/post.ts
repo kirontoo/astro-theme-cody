@@ -1,8 +1,17 @@
 import { getCollection, type CollectionEntry } from "astro:content";
 
-export async function getAllPosts() {
+export async function getAllPosts(filterHidden: boolean = false) {
 	return await getCollection("blog", ({ data }) => {
-		return import.meta.env.PROD ? data.draft !== true : true;
+		if (import.meta.env.PROD) {
+			if (filterHidden) {
+				return !data.hide;
+			}
+
+			// on production: exclude draft posts by default
+			return !data.draft;
+		}
+
+		return filterHidden ? !data.hide : true;
 	});
 }
  

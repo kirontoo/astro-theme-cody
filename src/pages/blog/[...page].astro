@@ -7,7 +7,8 @@ import Pagination from "@/components/Pagination";
 import { getAllPosts, getUniqueTags, sortMDByDate, sortMDByPinned } from "@/utils";
 
 export const getStaticPaths = (async ({ paginate }) => {
-	const allPosts = await getAllPosts();
+	// grab all posts besides drafts and hidden ones
+	const allPosts = await getAllPosts(true);
 	const allPostsByDate = sortMDByDate(allPosts);
 	const allPostsByPinned = sortMDByPinned(allPostsByDate);
 	const tags = getUniqueTags(allPosts);
