@@ -39,13 +39,13 @@ const paginationProps = {
 	...(page.url.prev && {
 		prevUrl: {
 			url: page.url.prev,
-			text: `← Previous Series`,
+			text: `← Previous in ${series}`,
 		},
 	}),
 	...(page.url.next && {
 		nextUrl: {
 			url: page.url.next,
-			text: `Next Series →`,
+			text: `Next in ${series} →`,
 		},
 	}),
 };
