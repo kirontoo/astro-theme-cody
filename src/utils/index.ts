@@ -32,4 +32,5 @@ export {
   getSupportedLanguages as getLanguageCodes,
   isValidLanguageCode,
   getLangFromUrl,
+  useTranslations,
 } from "./i18n"
