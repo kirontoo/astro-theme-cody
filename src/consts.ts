@@ -1,6 +1,9 @@
 // This is your config file, place any global data here.
 // You can import this data from anywhere in your site by using the `import` keyword.
 
+import type nav from "./i18n/nav";
+import type { SupportedLanguage } from "./utils/i18n";
+
 type Config = {
   title: string;
   description: string;
@@ -17,10 +20,17 @@ type SocialLink = {
   link: string;
 }
 
+export const SUPPORTED_LANGUAGES = {
+  'en': 'en',
+  'es': 'es'
+};
+
+export const DEFAULT_LANG = SUPPORTED_LANGUAGES.en as SupportedLanguage;
+
 export const siteConfig: Config = {
   title: "Astro Theme Cody",
   description: "",
-  lang: "en-GB",
+  lang: "en",
   profile: {
     author: "Amy Dang",
     description: "your bio description"
@@ -55,25 +65,6 @@ export const socialLinks: Array<SocialLink> = [
   }
 ];
 
-export const NAV_LINKS: Array<{ title: string, path: string }> = [
-  {
-    title: "Home",
-    path: "/",
-  },
-  {
-    title: "About",
-    path: "/about",
-  },
-  {
-    title: "Blog",
-    path: "/blog",
-  },
-  {
-    title: "Projects",
-    path: '/projects'
-  },
-  {
-    title: "Archive",
-    path: '/archive'
-  }
+export const NAV_LINKS: Array<keyof typeof nav[SupportedLanguage]> = [
+  "home", "about", "blog", "projects", "archive"
 ];
