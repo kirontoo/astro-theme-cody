@@ -12,6 +12,9 @@
       ],
       "@/layouts/*": [
         "src/layouts/*.astro"
+      ],
+      "@/i18n/*": [
+        "src/i18n/*.ts"
       ]
     }
   },
