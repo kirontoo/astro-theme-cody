@@ -30,7 +30,7 @@ export const DEFAULT_LANG = SUPPORTED_LANGUAGES.en as SupportedLanguage;
 export const siteConfig: Config = {
   title: "Astro Theme Cody",
   description: "",
-  lang: "en",
+  lang: DEFAULT_LANG,
   profile: {
     author: "Amy Dang",
     description: "your bio description"
