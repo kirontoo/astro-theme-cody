@@ -28,10 +28,6 @@ export function getLocalizedUrl(url: URL, locale: SupportedLanguage): string {
 }
 
 export function useTranslations(lang: keyof typeof nav) {
-    // return function t(key: keyof typeof nav[typeof DEFAULT_LANG]) {
-    //     return nav[lang][key] || nav[DEFAULT_LANG][key];
-    // }
-
     return function t(key: keyof typeof nav[SupportedLanguage]) {
         return nav[lang][key] || nav[DEFAULT_LANG][key];
     }
