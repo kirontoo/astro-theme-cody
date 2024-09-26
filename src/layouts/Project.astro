@@ -1,17 +1,20 @@
 ---
-import { siteConfig } from '../consts';
-import SidebarLayout from './Sidebar.astro';
-import SocialMediaLinks from '@/components/SocialMediaLinks';
-import TOC from '@/components/TableOfContents';
+import { siteConfig } from "../consts";
+import SidebarLayout from "./Sidebar.astro";
+import SocialMediaLinks from "@/components/SocialMediaLinks";
+import TOC from "@/components/TableOfContents";
+import ui from "@/i18n/ui";
+import { getLangFromUrl } from "@/utils";
 import { Icon } from "astro-icon";
-import type { CollectionEntry } from 'astro:content';
+import type { CollectionEntry } from "astro:content";
 
 interface Props {
 	project: CollectionEntry<"project">;
 }
 
-const { project } = Astro.props
-const { 
+const lang = getLangFromUrl(Astro.url);
+const { project } = Astro.props;
+const {
 	data: {
 		title,
 		pubDate,
@@ -20,79 +23,105 @@ const {
 		platform,
 		stack,
 		website,
-		github
-}} = project;
-const { headings } = project.render && await project.render();
+		github,
+	},
+} = project;
+const { headings } = project.render && (await project.render());
 const articleDate = pubDate.toISOString();
 ---
-<SidebarLayout title={title} description={description} articleDate={articleDate}>
+
+<SidebarLayout
+	title={title}
+	description={description}
+	articleDate={articleDate}
+>
 	<section class="cody-bg space-y-2 sm:space-y-4">
 		<h2 class="title">{title}</h2>
 
 		{
-			heroImage && 
-			<div class="aspect-h-9 aspect-w-16 mb-6 w-full">
-				<img src={heroImage.url} alt={heroImage.alt} />
-			</div>
+			heroImage && (
+				<div class="aspect-h-9 aspect-w-16 mb-6 w-full">
+					<img src={heroImage.url} alt={heroImage.alt} />
+				</div>
+			)
 		}
 
 		<ul class="space-y-2">
-			{ platform && 
-				<li class="project-frontmatter-item">
-					<small>PLATFORM</small>
-					<span>{platform}</span>
-				</li>
+			{
+				platform && (
+					<li class="project-frontmatter-item">
+						<small>PLATFORM</small>
+						<span>{platform}</span>
+					</li>
+				)
 			}
-			{ stack && 
-				<li class="project-frontmatter-item">
-					<small>STACK</small>
-					<ul class="inline-flex gap-2 sm:gap-4">
-						{stack.map((s: string) => ( 
-							<li>
-								<Icon 
-									class="h-6 w-6 text-textColor" 
-									name={`vscode-icons:file-type-${s.toLowerCase()}`} 
-									focusable="false"
-								title={s}
-								/>
-							</li>
-						))}
-					</ul>
-				</li> 
+			{
+				stack && (
+					<li class="project-frontmatter-item">
+						<small>STACK</small>
+						<ul class="inline-flex gap-2 sm:gap-4">
+							{stack.map((s: string) => (
+								<li>
+									<Icon
+										class="h-6 w-6 text-textColor"
+										name={`vscode-icons:file-type-${s.toLowerCase()}`}
+										focusable="false"
+										title={s}
+									/>
+								</li>
+							))}
+						</ul>
+					</li>
+				)
 			}
-			{ website &&
-				<li class="project-frontmatter-item">
-					<small>WEBSITE</small>
-					<a href={website} target="_blank" class="cody-link">{website}</a>
-				</li>
+			{
+				website && (
+					<li class="project-frontmatter-item">
+						<small>WEBSITE</small>
+						<a href={website} target="_blank" class="cody-link">
+							{website}
+						</a>
+					</li>
+				)
 			}
-			{ github && 
-				<li class="project-frontmatter-item">
-					<small>GITHUB</small>
-					<a href={github} target="_blank" class="cody-link">{github}</a>
-				</li>
+			{
+				github && (
+					<li class="project-frontmatter-item">
+						<small>GITHUB</small>
+						<a href={github} target="_blank" class="cody-link">
+							{github}
+						</a>
+					</li>
+				)
 			}
 		</ul>
 
-		<hr/>
+		<hr />
 
-		<div class="prose dark:prose-invert prose-sm prose-headings:font-semibold prose-headings:ml-4 prose-headings:before:absolute prose-headings:before:-ms-4 prose-headings:before:text-accent prose-headings:before:content-['#'] prose-th:before:content-none">
+		<div
+			class="prose dark:prose-invert prose-sm prose-headings:font-semibold prose-headings:ml-4 prose-headings:before:absolute prose-headings:before:-ms-4 prose-headings:before:text-accent prose-headings:before:content-['#'] prose-th:before:content-none"
+		>
 			<slot />
 		</div>
-
 	</section>
 	<aside slot="sidebar">
 		<div class="flex flex-col space-y-2">
-			<h2 class="font-semibold text-lg text-textColor">{siteConfig.profile.author}</h2>
-			{siteConfig.profile.description && (<p>{siteConfig.profile.description}</p>)}
-			<SocialMediaLinks/>
+			<h2 class="font-semibold text-lg text-textColor">
+				{siteConfig.profile.author}
+			</h2>
+			{
+				siteConfig.profile.description && (
+					<p>{siteConfig.profile.description}</p>
+				)
+			}
+			<SocialMediaLinks />
 			<span class="!my-4 text-accent" aria-hidden>---</span>
 			<p>
-				{description}
+				{ui[lang]["profile.description"].text}
 			</p>
 		</div>
 		{!!headings.length && <TOC headings={headings} />}
-	</aside>	
+	</aside>
 </SidebarLayout>
 
 <style>

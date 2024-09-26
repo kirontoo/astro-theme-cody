@@ -2,6 +2,7 @@
 // You can import this data from anywhere in your site by using the `import` keyword.
 
 import type nav from "./i18n/nav";
+import ui from "./i18n/ui";
 import type { SupportedLanguage } from "./utils/i18n";
 
 type Config = {
@@ -28,12 +29,12 @@ export const SUPPORTED_LANGUAGES = {
 export const DEFAULT_LANG = SUPPORTED_LANGUAGES.en as SupportedLanguage;
 
 export const siteConfig: Config = {
-  title: "Astro Theme Cody",
-  description: "",
+  title: ui[DEFAULT_LANG]["site.title"].text,
+  description: ui[DEFAULT_LANG]["site.description"].text,
   lang: DEFAULT_LANG,
   profile: {
     author: "Amy Dang",
-    description: "your bio description"
+    description: ui[DEFAULT_LANG]["profile.description"].text
   }
 }
 
@@ -65,6 +66,7 @@ export const socialLinks: Array<SocialLink> = [
   }
 ];
 
+// NOTE: match these entries with keys in `src/i18n/nav.ts`
 export const NAV_LINKS: Array<keyof typeof nav[SupportedLanguage]> = [
   "home", "about", "blog", "projects", "archive"
 ];
