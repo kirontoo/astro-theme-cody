@@ -1,5 +1,6 @@
 import { DEFAULT_LANG, SUPPORTED_LANGUAGES } from "src/consts";
 import nav from '@/i18n/nav';
+import ui from "@/i18n/ui";
 
 export type SupportedLanguage = keyof typeof SUPPORTED_LANGUAGES;
 
@@ -27,7 +28,7 @@ export function getLocalizedUrl(url: URL, locale: SupportedLanguage): string {
     return `/${DEFAULT_LANG}/${slug.join("/")}`
 }
 
-export function useTranslations(lang: keyof typeof nav) {
+export function useNavTranslations(lang: keyof typeof nav) {
     return function t(key: keyof typeof nav[SupportedLanguage]) {
         return nav[lang][key] || nav[DEFAULT_LANG][key];
     }

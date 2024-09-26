@@ -4,11 +4,11 @@ import { siteConfig, NAV_LINKS } from "../consts";
 import ThemeToggle from "@/components/ThemeToggle";
 import SelectLanguage from "@/components/SelectLanguage";
 import { getLangFromUrl } from "@/utils";
-import { useTranslations } from "src/utils/i18n";
+import { useNavTranslations } from "src/utils/i18n";
 
 const url = new URL(Astro.request.url);
 const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
+const t = useNavTranslations(lang);
 ---
 
 <header

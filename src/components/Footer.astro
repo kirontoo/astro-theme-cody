@@ -1,9 +1,9 @@
 ---
-import { getLangFromUrl, useTranslations } from "@/utils";
+import { getLangFromUrl, useNavTranslations } from "@/utils";
 import { NAV_LINKS, siteConfig } from "../consts.ts";
 const year = new Date().getFullYear();
 const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
+const t = useNavTranslations(lang);
 ---
 
 <footer
