@@ -3,8 +3,7 @@ import { siteConfig } from "../consts";
 import SidebarLayout from "./Sidebar.astro";
 import SocialMediaLinks from "@/components/SocialMediaLinks";
 import TOC from "@/components/TableOfContents";
-import ui from "@/i18n/ui";
-import { getLangFromUrl } from "@/utils";
+import { getLangFromUrl, useUITranslations } from "@/utils";
 import { Icon } from "astro-icon";
 import type { CollectionEntry } from "astro:content";
 
@@ -12,8 +11,9 @@ interface Props {
 	project: CollectionEntry<"project">;
 }
 
-const lang = getLangFromUrl(Astro.url);
 const { project } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const translate = useUITranslations(lang);
 const {
 	data: {
 		title,
@@ -111,13 +111,13 @@ const articleDate = pubDate.toISOString();
 			</h2>
 			{
 				siteConfig.profile.description && (
-					<p>{siteConfig.profile.description}</p>
+					<p>{translate("profile.description").text}</p>
 				)
 			}
 			<SocialMediaLinks />
 			<span class="!my-4 text-accent" aria-hidden>---</span>
 			<p>
-				{ui[lang]["profile.description"].text}
+				{description}
 			</p>
 		</div>
 		{!!headings.length && <TOC headings={headings} />}

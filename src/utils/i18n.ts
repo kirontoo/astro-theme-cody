@@ -33,3 +33,9 @@ export function useNavTranslations(lang: keyof typeof nav) {
         return nav[lang][key] || nav[DEFAULT_LANG][key];
     }
 }
+
+export function useUITranslations(lang: keyof typeof nav) {
+    return function t(key: keyof typeof ui[SupportedLanguage]) {
+        return ui[lang][key] || ui[DEFAULT_LANG][key];
+    }
+}

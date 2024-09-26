@@ -8,7 +8,7 @@ import BackToTopBtn from "@/components/BackToTopBtn";
 import CopyBtn from "@/components/CopyBtn";
 import { Icon } from "astro-icon";
 import { siteConfig } from "../consts";
-import { getLangFromUrl } from "@/utils";
+import { getLangFromUrl, useUITranslations } from "@/utils";
 import ui from "@/i18n/ui";
 
 interface Props {
@@ -36,6 +36,7 @@ const { headings, remarkPluginFrontmatter } =
 	post.render && (await post.render());
 const { minutesRead } = remarkPluginFrontmatter;
 const lang = getLangFromUrl(Astro.url);
+const translate = useUITranslations(lang);
 
 const socialImage = ogImage ?? `/og-image/${slug}.png`;
 const dateTimeOptions: Intl.DateTimeFormatOptions = {
@@ -99,7 +100,7 @@ const articleDate = updatedDate?.toISOString() ?? pubDate.toISOString();
 				{
 					updatedDate && (
 						<div class="italic px-2 bg-accent-2 w-fit text-sm font-normal">
-							{ui[lang]["blog.lastUpdated"].text}{" "}
+							{translate("blog.lastUpdated").text}{" "}
 							<FormattedDate
 								date={updatedDate}
 								dateTimeOptions={dateTimeOptions}
@@ -141,7 +142,7 @@ const articleDate = updatedDate?.toISOString() ?? pubDate.toISOString();
 			</h2>
 			{
 				siteConfig.profile.description && (
-					<p>{ui[lang]["profile.description"].text}</p>
+					<p>{translate("profile.description").text}</p>
 				)
 			}
 			<SocialMediaLinks />

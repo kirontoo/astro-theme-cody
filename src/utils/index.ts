@@ -33,4 +33,5 @@ export {
   isValidLanguageCode,
   getLangFromUrl,
   useNavTranslations,
+  useUITranslations
 } from "./i18n"
