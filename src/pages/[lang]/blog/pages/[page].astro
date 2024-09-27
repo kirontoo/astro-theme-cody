@@ -4,7 +4,15 @@ import type { CollectionEntry } from "astro:content";
 import BaseLayout from "@/layouts/Sidebar";
 import PostPreview from "@/components/blog/PostPreviewA";
 import Pagination from "@/components/Pagination";
-import { getAllPosts, getUniqueTags, sortMDByDate, sortMDByPinned } from "@/utils";
+import {
+	getAllPosts,
+	getLangFromSlug,
+	getUniqueTags,
+	sortMDByDate,
+	sortMDByPinned,
+} from "@/utils";
+import { SUPPORTED_LANGUAGES } from "src/consts";
+import { getSupportedLanguages } from "src/utils/i18n";
 
 export const getStaticPaths = (async ({ paginate }) => {
 	// grab all posts besides drafts and hidden ones
@@ -12,7 +20,19 @@ export const getStaticPaths = (async ({ paginate }) => {
 	const allPostsByDate = sortMDByDate(allPosts);
 	const allPostsByPinned = sortMDByPinned(allPostsByDate);
 	const tags = getUniqueTags(allPosts);
-	return paginate(allPostsByPinned, { props: { tags }, pageSize: 10 });
+
+	// filter posts by language and paginate
+	return getSupportedLanguages().flatMap((lang) => {
+		const filteredByLang = allPostsByPinned.filter((post) => {
+			const translationLang = getLangFromSlug(post.slug);
+			return lang === translationLang;
+		});
+		return paginate(filteredByLang, {
+			params: { lang },
+			props: { tags },
+			pageSize: 2,
+		});
+	});
 }) satisfies GetStaticPaths;
 
 interface Props {
@@ -47,11 +67,7 @@ const paginationProps = {
 	<section class="cody-bg">
 		<h1 class="title">Posts</h1>
 		<ul class="flex flex-col gap-4">
-			{
-			page.data.map(post => (
-				<PostPreview post={post} withDesc/>
-			))
-			}
+			{page.data.map((post) => <PostPreview post={post} withDesc />)}
 		</ul>
 		<Pagination {...paginationProps} />
 	</section>
@@ -78,18 +94,21 @@ const paginationProps = {
 					Tags
 				</h2>
 				<ul class="flex gap-2 flex-wrap mb-4">
-					{tags.map(tag => (
+					{tags.map((tag) => (
 						<li class="tag">
-							<a 
-								href={`/tags/${tag}`}
-								aria-label={`tag: ${tag}`}
-							>
+							<a href={`/tags/${tag}`} aria-label={`tag: ${tag}`}>
 								{tag}
 							</a>
 						</li>
 					))}
 				</ul>
-				<a href="/tags" class="cody-link" aria-label="View all blog tags">See more -></a>
+				<a
+					href="/tags"
+					class="cody-link"
+					aria-label="View all blog tags"
+				>
+					See more ->
+				</a>
 			</aside>
 		)
 	}

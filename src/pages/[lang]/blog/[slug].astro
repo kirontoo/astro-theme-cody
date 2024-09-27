@@ -1,0 +1,32 @@
+---
+import type { InferGetStaticPropsType, GetStaticPaths } from "astro";
+import BlogPost from "@/layouts/BlogPost";
+import { getAllPosts, getSlugFromPost } from "@/utils";
+import { getLangFromSlug, getSupportedLanguages } from "src/utils/i18n";
+
+export const getStaticPaths = (async () => {
+	const blogEntries = await getAllPosts();
+	return getSupportedLanguages().flatMap((lang) => {
+		const filteredByLanguage = blogEntries.filter((post) => {
+			const postLang = getLangFromSlug(post.slug);
+			return postLang === lang;
+		});
+
+		return filteredByLanguage.map((post) => {
+			const slug = getSlugFromPost(post);
+			return {
+				params: { lang, slug },
+				props: { post },
+			};
+		});
+	});
+}) satisfies GetStaticPaths;
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<BlogPost post={post}>
+	<Content />
+</BlogPost>
