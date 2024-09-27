@@ -13,7 +13,8 @@ export {
   getPostsByTag,
   getPostsBySeries,
   sortMDByDate,
-  sortMDByPinned
+  sortMDByPinned,
+  getSlugFromPost
 } from "./post";
 
 export {
@@ -32,6 +33,7 @@ export {
   getSupportedLanguages as getLanguageCodes,
   isValidLanguageCode,
   getLangFromUrl,
+  getLangFromSlug,
   useNavTranslations,
   useUITranslations
 } from "./i18n"

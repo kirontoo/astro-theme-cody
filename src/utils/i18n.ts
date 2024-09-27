@@ -20,6 +20,14 @@ export function getLangFromUrl(url: URL) {
     return DEFAULT_LANG;
 }
 
+export function getLangFromSlug(slug: string) {
+    const [lang,] = slug.split('/');
+    if (lang in SUPPORTED_LANGUAGES) {
+        return lang as SupportedLanguage;
+    }
+    return DEFAULT_LANG;
+}
+
 export function getLocalizedUrl(url: URL, locale: SupportedLanguage): string {
     const [, , ...slug] = url.pathname.split('/');
     if (isValidLanguageCode(locale)) {
