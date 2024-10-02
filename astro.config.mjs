@@ -14,6 +14,9 @@ export default defineConfig({
     defaultLocale: "en",
     locales: ["en", "es"]
   },
+  redirects: {
+    "/[lang]/blog": "/[lang]/blog/pages/1"
+  },
   markdown: {
     remarkPlugins: [remarkReadingTime],
     syntaxHighlight: 'shiki',

@@ -38,7 +38,7 @@ const t = useNavTranslations(lang);
 					return (
 						<HeaderLink
 							class="block py-2 sm:py-0"
-							href={`/${lang}/${translation.slug}`}
+							href={`/${lang}/${translation.slug}/`}
 							title={translation.text}
 							aria-current={
 								url.pathname === translation.slug
