@@ -31,7 +31,7 @@ export const getStaticPaths = (async ({ paginate }) => {
 		return paginate(filteredByLang, {
 			params: { lang },
 			props: { tags },
-			pageSize: 2,
+			pageSize: 5,
 		});
 	});
 }) satisfies GetStaticPaths;
