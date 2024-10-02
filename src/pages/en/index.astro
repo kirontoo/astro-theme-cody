@@ -2,12 +2,18 @@
 import BaseLayout from "@/layouts/Base";
 import PostPreview from "@/components/blog/PostPreviewB";
 import SocialMediaLinks from "@/components/SocialMediaLinks";
-import { getAllPosts, sortMDByDate, sortMDByPinned } from "@/utils";
+import {
+	filterByLanguage,
+	getAllPosts,
+	sortMDByDate,
+	sortMDByPinned,
+} from "@/utils";
 
 const MAX_POSTS = 10;
 const allPosts = await getAllPosts();
 const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS);
 const allPostsByPinned = sortMDByPinned(allPostsByDate);
+const filteredPostsByLanguage = filterByLanguage(allPostsByPinned, "en");
 
 const tech: Array<{ title: string; desc: string; href: string }> = [
 	{
@@ -61,7 +67,7 @@ const tech: Array<{ title: string; desc: string; href: string }> = [
 	<section class="mt-8 sm:mt-16">
 		<h2 class="title">Posts</h2>
 		<ul class="space-y-4 sm:space-y-2">
-			{allPostsByPinned.map((p) => <PostPreview post={p} />)}
+			{filteredPostsByLanguage.map((p) => <PostPreview post={p} />)}
 		</ul>
 	</section>
 
