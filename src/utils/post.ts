@@ -1,4 +1,5 @@
 import { getCollection, type CollectionEntry } from "astro:content";
+import { getLangFromSlug, type SupportedLanguage } from "./i18n";
 
 export async function getAllPosts(filterHidden: boolean = false) {
 	return await getCollection("blog", ({ data }) => {
@@ -38,6 +39,13 @@ export function sortMDByPinned(posts: Array<CollectionEntry<"blog">>) {
 		const aOrder = a.data.order ?? 100;
 		const bOrder = b.data.order ?? 100;
 		return aOrder - bOrder;
+	});
+}
+
+export function filterByLanguage(posts: Array<CollectionEntry<"blog">>, lang: SupportedLanguage) {
+	return posts.filter((post) => {
+		const translationLang = getLangFromSlug(post.slug);
+		return lang === translationLang;
 	});
 }
 

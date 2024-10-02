@@ -6,13 +6,13 @@ import PostPreview from "@/components/blog/PostPreviewA";
 import Pagination from "@/components/Pagination";
 import {
 	getAllPosts,
-	getLangFromSlug,
 	getUniqueTags,
 	sortMDByDate,
 	sortMDByPinned,
+	filterByLanguage,
+	getSupportedLanguages,
+	type SupportedLanguage,
 } from "@/utils";
-import { SUPPORTED_LANGUAGES } from "src/consts";
-import { getSupportedLanguages } from "src/utils/i18n";
 
 export const getStaticPaths = (async ({ paginate }) => {
 	// grab all posts besides drafts and hidden ones
@@ -23,10 +23,11 @@ export const getStaticPaths = (async ({ paginate }) => {
 
 	// filter posts by language and paginate
 	return getSupportedLanguages().flatMap((lang) => {
-		const filteredByLang = allPostsByPinned.filter((post) => {
-			const translationLang = getLangFromSlug(post.slug);
-			return lang === translationLang;
-		});
+		const filteredByLang = filterByLanguage(
+			allPostsByPinned,
+			lang as SupportedLanguage,
+		);
+
 		return paginate(filteredByLang, {
 			params: { lang },
 			props: { tags },

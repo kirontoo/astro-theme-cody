@@ -14,7 +14,8 @@ export {
   getPostsBySeries,
   sortMDByDate,
   sortMDByPinned,
-  getSlugFromPost
+  getSlugFromPost,
+  filterByLanguage
 } from "./post";
 
 export {
@@ -30,7 +31,8 @@ export {
 } from "./frontmatter"
 
 export {
-  getSupportedLanguages as getLanguageCodes,
+  type SupportedLanguage,
+  getSupportedLanguages,
   isValidLanguageCode,
   getLangFromUrl,
   getLangFromSlug,
