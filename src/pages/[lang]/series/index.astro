@@ -24,7 +24,7 @@ const series = getUniqueWithCountByProperty("series", filteredByLang);
 	<ul>
 		{series.map(([s, count]) => (
 			<li class="my-2">
-				<a class="cody-link" href={`/series/${s}`}>#{s}</a>
+				<a class="cody-link" href={`/${lang}/series/${s}`}>#{s}</a>
 				({count})
 			</li>
 		))}
