@@ -5,6 +5,11 @@ import BaseLayout from "@/layouts/Base";
 import PostPreview from "@/components/blog/PostPreviewA";
 import { getCollection } from "astro:content";
 import { siteConfig } from "src/consts";
+import {
+	getSupportedLanguages,
+	filterByLanguage,
+	type SupportedLanguage,
+} from "@/utils";
 
 interface Props {
 	page: Page<CollectionEntry<"project">>;
@@ -28,8 +33,16 @@ export const getStaticPaths = (async ({ paginate }) => {
 		return aOrder - bOrder;
 	});
 
-	return paginate(sortedByPinned, {
-		pageSize: siteConfig.settings.paginationSize,
+	return getSupportedLanguages().flatMap((lang) => {
+		const projects = filterByLanguage(
+			sortedByPinned,
+			lang as SupportedLanguage,
+		);
+
+		return paginate(projects, {
+			params: { lang },
+			pageSize: siteConfig.settings.paginationSize,
+		});
 	});
 }) satisfies GetStaticPaths;
 
