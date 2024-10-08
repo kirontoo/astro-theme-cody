@@ -2,7 +2,7 @@
 import type { Page, GetStaticPaths } from "astro";
 import type { CollectionEntry } from "astro:content";
 import BaseLayout from "@/layouts/Base";
-import { getAllPosts, getUniqueTags, sortMDByDate, getPostsByTag } from "@/utils";
+import { getAllPosts, getSupportedLanguages, filterByLanguage, getUniqueTags, sortMDByDate, getPostsByTag } from "@/utils";
 import PostPreview from '@/components/blog/PostPreviewA';
 // Alternative post item
 // import PostPreview from '@/components/blog/PostPreviewB';
