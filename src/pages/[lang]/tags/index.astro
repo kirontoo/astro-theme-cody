@@ -8,6 +8,7 @@ import {
 	type SupportedLanguage,
 } from "@/utils";
 import type { GetStaticPaths } from "astro";
+import type { CollectionEntry } from "astro:content";
 
 export const getStaticPaths = (() => {
 	return getSupportedLanguages().map((lang) => ({ params: { lang } }));
@@ -19,7 +20,10 @@ const posts = await getCollection("blog", ({ data }) => {
 
 const { lang } = Astro.params;
 const filteredByLang = filterByLanguage(posts, lang as SupportedLanguage);
-const tags = getUniqueWithCountByProperty("tags", filteredByLang);
+const tags = getUniqueWithCountByProperty(
+	"tags",
+	filteredByLang as Array<CollectionEntry<"blog">>,
+);
 ---
 
 <BaseLayout title="All Tags">

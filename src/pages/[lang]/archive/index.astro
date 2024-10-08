@@ -51,7 +51,9 @@ const groupArray = (posts: Array<CollectionEntry<"blog">>) => {
 	});
 };
 
-const archivedPosts = groupArray(postsFilteredByLanguage).reverse();
+const archivedPosts = groupArray(
+	postsFilteredByLanguage as Array<CollectionEntry<"blog">>,
+).reverse();
 const dateFormat = {
 	locale: "en-US",
 	options: {
@@ -78,7 +80,10 @@ const dateFormat = {
 								dateTimeOptions={dateFormat.options}
 								locale={dateFormat.locale}
 							/>
-							<a class="cody-link" href={`/${lang}/blog/${p.slug}`}>
+							<a
+								class="cody-link"
+								href={`/${lang}/blog/${p.slug}`}
+							>
 								{p.data.title}
 							</a>
 						</li>

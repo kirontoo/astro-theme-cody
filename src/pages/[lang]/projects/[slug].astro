@@ -1,6 +1,6 @@
 ---
 import type { InferGetStaticPropsType, GetStaticPaths } from "astro";
-import { getCollection } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
 import ProjectLayout from "@/layouts/Project";
 import {
 	filterByLanguage,
@@ -30,6 +30,6 @@ const { project } = Astro.props;
 const { Content } = await project.render();
 ---
 
-<ProjectLayout project={project}>
+<ProjectLayout project={project as CollectionEntry<"project">}>
 	<Content />
 </ProjectLayout>

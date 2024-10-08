@@ -42,7 +42,7 @@ export function sortMDByPinned(posts: Array<CollectionEntry<"blog">>) {
 	});
 }
 
-export function filterByLanguage(posts: Array<CollectionEntry<"blog">>, lang: SupportedLanguage) {
+export function filterByLanguage(posts: Array<CollectionEntry<"blog" | "project">>, lang: SupportedLanguage): Array<CollectionEntry<"blog" | "project">> {
 	return posts.filter((post) => {
 		const translationLang = getLangFromSlug(post.slug);
 		return lang === translationLang;

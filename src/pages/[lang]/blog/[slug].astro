@@ -3,6 +3,7 @@ import type { InferGetStaticPropsType, GetStaticPaths } from "astro";
 import BlogPost from "@/layouts/BlogPost";
 import { filterByLanguage, getAllPosts, getSlugFromPost } from "@/utils";
 import { getSupportedLanguages, type SupportedLanguage } from "src/utils/i18n";
+import type { CollectionEntry } from "astro:content";
 
 export const getStaticPaths = (async () => {
 	const blogEntries = await getAllPosts();
@@ -13,7 +14,7 @@ export const getStaticPaths = (async () => {
 		);
 
 		return filteredByLanguage.map((post) => {
-			const slug = getSlugFromPost(post);
+			const slug = getSlugFromPost(post as CollectionEntry<"blog">);
 			return {
 				params: { lang, slug },
 				props: { post },
@@ -27,6 +28,6 @@ const { post } = Astro.props;
 const { Content } = await post.render();
 ---
 
-<BlogPost post={post}>
+<BlogPost post={post as CollectionEntry<"blog">}>
 	<Content />
 </BlogPost>
