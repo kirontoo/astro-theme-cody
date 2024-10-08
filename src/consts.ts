@@ -12,7 +12,10 @@ type Config = {
   profile: {
     author: string;
     description?: string;
-  }
+  },
+  settings: {
+    paginationSize: number,
+  },
 }
 
 type SocialLink = {
@@ -35,6 +38,9 @@ export const siteConfig: Config = {
   profile: {
     author: "Amy Dang",
     description: ui[DEFAULT_LANG]["profile.description"].text
+  },
+  settings: {
+    paginationSize: 10
   }
 }
 

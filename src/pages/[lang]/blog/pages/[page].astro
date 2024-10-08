@@ -13,6 +13,7 @@ import {
 	getSupportedLanguages,
 	type SupportedLanguage,
 } from "@/utils";
+import { siteConfig } from "src/consts";
 
 export const getStaticPaths = (async ({ paginate }) => {
 	// grab all posts besides drafts and hidden ones
@@ -31,7 +32,7 @@ export const getStaticPaths = (async ({ paginate }) => {
 		return paginate(filteredByLang, {
 			params: { lang },
 			props: { tags },
-			pageSize: 5,
+			pageSize: siteConfig.settings.paginationSize,
 		});
 	});
 }) satisfies GetStaticPaths;

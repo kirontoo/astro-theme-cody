@@ -16,6 +16,7 @@ import PostPreview from "@/components/blog/PostPreviewA";
 // import PostPreview from '@/components/blog/PostPreviewB';
 
 import Pagination from "@/components/Pagination";
+import { siteConfig } from "src/consts";
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
 	const allPosts = await getAllPosts();
@@ -31,7 +32,7 @@ export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
 			);
 			return paginate(postsFilteredByLang, {
 				params: { lang, tag },
-				pageSize: 10,
+				pageSize: siteConfig.settings.paginationSize,
 			});
 		});
 	});
