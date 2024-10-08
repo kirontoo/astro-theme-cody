@@ -1,12 +1,19 @@
 ---
 import { getCollection } from 'astro:content';
-import BaseLayout from '../../layouts/Base.astro';
-import { getUniqueTagsWithCount } from '@/utils';
+import BaseLayout from '@/layouts/Base';
+import { filterByLanguage, getSupportedLanguages, getUniqueWithCountByProperty, type SupportedLanguage } from '@/utils';
+
+export const getStaticPaths = (() => {
+  return getSupportedLanguages().map((lang) => ({params: {lang}}))
+}) satisfies GetStaticPaths
 
 const posts = (await getCollection('blog', ({data}) => {
 		return import.meta.env.PROD ? data.draft !== true : true;
 }));
-const tags = getUniqueTagsWithCount(posts);
+
+const { lang } = Astro.params;
+const filteredByLang = filterByLanguage(posts, lang as SupportedLanguage);
+const tags = getUniqueWithCountByProperty("tags", filteredByLang);
 ---
 
 <BaseLayout title="All Tags">
