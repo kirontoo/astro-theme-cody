@@ -15,7 +15,8 @@ export default defineConfig({
     locales: ["en", "es"]
   },
   redirects: {
-    "/[lang]/blog": "/[lang]/blog/pages/1"
+    "/[lang]/blog": "/[lang]/blog/pages/1",
+    "/[lang]/projects": "/[lang]/projects/pages/1"
   },
   markdown: {
     remarkPlugins: [remarkReadingTime],

@@ -4,6 +4,7 @@ import { getCollection, type CollectionEntry } from "astro:content";
 import ProjectLayout from "@/layouts/Project";
 import {
 	filterByLanguage,
+	getSlugFromCollectionEntry,
 	getSupportedLanguages,
 	type SupportedLanguage,
 } from "@/utils";
@@ -18,10 +19,13 @@ export const getStaticPaths = (async () => {
 			allProjects,
 			lang as SupportedLanguage,
 		);
-		return projectsFilteredByLang.flatMap((project) => ({
-			params: { lang, slug: project.slug },
-			props: { project },
-		}));
+		return projectsFilteredByLang.map((project) => {
+			const slug = getSlugFromCollectionEntry(project);
+			return {
+				params: { lang, slug },
+				props: { project },
+			};
+		});
 	});
 }) satisfies GetStaticPaths;
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;

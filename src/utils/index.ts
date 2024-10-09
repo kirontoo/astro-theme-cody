@@ -15,7 +15,8 @@ export {
   sortMDByDate,
   sortMDByPinned,
   getSlugFromPost,
-  filterByLanguage
+  filterByLanguage,
+  getSlugFromCollectionEntry
 } from "./post";
 
 export {
