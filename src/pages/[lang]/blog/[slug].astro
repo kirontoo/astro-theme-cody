@@ -28,7 +28,7 @@ export const getStaticPaths = (async () => {
 		});
 	});
 }) satisfies GetStaticPaths;
-type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+export type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 const { post } = Astro.props;
 const { Content } = await post.render();

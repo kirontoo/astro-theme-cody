@@ -1,5 +1,3 @@
-import { getSupportedLanguages } from "./i18n";
-
 export { getFormattedDate } from "./date";
 export { remarkReadingTime } from "./remark-reading-time.mjs";
 export {
