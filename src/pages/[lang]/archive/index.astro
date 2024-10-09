@@ -3,6 +3,7 @@ import type { GetStaticPaths } from "astro";
 import {
 	filterByLanguage,
 	getAllPosts,
+	getSlugFromPost,
 	sortMDByDate,
 	type SupportedLanguage,
 } from "@/utils";
@@ -82,7 +83,7 @@ const dateFormat = {
 							/>
 							<a
 								class="cody-link"
-								href={`/${lang}/blog/${p.slug}`}
+								href={`/${lang}/blog/${getSlugFromPost(p)}`}
 							>
 								{p.data.title}
 							</a>
