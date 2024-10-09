@@ -15,7 +15,7 @@ const t = useNavTranslations(lang);
 	</div>
 	<nav
 		aria-label="More on this site"
-		class="gap-x-0 sm:gap-x-2 sm:flex sm:divide-x sm:divide-accent"
+		class="sm:flex sm:divide-x sm:divide-accent"
 	>
 		{
 			NAV_LINKS.map((link) => {
@@ -23,7 +23,7 @@ const t = useNavTranslations(lang);
 				return (
 					<a
 						href={`/${lang}/${translation.slug}`}
-						class="px-2 py-0 hover:text-textColor hover:underline sm:px-4 sm:py-2"
+						class="px-2 py-0 hover:text-textColor hover:underline sm:px-4 sm:py-1 text-center"
 					>
 						{translation.text}
 					</a>
