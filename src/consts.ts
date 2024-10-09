@@ -49,7 +49,7 @@ export const siteConfig: Config = {
   It uses https://github.com/natemoo-re/astro-icon#readme
   You can find icons @ https://icones.js.org/
 */
-export const socialLinks: Array<SocialLink> = [
+export const SOCIAL_LINKS: Array<SocialLink> = [
   {
     icon: "mdi:github",
     friendlyName: "Github",
