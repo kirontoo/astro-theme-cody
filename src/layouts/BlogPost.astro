@@ -119,7 +119,7 @@ const articleDate = updatedDate?.toISOString() ?? pubDate.toISOString();
 						/>
 						{tags.map((tag: string) => (
 							<li class="tag">
-								<a href={`/tags/${tag}`}>{tag}</a>
+								<a href={`/${lang}/tags/${tag}`}>{tag}</a>
 							</li>
 						))}
 					</ul>
@@ -156,7 +156,10 @@ const articleDate = updatedDate?.toISOString() ?? pubDate.toISOString();
 						<br />
 						<ul>
 							<li>
-								<a class="cody-link" href={`/series/${series}`}>
+								<a
+									class="cody-link"
+									href={`/${lang}/series/${series}`}
+								>
 									{series}
 								</a>
 							</li>
