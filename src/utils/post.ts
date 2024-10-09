@@ -74,12 +74,6 @@ export function getPostsBySeries(
 }
 
 // Possible slugs: "[lang]/[slug]" or "[slug]"
-export function getSlugFromPost(post: CollectionEntry<"blog">) {
-	const [, ...slugs] = post.slug.split("/");
-	// if post is a translation post, grab the slug only
-	return slugs.length ? slugs.join("/") : post.slug;
-}
-
 export function getSlugFromCollectionEntry(entry: CollectionEntry<"blog" | "project">) {
 	const [, ...slugs] = entry.slug.split("/");
 	// if collection entry is a translation, grab the slug only

@@ -14,7 +14,6 @@ export {
   getPostsBySeries,
   sortMDByDate,
   sortMDByPinned,
-  getSlugFromPost,
   filterByLanguage,
   getSlugFromCollectionEntry
 } from "./post";
