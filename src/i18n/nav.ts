@@ -1,6 +1,6 @@
 /**
- * This configures the navigation bar each entry is a nav link with the correct
- * translation and url path.
+ * This configures the navigation bar and footer. Each entry is a nav link with
+ * the correct translation and url path.
  * 
  * All languages will follow this ordering/structure and will fallback to the
  * default language for any entries that haven't been translated 
