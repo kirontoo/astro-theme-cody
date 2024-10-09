@@ -19,6 +19,9 @@ export default {
         },
         "blog.lastUpdated": {
             text: "Last updated:"
+        },
+        "sidebar.tableOfContents": {
+            text: "Table of Contents"
         }
     },
     "es": {
@@ -33,6 +36,9 @@ export default {
         },
         "blog.lastUpdated": {
             text: "Última actualización:"
+        },
+        "sidebar.tableOfContents": {
+            text: "Tabla de contenidos"
         }
     }
 } as const satisfies TranslationUIEntry;
