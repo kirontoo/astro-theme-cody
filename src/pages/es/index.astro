@@ -8,6 +8,7 @@ import {
 	sortMDByDate,
 	sortMDByPinned,
 } from "@/utils";
+import type { CollectionEntry } from "astro:content";
 
 const MAX_POSTS = 10;
 const allPosts = await getAllPosts();
@@ -67,7 +68,11 @@ const tech: Array<{ title: string; desc: string; href: string }> = [
 	<section class="mt-8 sm:mt-16">
 		<h2 class="title">Posts</h2>
 		<ul class="space-y-4 sm:space-y-2">
-			{filteredPostsByLanguage.map((p) => <PostPreview post={p} />)}
+			{
+				filteredPostsByLanguage.map((p) => (
+					<PostPreview post={p as CollectionEntry<"blog">} />
+				))
+			}
 		</ul>
 	</section>
 
