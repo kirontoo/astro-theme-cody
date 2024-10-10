@@ -20,11 +20,13 @@ export default {
         },
         "blog": {
             text: "Blog",
-            slug: "blog"
+            slug: "blog",
+            route: "/blog/pages/1"
         },
         "projects": {
             text: "Projects",
-            slug: "projects"
+            slug: "projects",
+            route: "/projects/pages/1"
         },
         "archive": {
             text: "Archive",
@@ -50,11 +52,13 @@ export default {
         },
         "blog": {
             text: "Blog",
-            slug: "blog"
+            slug: "blog",
+            route: "/blog/pages/1"
         },
         "projects": {
             text: "Proyectos",
-            slug: "projects"
+            slug: "projects",
+            route: "/projects/pages/1"
         },
         "archive": {
             text: "Archivo",
@@ -71,9 +75,9 @@ export default {
     }
 } as const satisfies TranslationNavEntries;
 
-type TranslationNavEntries = Record<SupportedLanguage, NavEntry>
+type TranslationNavEntries = Record<SupportedLanguage, Record<string, NavEntry>>
 
-type NavEntry = Record<string, {
+export type NavEntry = {
     /*
         Provided translation
     */
@@ -82,5 +86,7 @@ type NavEntry = Record<string, {
     /*
         Content collection slug or url path for this page without the language code
     */
-    slug: string
-}>;
+    slug: string,
+
+    route?: string
+};

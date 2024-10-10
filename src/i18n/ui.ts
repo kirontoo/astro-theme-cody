@@ -41,7 +41,8 @@ export default {
             text: "Tabla de contenidos"
         }
     }
-} as const satisfies TranslationUIEntry;
+} as const satisfies TranslationUIEntries;
 
-type TranslationUIEntry = Record<SupportedLanguage, UIEntry>;
-type UIEntry = Record<string, { text: string }>;
+type TranslationUIEntries = Record<SupportedLanguage, Record<string, UIEntry>>;
+
+export type UIEntry = { text: string };

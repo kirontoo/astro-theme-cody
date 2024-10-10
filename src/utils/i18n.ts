@@ -1,6 +1,6 @@
 import { DEFAULT_LANG, SUPPORTED_LANGUAGES } from "src/consts";
-import nav from '@/i18n/nav';
-import ui from "@/i18n/ui";
+import nav, { type NavEntry } from '@/i18n/nav';
+import ui, { type UIEntry } from "@/i18n/ui";
 
 export type SupportedLanguage = keyof typeof SUPPORTED_LANGUAGES;
 
@@ -37,13 +37,13 @@ export function getLocalizedUrl(url: URL, locale: SupportedLanguage): string {
 }
 
 export function useNavTranslations(lang: keyof typeof nav) {
-    return function t(key: keyof typeof nav[SupportedLanguage]) {
+    return function t(key: keyof typeof nav[SupportedLanguage]): NavEntry {
         return nav[lang][key] || nav[DEFAULT_LANG][key];
     }
 }
 
 export function useUITranslations(lang: keyof typeof nav) {
-    return function t(key: keyof typeof ui[SupportedLanguage]) {
+    return function t(key: keyof typeof ui[SupportedLanguage]): UIEntry {
         return ui[lang][key] || ui[DEFAULT_LANG][key];
     }
 }
