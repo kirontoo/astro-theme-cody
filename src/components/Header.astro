@@ -5,10 +5,19 @@ import ThemeToggle from "@/components/ThemeToggle";
 import SelectLanguage from "@/components/SelectLanguage";
 import { getLangFromUrl } from "@/utils";
 import { useNavTranslations } from "src/utils/i18n";
+import type { NavEntry } from "@/i18n/nav";
 
 const url = new URL(Astro.request.url);
 const lang = getLangFromUrl(Astro.url);
 const t = useNavTranslations(lang);
+
+function buildNavLink(nav: string, entry: NavEntry): string {
+	if (entry.route) {
+		return `/${lang}${entry.route}`;
+	}
+
+	return `/${lang}${nav != "home" ? `/${entry.slug}/` : "/"}`;
+}
 ---
 
 <header
@@ -38,7 +47,7 @@ const t = useNavTranslations(lang);
 					return (
 						<HeaderLink
 							class="block py-2 sm:py-0"
-							href={`/${lang}${nav != "home" ? `/${translation.slug}/` : "/"}`}
+							href={buildNavLink(nav, translation)}
 							title={translation.text}
 							aria-current={
 								url.pathname === translation.slug
