@@ -1,6 +1,7 @@
 ---
 import type { MarkdownHeading } from "astro";
-import TableOfContentsHeading from '@/components/TableOfContentsHeading';
+import TableOfContentsHeading from "@/components/TableOfContentsHeading";
+import { useUITranslations, type SupportedLanguage } from "@/utils";
 const { headings } = Astro.props;
 const toc = buildToc(headings);
 
@@ -14,7 +15,10 @@ function diveChildren(item: TocItem, depth: number): Array<TocItem> {
 		return item.subheadings;
 	} else {
 		// e.g., 2
-		return diveChildren(item.subheadings[item.subheadings.length - 1] as TocItem, depth - 1);
+		return diveChildren(
+			item.subheadings[item.subheadings.length - 1] as TocItem,
+			depth - 1,
+		);
 	}
 }
 
@@ -24,7 +28,7 @@ function buildToc(headings: ReadonlyArray<MarkdownHeading>) {
 	const toc: Array<TocItem> = [];
 
 	bodyHeadings.forEach((h) => {
-	const heading: TocItem = { ...h, subheadings: [] };
+		const heading: TocItem = { ...h, subheadings: [] };
 
 		// add h2 elements into the top level
 		if (heading.depth === 2) {
@@ -45,32 +49,35 @@ function buildToc(headings: ReadonlyArray<MarkdownHeading>) {
 	return toc;
 }
 
+const { lang } = Astro.params;
+const translate = useUITranslations(lang as SupportedLanguage);
 ---
 
 <nav class="sticky top-20 order-2 hidden basis-64 lg:block">
-	<hr/>
-	<h2 class="font-bold text-lg">Table of Contents</h2>
+	<hr />
+	<h2 class="font-bold text-lg">
+		{translate("sidebar.tableOfContents").text}
+	</h2>
 	<ul class="-me-32" id="toc">
 		{toc.map((heading) => <TableOfContentsHeading heading={heading} />)}
 	</ul>
 </nav>
 
-
 <script>
 	const toc = document.getElementById("toc");
-	if(toc) {
-		toc?.addEventListener('click', (e) => {
+	if (toc) {
+		toc?.addEventListener("click", (e) => {
 			const prevHeading = window.location.hash.slice(1);
 			const prevLink = document.getElementById(`toc-${prevHeading}`);
 
 			// remove active class from prev heading
-			if(prevLink instanceof HTMLElement) {
-				prevLink?.classList.remove('active-toc');
+			if (prevLink instanceof HTMLElement) {
+				prevLink?.classList.remove("active-toc");
 			}
 
 			// add active class to current heading
 			if (e.target instanceof HTMLElement) {
-				e.target.classList.add('active-toc');
+				e.target.classList.add("active-toc");
 			}
 		});
 	}

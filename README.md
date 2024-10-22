@@ -6,6 +6,7 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
+[![Netlify Status](https://api.netlify.com/api/v1/badges/3d9506ce-9212-47ae-b686-fb932a24f940/deploy-status)](https://app.netlify.com/sites/astro-theme-cody/deploys)  
 
 
   <p align="center">
@@ -26,15 +27,18 @@
 
 
 ## Table of Contents
-1. [Motivation](#motivation)
-2. [Key Features](#key-features)
-3. [Demo](#demo)
-4. [Quick Start](#quick-start)
-5. [Commands](#commands)
-6. [Configure](#configure)
-7. [Deploy](#deploy)
-8. [Extra Functionality](#extra-funtionality)
-9. [Credit](#credit)
+- [Motivation](#motivation)
+- [Key Features](#key-features)
+- [Demo](#demo)
+- [Quick Start](#quick-start)
+- [Commands](#commands)
+- [Configuring Your Website](#configuring-your-website)
+  - [Site Config, Social Media Links and Navbar Links](#site-config-social-media-links-and-navbar-links)
+  - [Adding Posts and Projects](#adding-posts-and-projects)
+  - [Multi-Language Support](#multi-language-support)
+- [Deploy](#deploy)
+- [Extra Functionality](#extra-funtionality)
+- [Credit](#credit)
 
 ## Motivation
 Although there are already so many blog themes out there, I wanted one that would give off
@@ -45,6 +49,7 @@ that terminal/dev vibe and a few features that other themes did not have.
 - TailwindCSS Utility classes
 - Accessible, semantic HTML markup
 - Responsive & SEO-friendly
+- Multi-language support
 - Dark / Light mode, using Tailwind and CSS variables
 - Pinned posts and projects
 - [Astro Assets Integration](https://docs.astro.build/en/guides/assets/) for optimised images
@@ -87,7 +92,7 @@ All commands are run from the root of the project, from a terminal:
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Configure
+## Configuring Your Website
 
 ### Site Config, Social Media Links and Navbar Links
 Your site config, social media links and Navbar links are all placed within [`src/consts.ts`](https://github.com/kirontoo/astro-theme-cody/blob/main/src/consts.ts).
@@ -132,6 +137,9 @@ You can find examples of blog posts in `src/content/blog` and examples of projec
 | order | Optional number value from 1 - 5 to pin certain projects to the top. Limited to only 5 pinned posts|
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+### Multi-Language Support
+See the [wiki](https://github.com/kirontoo/astro-theme-cody/wiki/Set-up-multi%E2%80%90language-support) to set up multi-language support for your blog.
 
 ## Deploy
 Astro provides great documentation for deploying your Astro websites on various platforms.

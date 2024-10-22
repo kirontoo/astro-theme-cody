@@ -2,23 +2,38 @@
 import type { Page, GetStaticPaths } from "astro";
 import type { CollectionEntry } from "astro:content";
 import BaseLayout from "@/layouts/Base";
-import { getAllPosts, getUniqueTags, sortMDByDate, getPostsByTag } from "@/utils";
-import PostPreview from '@/components/blog/PostPreviewA';
+import {
+	getAllPosts,
+	getSupportedLanguages,
+	filterByLanguage,
+	getUniqueTags,
+	sortMDByDate,
+	getPostsByTag,
+	type SupportedLanguage,
+} from "@/utils";
+import PostPreview from "@/components/blog/PostPreviewA";
 // Alternative post item
 // import PostPreview from '@/components/blog/PostPreviewB';
 
-import Pagination from '@/components/Pagination';
+import Pagination from "@/components/Pagination";
+import { siteConfig } from "src/consts";
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
 	const allPosts = await getAllPosts();
 	const allPostsByDate = sortMDByDate(allPosts);
 	const uniqueTags = getUniqueTags(allPostsByDate);
 
-	return uniqueTags.flatMap((tag) => {
-		const filteredPosts = getPostsByTag(tag, allPostsByDate);
-		return paginate(filteredPosts, {
-			params: { tag },
-			pageSize: 10,
+	return getSupportedLanguages().flatMap((lang) => {
+		return uniqueTags.flatMap((tag) => {
+			const postsFilteredByTag = getPostsByTag(tag, allPostsByDate);
+			const postsFilteredByLang = filterByLanguage(
+				postsFilteredByTag,
+				lang as SupportedLanguage,
+			);
+			return paginate(postsFilteredByLang, {
+				params: { lang, tag },
+				pageSize: siteConfig.settings.paginationSize,
+			});
 		});
 	});
 };
@@ -58,11 +73,7 @@ const paginationProps = {
 		<span>#{tag}</span>
 	</h1>
 	<ul class="flex flex-col gap-4">
-		{
-		page.data.map(post => (
-			<PostPreview post={post} withDesc/>
-		))
-		}
+		{page.data.map((post) => <PostPreview post={post} withDesc />)}
 	</ul>
 	<Pagination {...paginationProps} />
 </BaseLayout>

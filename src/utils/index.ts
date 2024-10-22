@@ -11,7 +11,9 @@ export {
   getPostsByTag,
   getPostsBySeries,
   sortMDByDate,
-  sortMDByPinned
+  sortMDByPinned,
+  filterByLanguage,
+  getSlugFromCollectionEntry
 } from "./post";
 
 export {
@@ -25,3 +27,13 @@ export {
   getUniqueByProperty,
   getUniqueWithCountByProperty,
 } from "./frontmatter"
+
+export {
+  type SupportedLanguage,
+  getSupportedLanguages,
+  isValidLanguageCode,
+  getLangFromUrl,
+  getLangFromSlug,
+  useNavTranslations,
+  useUITranslations
+} from "./i18n"

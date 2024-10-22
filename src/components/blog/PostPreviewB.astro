@@ -3,6 +3,7 @@ import type { CollectionEntry } from "astro:content";
 import type { HTMLTag, Polymorphic } from "astro/types";
 import FormattedDate from "@/components/FormattedDate";
 import { Icon } from "astro-icon";
+import { getLangFromUrl, getSlugFromCollectionEntry } from "@/utils";
 
 type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag }> & {
 	post: CollectionEntry<"blog">;
@@ -10,27 +11,39 @@ type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag }> & {
 };
 
 const { post, withDesc = false } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const slug = getSlugFromCollectionEntry(post);
+const urlBasePath =
+	post.collection === "project" ? "projects" : post.collection;
 const postDate = post.data.updatedDate ?? post.data.pubDate;
 const pinned: boolean = !!post.data.order;
 ---
 
 <li>
 	<div class="flex flex-col gap-x-0 sm:flex-row sm:divide-x sm:divide-accent">
-		<FormattedDate date={postDate} class="min-w-[125px] text-gray-600 dark:text-gray-400"/>
+		<FormattedDate
+			date={postDate}
+			class="min-w-[125px] text-gray-600 dark:text-gray-400"
+		/>
 		<span class="sm:before:ml-4">
-			<a href={`/blog/${post.slug}/`} class="cody-link" data-astro-prefetch>
+			<a
+				href={`/${lang}/${urlBasePath}/${slug}`}
+				class="cody-link"
+				data-astro-prefetch
+			>
 				{post.data.title}
 			</a>
-			{ pinned &&
-				<Icon 
-					class="h-5 w-5 inline text-accent rotate-45 ml-1" 
-					name="mdi:pin" 
-					aria-hidden="true" 
-					focusable="false"
-				/>
+			{
+				pinned && (
+					<Icon
+						class="h-5 w-5 inline text-accent rotate-45 ml-1"
+						name="mdi:pin"
+						aria-hidden="true"
+						focusable="false"
+					/>
+				)
 			}
 		</span>
 	</div>
-	{withDesc && ( <p class="italic">{post.data.description}</p> )}
+	{withDesc && <p class="italic">{post.data.description}</p>}
 </li>
-

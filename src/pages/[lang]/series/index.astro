@@ -1,0 +1,43 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "@/layouts/Base";
+import {
+	filterByLanguage,
+	getSupportedLanguages,
+	getUniqueWithCountByProperty,
+	type SupportedLanguage,
+} from "@/utils";
+import type { GetStaticPaths } from "astro";
+import type { CollectionEntry } from "astro:content";
+
+export const getStaticPaths = (() => {
+	return getSupportedLanguages().map((lang) => ({ params: { lang } }));
+}) satisfies GetStaticPaths;
+
+const posts = await getCollection("blog", ({ data }) => {
+	return import.meta.env.PROD ? data.draft !== true : true;
+});
+
+const { lang } = Astro.params;
+const filteredByLang = filterByLanguage(posts, lang as SupportedLanguage);
+const series = getUniqueWithCountByProperty(
+	"series",
+	filteredByLang as Array<CollectionEntry<"blog">>,
+);
+---
+
+<BaseLayout title="Series">
+	<h1 class="title flex font-bold text-xl items-center mb-4">Series</h1>
+	<ul>
+		{
+			series.map(([s, count]) => (
+				<li class="my-2">
+					<a class="cody-link" href={`/${lang}/series/${s}`}>
+						#{s}
+					</a>
+					({count})
+				</li>
+			))
+		}
+	</ul>
+</BaseLayout>

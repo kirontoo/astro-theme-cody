@@ -1,32 +1,45 @@
 ---
-
-import { 
+import type { GetStaticPaths } from "astro";
+import {
+	filterByLanguage,
 	getAllPosts,
+	getSlugFromCollectionEntry,
 	sortMDByDate,
+	type SupportedLanguage,
 } from "@/utils";
 import BaseLayout from "@/layouts/Base";
 import FormattedDate from "@/components/FormattedDate";
-import { siteConfig } from '../../consts';
+import { siteConfig } from "src/consts";
 import type { CollectionEntry } from "astro:content";
+import { getSupportedLanguages } from "@/utils";
 
 const allPosts = await getAllPosts();
 const allPostsByDate = sortMDByDate(allPosts, "ascending");
 
+export const getStaticPaths = (() => {
+	return getSupportedLanguages().map((lang) => ({ params: { lang } }));
+}) satisfies GetStaticPaths;
+
+const { lang } = Astro.params;
+const postsFilteredByLanguage = filterByLanguage(
+	allPostsByDate,
+	lang as SupportedLanguage,
+);
+
 const getGroupsByYear = (
-	posts: Array<CollectionEntry<"blog">>
-) : Record<string, Array<CollectionEntry<"blog">>> => {
-	const initialValue: Record<string, Array<CollectionEntry<"blog">>> = {}; 
-	return posts.reduce(
-		(groups, p) => {
+	posts: Array<CollectionEntry<"blog">>,
+): Record<string, Array<CollectionEntry<"blog">>> => {
+	const initialValue: Record<string, Array<CollectionEntry<"blog">>> = {};
+	return posts.reduce((groups, p) => {
 		const date = new Date(p.data.pubDate);
 		const year: string = date.getFullYear().toString();
-		if(!groups[year]) {
+		if (!groups[year]) {
 			groups[year] = [];
 		}
 		groups[year].push(p);
 		return groups;
-		}, initialValue);
-}
+	}, initialValue);
+};
 
 const groupArray = (posts: Array<CollectionEntry<"blog">>) => {
 	const groups = getGroupsByYear(posts);
@@ -34,39 +47,44 @@ const groupArray = (posts: Array<CollectionEntry<"blog">>) => {
 	return keys.map((year) => {
 		return {
 			year,
-			posts: groups[year]
-		}
+			posts: groups[year],
+		};
 	});
-}
+};
 
-const archivedPosts = groupArray(allPostsByDate).reverse();
+const archivedPosts = groupArray(
+	postsFilteredByLanguage as Array<CollectionEntry<"blog">>,
+).reverse();
 const dateFormat = {
 	locale: "en-US",
 	options: {
 		month: "short",
 		day: "2-digit",
-	} as Intl.DateTimeFormatOptions
+	} as Intl.DateTimeFormatOptions,
 };
 ---
 
 <BaseLayout title={`Archive | ${siteConfig.title}`} description="">
 	<main class="space-y-4">
 		{
-			archivedPosts.map(group => (
+			archivedPosts.map((group) => (
 				<ul class="space-y-2">
 					<h2 class="title" id={group.year}>
 						<a href={`#${group.year}`} class="-ml-2 cody-link">
 							<time datetime={group.year}>{group.year}</time>
 						</a>
 					</h2>
-					{group.posts.map(p => (
+					{group.posts.map((p) => (
 						<li>
-							<FormattedDate 
-								date={p.data.updatedDate ?? p.data.pubDate} 
-								dateTimeOptions={dateFormat.options} 
+							<FormattedDate
+								date={p.data.updatedDate ?? p.data.pubDate}
+								dateTimeOptions={dateFormat.options}
 								locale={dateFormat.locale}
 							/>
-							<a class="cody-link" href={`/blog/${p.slug}`}>
+							<a
+								class="cody-link"
+								href={`/${lang}/blog/${getSlugFromCollectionEntry(p)}`}
+							>
 								{p.data.title}
 							</a>
 						</li>

@@ -9,6 +9,11 @@ import tailwind from "@astrojs/tailwind";
 export default defineConfig({
   site: 'https://astro-theme-cody.netlify.app',
   integrations: [mdx(), sitemap(), tailwind()],
+  // NOTE: Make sure this matches your supported languages in the file: src/consts.ts
+  i18n: {
+    defaultLocale: "en",
+    locales: ["en", "es"]
+  },
   markdown: {
     remarkPlugins: [remarkReadingTime],
     syntaxHighlight: 'shiki',
