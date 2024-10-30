@@ -22,6 +22,15 @@ export default {
         },
         "sidebar.tableOfContents": {
             text: "Table of Contents"
+        },
+        "project.platform": {
+            text: "PLATFORM"
+        },
+        "project.stack": {
+            text: "STACK"
+        },
+        "project.website": {
+            text: "WEBSITE"
         }
     },
     "es": {
@@ -39,6 +48,15 @@ export default {
         },
         "sidebar.tableOfContents": {
             text: "Tabla de contenidos"
+        },
+        "project.platform": {
+            text: "PLATAFORMA"
+        },
+        "project.stack": {
+            text: "PILA"
+        },
+        "project.website": {
+            text: "WEBSITE"
         }
     }
 } as const satisfies TranslationUIEntries;
