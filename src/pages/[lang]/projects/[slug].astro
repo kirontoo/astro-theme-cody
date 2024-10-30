@@ -1,0 +1,39 @@
+---
+import type { InferGetStaticPropsType, GetStaticPaths } from "astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+import ProjectLayout from "@/layouts/Project";
+import {
+	filterByLanguage,
+	getSlugFromCollectionEntry,
+	getSupportedLanguages,
+	type SupportedLanguage,
+} from "@/utils";
+
+export const getStaticPaths = (async () => {
+	const allProjects = await getCollection("project", ({ data }) => {
+		return import.meta.env.PROD ? data.draft !== true : true;
+	});
+
+	return getSupportedLanguages().flatMap((lang) => {
+		const projectsFilteredByLang = filterByLanguage(
+			allProjects,
+			lang as SupportedLanguage,
+		);
+		return projectsFilteredByLang.map((project) => {
+			const slug = getSlugFromCollectionEntry(project);
+			return {
+				params: { lang, slug },
+				props: { project },
+			};
+		});
+	});
+}) satisfies GetStaticPaths;
+export type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { project } = Astro.props;
+const { Content } = await project.render();
+---
+
+<ProjectLayout project={project as CollectionEntry<"project">}>
+	<Content />
+</ProjectLayout>

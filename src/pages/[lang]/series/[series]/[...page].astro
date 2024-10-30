@@ -2,23 +2,41 @@
 import type { Page, GetStaticPaths } from "astro";
 import type { CollectionEntry } from "astro:content";
 import BaseLayout from "@/layouts/Base";
-import { getAllPosts, getUniqueByProperty, sortMDByDate, getPostsBySeries } from "@/utils";
-import PostPreview from '@/components/blog/PostPreviewA';
+import {
+	getAllPosts,
+	getUniqueByProperty,
+	sortMDByDate,
+	getPostsBySeries,
+	getSupportedLanguages,
+	filterByLanguage,
+	type SupportedLanguage,
+} from "@/utils";
+import PostPreview from "@/components/blog/PostPreviewA";
 // Alternative post item
 // import PostPreview from '@/components/blog/PostPreviewB';
 
-import Pagination from '@/components/Pagination';
+import Pagination from "@/components/Pagination";
+import { siteConfig } from "src/consts";
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
 	const allPosts = await getAllPosts();
 	const allPostsByDate = sortMDByDate(allPosts, "ascending");
-	const  uniqueSeries = getUniqueByProperty("series", allPostsByDate);
+	const uniqueSeries = getUniqueByProperty("series", allPostsByDate);
 
-	return uniqueSeries.flatMap((series) => {
-		const filteredPosts = getPostsBySeries(series, allPostsByDate);
-		return paginate(filteredPosts, {
-			params: { series },
-			pageSize: 10,
+	return getSupportedLanguages().flatMap((lang) => {
+		return uniqueSeries.flatMap((series) => {
+			const postsFilteredBySeries = getPostsBySeries(
+				series,
+				allPostsByDate,
+			);
+			const postsFilteredByLang = filterByLanguage(
+				postsFilteredBySeries,
+				lang as SupportedLanguage,
+			);
+			return paginate(postsFilteredByLang, {
+				params: { lang, series },
+				pageSize: siteConfig.settings.paginationSize,
+			});
 		});
 	});
 };
@@ -58,11 +76,7 @@ const paginationProps = {
 		<span>#{series}</span>
 	</h1>
 	<ul class="flex flex-col gap-4">
-		{
-		page.data.map(post => (
-			<PostPreview post={post} withDesc/>
-		))
-		}
+		{page.data.map((post) => <PostPreview post={post} withDesc />)}
 	</ul>
 	<Pagination {...paginationProps} />
 </BaseLayout>

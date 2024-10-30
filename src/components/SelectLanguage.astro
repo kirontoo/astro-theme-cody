@@ -1,0 +1,64 @@
+---
+import {
+    getLangFromUrl,
+    getLocalizedUrl,
+    getSupportedLanguages,
+    type SupportedLanguage,
+} from "src/utils/i18n";
+
+const { class: className } = Astro.props;
+
+let currentLanguage = getLangFromUrl(Astro.url);
+---
+
+<lang-select>
+    <label>
+        <span class="sr-only">Select Language</span>
+        <select
+            name="languages"
+            id="lang-select"
+            value={currentLanguage}
+            class:list={[className]}
+        >
+            {
+                getSupportedLanguages().map((lang: string) => {
+                    return (
+                        <option
+                            class="outline-none"
+                            value={getLocalizedUrl(
+                                Astro.url,
+                                lang as SupportedLanguage,
+                            )}
+                            selected={lang === currentLanguage}
+                            set:html={lang}
+                        />
+                    );
+                })
+            }
+        </select>
+    </label>
+</lang-select>
+
+<script>
+    class LangSelect extends HTMLElement {
+        constructor() {
+            super();
+            const select = this.querySelector("select");
+            if (select) {
+                select.addEventListener("change", (e) => {
+                    if (e.currentTarget instanceof HTMLSelectElement) {
+                        window.location.pathname = e.currentTarget.value;
+                    }
+                });
+            }
+        }
+    }
+
+    customElements.define("lang-select", LangSelect);
+</script>
+
+<style>
+    select {
+        @apply bg-bgColor border-b border-accent focus:border-accent focus:border;
+    }
+</style>

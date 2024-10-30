@@ -1,0 +1,59 @@
+---
+import type { Page, GetStaticPaths } from "astro";
+import type { CollectionEntry } from "astro:content";
+import BaseLayout from "@/layouts/Base";
+import PostPreview from "@/components/blog/PostPreviewA";
+import { getCollection } from "astro:content";
+import { siteConfig } from "src/consts";
+import {
+	getSupportedLanguages,
+	filterByLanguage,
+	type SupportedLanguage,
+} from "@/utils";
+
+interface Props {
+	page: Page<CollectionEntry<"project">>;
+}
+
+export const getStaticPaths = (async ({ paginate }) => {
+	const allProjects = await getCollection("project", ({ data }) => {
+		return import.meta.env.PROD ? data.draft !== true : true;
+	});
+
+	const sortedByDateProjects = allProjects.sort((a, b) => {
+		const aDate = new Date(a.data.pubDate).valueOf();
+		const bDate = new Date(b.data.pubDate).valueOf();
+		return bDate - aDate;
+	});
+
+	// move all pinned projects to the top
+	const sortedByPinned = sortedByDateProjects.sort((a, b) => {
+		const aOrder = a.data.order ?? 100;
+		const bOrder = b.data.order ?? 100;
+		return aOrder - bOrder;
+	});
+
+	return getSupportedLanguages().flatMap((lang) => {
+		const projects = filterByLanguage(
+			sortedByPinned,
+			lang as SupportedLanguage,
+		);
+
+		return paginate(projects, {
+			params: { lang },
+			pageSize: siteConfig.settings.paginationSize,
+		});
+	});
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+---
+
+<BaseLayout title="Projects">
+	<section>
+		<h2 class="title">Projects</h2>
+		<ul role="list" class="space-y-2 sm:space-y-4">
+			{page.data.map((p) => <PostPreview post={p} withDesc />)}
+		</ul>
+	</section>
+</BaseLayout>
