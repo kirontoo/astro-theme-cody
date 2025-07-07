@@ -12,6 +12,9 @@
       ],
       "@/layouts/*": [
         "src/layouts/*.astro"
+      ],
+      "@/styles/*": [
+        "src/styles/*.css"
       ]
     }
   },
