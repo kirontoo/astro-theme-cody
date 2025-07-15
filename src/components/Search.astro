@@ -1,0 +1,107 @@
+---
+import "@/styles/search";
+import { Icon } from "astro-icon";
+---
+
+
+<site-search>
+    <button 
+	id="toggleSearch" 
+	class="flex justify-center items-center"
+	aria-label="toggle search dialog"
+	data-open-modal
+	>
+	<Icon 
+	    name="mdi:magnify"
+	    aria-hidden="false"
+	    class="h-6 w-6 text-textColor"
+	/>
+    </button>
+    <dialog
+	class="h-full w-full max-h-full max-w-full open:flex close:hidden justify-center relative z-10 shadow-sm backdrop:backdrop-blur-sm o"
+	data-dialog
+	id="search-dialog"
+	role="dialog"
+    >
+	<div class="dialog-frame flex grow flex-row gap-4 items-start justify-between my-16 p-4 border border-1 border-accent max-w-6xl">
+	    <div id="cody-search"></div>
+	    <button data-close-modal>
+		<Icon
+		    name="mdi:close"
+		    class="h-6 w-6 text-accent"
+		/>
+	    </button>
+	</div>
+    </dialog>
+</site-search>
+
+<script>
+import { PagefindUI } from "@pagefind/default-ui";
+window.addEventListener("DOMContentLoaded", () => {
+    new PagefindUI({
+	element: "#cody-search",
+	showImages: false,
+	showSubResults: true,
+    });
+});
+
+class SiteSearch extends HTMLElement {
+    openModalBtn: HTMLButtonElement | null;
+    closeModalBtn: HTMLButtonElement | null;
+    dialogElement: HTMLDialogElement | null;
+
+    constructor() {
+	super();
+
+	this.openModalBtn = this.querySelector<HTMLButtonElement>("button[data-open-modal]");
+	this.dialogElement = this.querySelector<HTMLDialogElement>("dialog#search-dialog");
+	this.closeModalBtn = this.querySelector<HTMLButtonElement>("button[data-close-modal]");
+
+	// bind functions
+	this.openModal = this.openModal.bind(this);
+	this.closeModal = this.closeModal.bind(this);
+
+	// initalize event handlers
+	if (this.openModalBtn){
+	    this.openModalBtn.addEventListener("click", this.openModal);
+	}
+
+	if (this.closeModalBtn) {
+	    this.closeModalBtn.addEventListener("click", this.closeModal);
+	}
+
+	if (this.dialogElement) {
+	    // this.dialogElement.showModal();
+	    this.dialogElement.addEventListener("close", () => {
+		window.removeEventListener("click", this.onWindowClick);
+	    });
+	} else {
+	    console.warn("Dialog not found")
+	}
+    }
+
+    openModal(event?: MouseEvent) {
+	if (this.dialogElement) {
+	    this.dialogElement.showModal();
+	    console.log("open")
+
+	    this.querySelector("input")?.focus();
+	    event?.stopPropagation();
+	}
+    }
+
+    closeModal(event?: MouseEvent) {
+	if (this.dialogElement) {
+	    this.dialogElement.close();
+	    console.log("close")
+	}
+    }
+
+    onWindowClick(){
+	console.log("close dialog")
+    }
+
+}
+
+customElements.define("site-search", SiteSearch);
+</script>
