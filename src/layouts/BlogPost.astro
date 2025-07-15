@@ -44,7 +44,7 @@ const articleDate = updatedDate?.toISOString() ?? pubDate.toISOString();
 ---
 
 <Layout title={title} description={description} image={socialImage} articleDate={articleDate}>
-	<article class="cody-bg prose dark:prose-invert prose-cody text-textColor max-w-4xl">
+	<article class="cody-bg prose dark:prose-invert prose-cody text-textColor max-w-4xl" data-pagefind-body>
 		<header class="space-y-2">
 			{
 				heroImage &&
