@@ -1,8 +1,12 @@
 ---
-import HeaderLink from './HeaderLink.astro';
 import Search from './Search.astro';
-import { siteConfig, NAV_LINKS } from '../consts';
-import ThemeToggle from '../components/ThemeToggle.astro';
+import HeaderLink from "./HeaderLink.astro";
+import { siteConfig, NAV_LINKS } from "../consts";
+import ThemeToggle from "@/components/ThemeToggle";
+import SelectLanguage from "@/components/SelectLanguage";
+import { getLangFromUrl } from "@/utils";
+import { useNavTranslations } from "src/utils/i18n";
+import type { NavEntry } from "@/i18n/nav";
 
 const url = new URL(Astro.request.url);
 const lang = getLangFromUrl(Astro.url);
