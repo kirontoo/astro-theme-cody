@@ -1,0 +1,104 @@
+---
+import BaseLayout from "@/layouts/Base";
+import PostPreview from "@/components/blog/PostPreviewB";
+import SocialMediaLinks from "@/components/SocialMediaLinks";
+import {
+	filterByLanguage,
+	getAllPosts,
+	sortMDByDate,
+	sortMDByPinned,
+} from "@/utils";
+import type { CollectionEntry } from "astro:content";
+
+const MAX_POSTS = 10;
+const allPosts = await getAllPosts();
+const allPostsByDate = sortMDByDate(allPosts);
+const allPostsByPinned = sortMDByPinned(allPostsByDate);
+const filteredPostsByLanguage = filterByLanguage(allPostsByPinned, "es").slice(0, MAX_POSTS);
+
+const tech: Array<{ title: string; desc: string; href: string }> = [
+	{
+		title: "Astro",
+		desc: "Crea sitios web rápidos, más rápido.",
+		href: "https://astro.build",
+	},
+	{
+		title: "Astro Assets",
+		desc: "Compatibilidad con activos optimizados integrados.",
+		href: "https://docs.astro.build/en/guides/assets/",
+	},
+	{
+		title: "Tailwind CSS",
+		desc: "Crea sitios web modernos rápidamente sin tener que abandonar el HTML.",
+		href: "https://tailwindcss.com",
+	},
+	{
+		title: "Markdown",
+		desc: "Lenguaje de marcado simple y fácil de usar.",
+		href: "https://www.markdownguide.org/",
+	},
+	{
+		title: "MDX",
+		desc: "Markdown para la era de los componentes.",
+		href: "https://mdxjs.com/",
+	},
+	{
+		title: "Astro Icon",
+		desc: "Un componente de ícono fácil de usar para Astro.",
+		href: "https://github.com/natemoo-re/astro-icon#readme",
+	},
+];
+---
+
+<BaseLayout title="Home">
+	<section>
+		<h1 class="title">Hello World</h1>
+		<p class="mb-4 sm:mb-8">
+			¡Hola a todos! Este es un tema para Astro. Pueden usarlo como blog
+			personal o portafolio. Si quieren saber más sobre cómo
+			personalizarlo y hacerlo suyo, hagan clic en el enlace del ícono de
+			Github que aparece a continuación y los llevará al repositorio.
+		</p>
+		<div>
+			<span>Puedes encontrarme en:</span>
+			<SocialMediaLinks />
+		</div>
+	</section>
+
+	<section class="mt-8 sm:mt-16">
+		<h2 class="title">Posts</h2>
+		<ul class="space-y-4 sm:space-y-2">
+			{
+				filteredPostsByLanguage.map((p) => (
+					<PostPreview post={p as CollectionEntry<"blog">} />
+				))
+			}
+		</ul>
+	</section>
+
+	<section class="mt-16 mb-4">
+		<h2 class="title">Technologies</h2>
+		<ul class="space-y-4 sm:space-y-2">
+			{
+				tech.map(({ href, title, desc }) => (
+					<li>
+						<a
+							href={href}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="cody-link inline-block"
+						>
+							{title}
+						</a>
+						: <p class="inline-block sm:mt-2">{desc}</p>
+					</li>
+				))
+			}
+		</ul>
+	</section>
+
+	<hr />
+	<section class="">
+		<p>Esto fue traducido usando Google Translate</p>
+	</section>
+</BaseLayout>

@@ -1,19 +1,20 @@
 ---
-import type { CollectionEntry } from 'astro:content';
-import Layout from '../layouts/Sidebar.astro';
-import FormattedDate from '../components/FormattedDate.astro';
-import SocialMediaLinks from '@/components/SocialMediaLinks';
-import TOC from '@/components/TableOfContents';
-import BackToTopBtn from '@/components/BackToTopBtn';
-import CopyBtn from '@/components/CopyBtn';
-import { Icon } from 'astro-icon';
-import { siteConfig } from '../consts';
+import type { CollectionEntry } from "astro:content";
+import Layout from "../layouts/Sidebar.astro";
+import FormattedDate from "../components/FormattedDate.astro";
+import SocialMediaLinks from "@/components/SocialMediaLinks";
+import TOC from "@/components/TableOfContents";
+import BackToTopBtn from "@/components/BackToTopBtn";
+import CopyBtn from "@/components/CopyBtn";
+import { Icon } from "astro-icon";
+import { siteConfig } from "../consts";
+import { getLangFromUrl, useUITranslations } from "@/utils";
 
 interface Props {
 	post: CollectionEntry<"blog">;
 }
 
-const {post} = Astro.props
+const { post } = Astro.props;
 
 const {
 	slug,
@@ -26,18 +27,21 @@ const {
 		ogImage,
 		tags,
 		series,
-		draft
-	}
+		draft,
+	},
 } = post;
 
-const { headings, remarkPluginFrontmatter } = post.render && await post.render();
+const { headings, remarkPluginFrontmatter } =
+	post.render && (await post.render());
 const { minutesRead } = remarkPluginFrontmatter;
+const lang = getLangFromUrl(Astro.url);
+const translate = useUITranslations(lang);
 
 const socialImage = ogImage ?? `/og-image/${slug}.png`;
 const dateTimeOptions: Intl.DateTimeFormatOptions = {
 	year: "numeric",
 	month: "long",
-	day: "numeric"
+	day: "numeric",
 };
 
 const articleDate = updatedDate?.toISOString() ?? pubDate.toISOString();
@@ -47,72 +51,118 @@ const articleDate = updatedDate?.toISOString() ?? pubDate.toISOString();
 	<article class="cody-bg prose dark:prose-invert prose-cody text-textColor max-w-4xl" data-pagefind-body>
 		<header class="space-y-2">
 			{
-				heroImage &&
-				<div class="aspect-h-9 aspect-w-16 mb-6 w-full flex justify-center">
-						<img src={heroImage.src} alt={heroImage.alt} class="m-0"/>
-				</div>
+				heroImage && (
+					<div class="aspect-h-9 aspect-w-16 mb-6 w-full flex justify-center">
+						<img
+							src={heroImage.src}
+							alt={heroImage.alt}
+							class="m-0"
+						/>
+					</div>
+				)
 			}
-			{series && (
-				<div class="md:sr-only not-sr-only">
-					<span>Part of series:</span>
-						<a class="cody-link" href={`/series/${series}`}>{series}</a>
-				</div>
-			)}
+			{
+				series && (
+					<div class="md:sr-only not-sr-only">
+						<span>Part of series:</span>
+						<a class="cody-link" href={`/series/${series}`}>
+							{series}
+						</a>
+					</div>
+				)
+			}
 			<div class="flex gap-2 items-center">
 				<h1 class="text-3xl my-0">{title}</h1>
-				{ draft && (<span class="px-1 py-0 bg-red-200 text-red-600 text-sm font-semibold">draft</span>)}
+				{
+					draft && (
+						<span class="px-1 py-0 bg-red-200 text-red-600 text-sm font-semibold">
+							draft
+						</span>
+					)
+				}
 			</div>
 			<span class="font-semibold text-textColor flex gap-2 items-center">
-				<FormattedDate date={pubDate} dateTimeOptions={dateTimeOptions}/>
+				<FormattedDate
+					date={pubDate}
+					dateTimeOptions={dateTimeOptions}
+				/>
 				<span>
 					/ {minutesRead}
 				</span>
 				{
 					updatedDate && (
 						<div class="italic px-2 bg-accent-2 w-fit text-sm font-normal">
-							Last updated: <FormattedDate date={updatedDate} dateTimeOptions={dateTimeOptions} />
+							{translate("blog.lastUpdated").text}{" "}
+							<FormattedDate
+								date={updatedDate}
+								dateTimeOptions={dateTimeOptions}
+							/>
 						</div>
 					)
 				}
 			</span>
-			{tags && (
-				<ul class="not-prose flex gap-2 flex-wrap">
-					<Icon class="w-5 h-5" name="carbon:tag-group" aria-hidden="true" focusable="false"/>
-					{tags.map((tag: string) => (
-						<li class="tag">
-							<a href={`/tags/${tag}`}>{tag}</a>
-						</li>
-					))}
-				</ul>
-			)}
+			{
+				tags && (
+					<ul class="not-prose flex gap-2 flex-wrap">
+						<Icon
+							class="w-5 h-5"
+							name="carbon:tag-group"
+							aria-hidden="true"
+							focusable="false"
+						/>
+						{tags.map((tag: string) => (
+							<li class="tag">
+								<a href={`/${lang}/tags/${tag}`}>{tag}</a>
+							</li>
+						))}
+					</ul>
+				)
+			}
 		</header>
-		<hr class="my-4"/>
-		<main class="prose-sm prose-headings:font-semibold prose-headings:ml-4 prose-headings:before:absolute prose-headings:before:-ms-4 prose-headings:before:text-accent prose-headings:before:content-['#'] prose-th:before:content-none prose-a:text-accent">
+		<hr class="my-4" />
+		<main
+			class="prose-sm prose-headings:font-semibold prose-headings:ml-4 prose-headings:before:absolute prose-headings:before:-ms-4 prose-headings:before:text-accent prose-headings:before:content-['#'] prose-th:before:content-none prose-a:text-accent"
+		>
 			<slot />
 		</main>
-		<BackToTopBtn/>
+		<BackToTopBtn />
 	</article>
 	<aside slot="sidebar" class="hidden sm:block">
 		<div class="flex flex-col space-y-2">
-			<h2 class="font-semibold text-lg text-textColor">{siteConfig.profile.author}</h2>
-			{siteConfig.profile.description && (<p>{siteConfig.profile.description}</p>)}
-			<SocialMediaLinks/>
+			<h2 class="font-semibold text-lg text-textColor">
+				{siteConfig.profile.author}
+			</h2>
+			{
+				siteConfig.profile.description && (
+					<p>{translate("profile.description").text}</p>
+				)
+			}
+			<SocialMediaLinks />
 			<span class="!my-4 text-accent" aria-hidden>---</span>
 			<p>
 				{description}
 			</p>
-			{series && (
-				<div class="pt-2 hidden md:block">
-					<span>Part of series: </span>
-					<br>
-					<ul>
-							<li><a class="cody-link" href={`/series/${series}`}>{series}</a></li>
-					</ul>
-				</div>
-			)}
+			{
+				series && (
+					<div class="pt-2 hidden md:block">
+						<span>Part of series: </span>
+						<br />
+						<ul>
+							<li>
+								<a
+									class="cody-link"
+									href={`/${lang}/series/${series}`}
+								>
+									{series}
+								</a>
+							</li>
+						</ul>
+					</div>
+				)
+			}
 		</div>
 		{!!headings.length && <TOC headings={headings} />}
 	</aside>
 </Layout>
 
-<CopyBtn/>
+<CopyBtn />

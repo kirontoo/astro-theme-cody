@@ -13,9 +13,12 @@
       "@/layouts/*": [
         "src/layouts/*.astro"
       ],
+      "@/i18n/*": [
+        "src/i18n/*.ts"
+      ],
       "@/styles/*": [
         "src/styles/*.css"
-      ]
+      ],
     }
   },
   "include": [
