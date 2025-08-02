@@ -32,6 +32,10 @@ input.pagefind-ui__search-input {
   flex-grow: 1 0;
 } 
 
+.pagefind-ui__search-clear:hover{ 
+  @apply text-accent;
+} 
+
 .pagefind-ui__drawer,
 .pagefind-ui__results-area {
   display:flex;
