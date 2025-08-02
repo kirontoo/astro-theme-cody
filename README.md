@@ -7,6 +7,8 @@
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 
+<a href='https://ko-fi.com/F1F2J3RV9' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi2.png?v=6' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
+
 
   <p align="center">
     <h1>Astro Theme Cody</h1>
@@ -50,6 +52,7 @@ that terminal/dev vibe and a few features that other themes did not have.
 - [Astro Assets Integration](https://docs.astro.build/en/guides/assets/) for optimised images
 - MD & [MDX](https://docs.astro.build/en/guides/markdown-content/#mdx-only-features) posts
 - Pagination
+- Search through posts with [PageFind](https://pagefind.app/)
 - [Automatic RSS feed](https://docs.astro.build/en/guides/rss)
 - Auto-generated [sitemap](https://docs.astro.build/en/guides/integrations-guide/sitemap/)
 - [Astro Icon](https://github.com/natemoo-re/astro-icon) svg icon component
