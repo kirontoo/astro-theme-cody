@@ -18,19 +18,19 @@ import { Icon } from "astro-icon";
 	/>
     </button>
     <dialog
-	class="h-full w-full max-h-full max-w-full open:flex close:hidden justify-center relative z-10 shadow-sm bg-transparent"
+	class="h-full w-full lg:max-h-full max-h-screen max-w-full open:flex close:hidden justify-center relative z-20 shadow-sm bg-transparent m-0" 
 	data-dialog
 	id="search-dialog"
 	role="dialog"
     >
-	<div class="dialog-frame flex grow flex-row gap-4 items-start justify-between my-16 p-4 border border-1 border-accent max-w-6xl bg-surface">
-	    <div id="cody-search"></div>
-	    <button data-close-modal>
+	<div class="dialog-frame flex grow flex-col lg:flex-row-reverse gap-4 items-start lg:my-16 p-4 border border-1 border-accent lg:max-w-6xl lg:min-h-[calc(100%-8rem)] bg-surface sm:h-max h-max w-full min-h-full">
+	    <button data-close-modal class="self-end lg:self-start">
 		<Icon
 		    name="mdi:close"
 		    class="h-6 w-6 text-accent"
 		/>
 	    </button>
+	    <div id="cody-search"></div>
 	</div>
     </dialog>
 </site-search>

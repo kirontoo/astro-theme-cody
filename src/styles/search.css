@@ -74,3 +74,11 @@ input.pagefind-ui__search-input {
   content: "\21AA";
   @apply pr-2 no-underline;
 }
+
+.pagefind-ui__button {
+  @apply underline decoration-accent underline-offset-2;
+}
+
+.pagefind-ui__button:hover {
+  @apply text-accent;
+}
