@@ -1,5 +1,6 @@
 ---
 import HeaderLink from './HeaderLink.astro';
+import Search from './Search.astro';
 import { siteConfig, NAV_LINKS } from '../consts';
 import ThemeToggle from '../components/ThemeToggle.astro';
 
@@ -48,6 +49,7 @@ const url = new URL(Astro.request.url);
 	</nav>
 
 	<div class="flex gap-2 items-center justify-center">
+		<Search/>
 		<ThemeToggle/>
 
 		<nav-button>
