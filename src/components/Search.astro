@@ -37,11 +37,14 @@ import { Icon } from "astro-icon";
 
 <script>
 import { PagefindUI } from "@pagefind/default-ui";
+const lang = document.documentElement.lang;
 window.addEventListener("DOMContentLoaded", () => {
     new PagefindUI({
-	element: "#cody-search",
-	showImages: false,
-	showSubResults: true,
+      baseUrl: `${import.meta.env.BASE_URL}/${lang}`,
+      bundlePath: import.meta.env.BASE_URL.replace(/\/$/, "") + "/pagefind/",
+      element: "#cody-search",
+      showImages: false,
+      showSubResults: true,
     });
 });
 
