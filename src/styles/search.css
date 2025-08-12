@@ -4,7 +4,9 @@
 @tailwind components;
 @tailwind utilities;
 
-#cody-search, .pagefind-ui__form, .pagfind-ui {
+#cody-search,
+.pagefind-ui__form,
+.pagfind-ui {
   width: 100%;
 }
 
@@ -28,49 +30,51 @@ input.pagefind-ui__search-input {
 .pagefind-ui__search-input {
   flex-grow: 1 0;
 }
-.pagefind-ui__search-clear{ 
-  flex-grow: 1 0;
-} 
 
-.pagefind-ui__search-clear:hover{ 
+.pagefind-ui__search-clear {
+  flex-grow: 1 0;
+}
+
+.pagefind-ui__search-clear:hover {
   @apply text-accent;
-} 
+}
 
 .pagefind-ui__drawer,
 .pagefind-ui__results-area {
-  display:flex;
+  display: flex;
   flex-direction: column;
   flex-basis: 100%;
 }
 
-.pagefind-ui__message  {
+.pagefind-ui__message {
   @apply font-bold text-accent;
 }
 
-.pagefind-ui__results > li {
-  @apply my-6;
+.pagefind-ui__results>li {
+  @apply !my-2;
 }
 
 .pagefind-ui__result-title:hover {
-    @apply decoration-accent text-accent;
+  @apply decoration-accent text-accent;
 }
 
 .pagefind-ui__result-link:focus-visible {
   @apply outline outline-accent outline-1;
 }
 
-.pagefind-ui__result-inner {}
 .pagefind-ui__result-title {
   @apply underline underline-offset-2 text-lg;
 }
-.pagefind-ui__result-excerpt > mark {
+
+.pagefind-ui__result-excerpt>mark {
   @apply text-accent bg-surface;
 }
 
 .pagefind-ui__result-nested {
   @apply ml-6;
 }
-.pagefind-ui__result-nested > .pagefind-ui__result-title::before {
+
+.pagefind-ui__result-nested>.pagefind-ui__result-title::before {
   content: "\21AA";
   @apply pr-2 no-underline;
 }
