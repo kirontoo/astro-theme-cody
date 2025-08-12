@@ -29,13 +29,8 @@ const {
 const { headings } = project.render && (await project.render());
 const articleDate = pubDate.toISOString();
 ---
-
-<SidebarLayout
-	title={title}
-	description={description}
-	articleDate={articleDate}
->
-	<section class="cody-bg space-y-2 sm:space-y-4">
+<SidebarLayout title={title} description={description} articleDate={articleDate}>
+	<section class="cody-bg space-y-2 sm:space-y-4" data-pagefind-body>
 		<h2 class="title">{title}</h2>
 
 		{

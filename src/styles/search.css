@@ -1,0 +1,88 @@
+/* @import "@pagefind/default-ui/css/ui.css"; */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#cody-search,
+.pagefind-ui__form,
+.pagfind-ui {
+  width: 100%;
+}
+
+.pagefind-ui__form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+input.pagefind-ui__search-input {
+  width: 94%;
+  @apply p-2 border-b border-accent bg-surface;
+}
+
+.pagefind-ui__search-input:focus-visible {
+  @apply !outline-none border border-accent;
+}
+
+.pagefind-ui__search-input {
+  flex-grow: 1 0;
+}
+
+.pagefind-ui__search-clear {
+  flex-grow: 1 0;
+}
+
+.pagefind-ui__search-clear:hover {
+  @apply text-accent;
+}
+
+.pagefind-ui__drawer,
+.pagefind-ui__results-area {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+}
+
+.pagefind-ui__message {
+  @apply font-bold text-accent;
+}
+
+.pagefind-ui__results>li {
+  @apply !my-2;
+}
+
+.pagefind-ui__result-title:hover {
+  @apply decoration-accent text-accent;
+}
+
+.pagefind-ui__result-link:focus-visible {
+  @apply outline outline-accent outline-1;
+}
+
+.pagefind-ui__result-title {
+  @apply underline underline-offset-2 text-lg;
+}
+
+.pagefind-ui__result-excerpt>mark {
+  @apply text-accent bg-surface;
+}
+
+.pagefind-ui__result-nested {
+  @apply ml-6;
+}
+
+.pagefind-ui__result-nested>.pagefind-ui__result-title::before {
+  content: "\21AA";
+  @apply pr-2 no-underline;
+}
+
+.pagefind-ui__button {
+  @apply underline decoration-accent underline-offset-2;
+}
+
+.pagefind-ui__button:hover {
+  @apply text-accent;
+}

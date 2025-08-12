@@ -7,7 +7,7 @@ const { frontmatter: {title, description}, headings } = Astro.props
 ---
 
 <Layout title={title} description={description}>
-	<article class="cody-bg h-min">
+	<article class="cody-bg h-min" data-pagefind-body>
 		<div class="prose dark:prose-invert prose-cody text-textColor max-w-3xl prose-sm prose-headings:font-semibold prose-headings:ml-4 prose-headings:before:absolute prose-headings:before:-ms-4 prose-headings:before:text-accent prose-headings:before:content-['#'] prose-th:before:content-none prose-a:text-accent">
 			<slot/>
 		</div>

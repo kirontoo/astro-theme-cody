@@ -1,4 +1,5 @@
 ---
+import Search from './Search.astro';
 import HeaderLink from "./HeaderLink.astro";
 import { siteConfig, NAV_LINKS } from "../consts";
 import ThemeToggle from "@/components/ThemeToggle";
@@ -79,6 +80,7 @@ function buildNavLink(nav: string, entry: NavEntry): string {
 	</nav>
 
 	<div class="flex gap-2 items-center justify-center">
+		<Search/>
 		<SelectLanguage class="sm:mr-2" />
 		<ThemeToggle />
 

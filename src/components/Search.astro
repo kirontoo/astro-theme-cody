@@ -1,0 +1,119 @@
+---
+import "@/styles/search";
+import { Icon } from "astro-icon";
+---
+
+<site-search>
+	<button
+		id="toggleSearch"
+		class="flex justify-center items-center"
+		aria-label="toggle search dialog"
+		data-open-modal
+	>
+		<Icon
+			name="mdi:magnify"
+			aria-hidden="false"
+			class="h-6 w-6 text-textColor"
+		/>
+	</button>
+	<dialog
+		class="h-full w-full lg:max-h-full max-h-screen max-w-full open:flex close:hidden justify-center relative z-20 shadow-sm bg-transparent m-0"
+		data-dialog
+		id="search-dialog"
+		role="dialog"
+	>
+		<div
+			class="dialog-frame flex grow flex-col lg:flex-row-reverse gap-4 items-start lg:my-16 p-4 border border-1 border-accent lg:max-w-6xl lg:min-h-[calc(100%-8rem)] bg-surface sm:h-max h-max w-full min-h-full"
+		>
+			<button data-close-modal class="self-end lg:self-start">
+				<Icon name="mdi:close" class="h-6 w-6 text-accent" />
+			</button>
+			<div id="cody-search"></div>
+		</div>
+	</dialog>
+</site-search>
+
+<script>
+	import { PagefindUI } from "@pagefind/default-ui";
+	window.addEventListener("DOMContentLoaded", () => {
+		new PagefindUI({
+			baseUrl: `${import.meta.env.BASE_URL}`,
+			bundlePath: import.meta.env.BASE_URL.replace(/\/$/, "") + "/pagefind/",
+			element: "#cody-search",
+			showImages: false,
+			showSubResults: true,
+		});
+	});
+
+	class SiteSearch extends HTMLElement {
+		openModalBtn: HTMLButtonElement | null;
+		closeModalBtn: HTMLButtonElement | null;
+		dialogElement: HTMLDialogElement | null;
+		dialogFrame: HTMLDivElement | null;
+
+		constructor() {
+			super();
+
+			this.openModalBtn = this.querySelector<HTMLButtonElement>(
+				"button[data-open-modal]",
+			);
+			this.dialogElement = this.querySelector<HTMLDialogElement>(
+				"dialog#search-dialog",
+			);
+			this.closeModalBtn = this.querySelector<HTMLButtonElement>(
+				"button[data-close-modal]",
+			);
+			this.dialogFrame = this.querySelector<HTMLDivElement>("div.dialog-frame");
+
+			// bind functions
+			this.openModal = this.openModal.bind(this);
+			this.closeModal = this.closeModal.bind(this);
+			this.onWindowClick = this.onWindowClick.bind(this);
+
+			// initalize event handlers
+			if (this.openModalBtn) {
+				this.openModalBtn.addEventListener("click", this.openModal);
+			}
+
+			if (this.closeModalBtn) {
+				this.closeModalBtn.addEventListener("click", this.closeModal);
+			}
+
+			if (this.dialogElement) {
+				this.dialogElement.addEventListener("close", () => {
+					window.removeEventListener("click", this.onWindowClick);
+				});
+			}
+		}
+
+		openModal(event?: MouseEvent) {
+			if (this.dialogElement) {
+				this.dialogElement.showModal();
+
+				this.querySelector("input")?.focus();
+				event?.stopPropagation();
+				window.addEventListener("click", this.onWindowClick);
+			}
+		}
+
+		closeModal(event?: MouseEvent) {
+			if (this.dialogElement) {
+				this.dialogElement.close();
+			}
+		}
+
+		onWindowClick(e: MouseEvent) {
+			const isLink = "href" in (e.target || {});
+
+			if (
+				isLink ||
+				(document.body.contains(e.target as Node) &&
+					!this.dialogFrame?.contains(e.target as Node))
+			) {
+				this.closeModal();
+			}
+		}
+	}
+
+	customElements.define("site-search", SiteSearch);
+</script>
